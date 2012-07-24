@@ -16,7 +16,7 @@ public class MainActivity extends Activity
 {	
 	
 	//---------- Attributes-----------------------------------------------------------------//
-	public final static String EXTRA_MESSAGE = "com.example.myapp.MESSAGE";
+	public final static String EXTRA_MESSAGE = "com.app_example.MESSAGE";
 	
 	
 	//---------- ON CREATE-----------------------------------------------------------------//

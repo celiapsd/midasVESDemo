@@ -10,7 +10,6 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcel;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.view.View;
@@ -26,7 +25,7 @@ public class ListOfViewsActivity extends Activity
 	private ListView mainListView ;
 	private ArrayAdapter<String> listAdapter ;
 	public  List<Community> ListCommunity;	  
-	//public  static Folder child;
+	public final static String EXTRA_MESSAGE3 = "com.app_example.MESSAGE";
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
 	@Override
@@ -49,7 +48,7 @@ public class ListOfViewsActivity extends Activity
 		for(int i=0; i<ListCommunity.size(); i++)  
 		{  
 			Names[i]=ListCommunity.get(i).getName().toString();
-			System.out.println(Names[i]);
+			//System.out.println(Names[i]);
 		}	
 		List<String> ListNames = new ArrayList<String>();
 		ListNames.addAll( Arrays.asList(Names) );
@@ -72,26 +71,32 @@ public class ListOfViewsActivity extends Activity
 				String name = ((TextView) view).getText().toString();
 				List<Community> ListCommunity=ListOfViewsActivity.this.ListCommunity;
 				int fold_id=ListCommunity.get(position).getId_Folder();
-				//String FoldID=
+
 				Folder child=new Folder();
 				child.set_Folder_attributes(fold_id, name);
 				
 				
-					//Parcel in = new Parcel;			
-				Intent i = new Intent(ListOfViewsActivity.this, SingleListItemActivity.class);
-				Bundle b= new Bundle();
-						
-						
+				//-----test Parcel----//		
+				/*Intent i = new Intent(ListOfViewsActivity.this, SingleListItemActivity.class);
+				Bundle b= new Bundle();		
 				b.putParcelable("child", child);
 				//i.getExtras().putParcelable("child", child);
 				//i.putExtra("child", child);// sending data to new activity
 				i.putExtras(b);
-				startActivity(i);
+				startActivity(i);*/
+				
+				//----- test string -----//
+				
+				Intent in = new Intent(ListOfViewsActivity.this, SingleListItemActivity.class);
+				//System.out.println("This shouldnt be empty: "+child.transFolderIntoJSONString());
+				String childSt=new String(child.transFolderIntoJSONString());
+				in.putExtra(EXTRA_MESSAGE3,childSt);
+				startActivity(in);
 		   	}
 		});		
 	}
 	//---------- GET COMMUNITY INTO LIST-----------------------------------------------------------------//
-	List<Community> get_Community_Into_List(String jsonString)
+	public List<Community> get_Community_Into_List(String jsonString)
 	{
 		try 
 		{
@@ -101,13 +106,13 @@ public class ListOfViewsActivity extends Activity
 			
 			for(int i=0; i<Array1.length(); i++)  
 	        {  
-				String Id=Array1.getJSONObject(i).getString("id").toString();
+				int Id=Array1.getJSONObject(i).getInt("id");
 	            String Name=Array1.getJSONObject(i).getString("name").toString();
-	            String FolderId=Array1.getJSONObject(i).getString("folder_id").toString();
-				int id=Integer.parseInt(Id);
-				int folder_id=Integer.parseInt(FolderId);
+	            int FolderId=Array1.getJSONObject(i).getInt("folder_id");
+				//int id=Integer.parseInt(Id);
+				//int folder_id=Integer.parseInt(FolderId);
 				Community folder=new Community();
-				folder.set_community_attributes(id,Name,folder_id);
+				folder.set_community_attributes(Id,Name,FolderId);
 				communityList.add(folder);
 				
 	        }
