@@ -13,7 +13,7 @@ public class DisplayMessageActivity extends Activity
 {	  
 	
 	//---------- Attributes-----------------------------------------------------------------//
-	public final static String EXTRA_MESSAGE2 = "com.example.myapp.MESSAGE";
+	public final static String EXTRA_MESSAGE2 = "com.app_example.MESSAGE";
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
 	public void onCreate(Bundle savedInstanceState)
@@ -109,7 +109,6 @@ public class DisplayMessageActivity extends Activity
 	    		String Name=Array1.getJSONObject(i).getString("name").toString();
 	    		String Id=Array1.getJSONObject(i).getString("community_id").toString();
 	    		String folder_id=Array1.getJSONObject(i).getString("folder_id").toString();
-	    		//int id=Integer.parseInt(Id);
 	    		jsonCommunity+="{\"id\":"+"\""+Id+"\","+"\"name\":"+"\""+Name+"\","+"\"folder_id\":"+"\""+folder_id+"\"}";
 	    		if(i<(Array1.length()-1))
 	    			jsonCommunity+=",";
@@ -118,32 +117,32 @@ public class DisplayMessageActivity extends Activity
 	    	return jsonCommunity;
 	    }
 		
-		//---------- MAKE JSON CHILDREN TREE-----------------------------------------------------------------//
-		String make_json_Children_tree(String message, int parent_id)throws JSONException
-		{
-				  
-			JSONObject jsonObject = new JSONObject(message); 
-			JSONObject jsonObject2=jsonObject.getJSONObject("folders");
-			JSONArray Array1=jsonObject2.optJSONArray("data");
-			String Parent_id=String.valueOf(parent_id);
-					
-			String jsonChildren="{\"parent_Id\":"+"\""+Parent_id+"\",\"children\":[";
-			
-			for(int i=0; i<Array1.length(); i++)  
-			{  
-				String Name=Array1.getJSONObject(i).getString("name").toString();
-				String Id=Array1.getJSONObject(i).getString("folder_id").toString();
-				//int id=Integer.parseInt(Id);
-				//String Parent_id=Array1.getJSONObject(i).getString("parent_id").toString();
-				//int parent_id=Integer.parseInt(Parent_id);
-						
-				jsonChildren+="{\"id\":"+"\""+Id+"\","+"\"name\":"+"\""+Name+"\"}";//,"+"\"parent_id\":"+"\""+parent_id+"\"}";
-				if(i<(Array1.length()-1))
-					jsonChildren+=",";
-			}
-			jsonChildren+="]}";
-			return jsonChildren;
-		}
+	  /*//---------- MAKE JSON CHILDREN TREE-----------------------------------------------------------------//
+	  		String make_json_Children_tree(String message, int parent_id)throws JSONException
+	  		{
+	  				  
+	  			JSONObject jsonObject = new JSONObject(message); 
+	  			JSONObject jsonObject2=jsonObject.getJSONObject("folders");
+	  			JSONArray Array1=jsonObject2.optJSONArray("data");
+	  			String Parent_id=String.valueOf(parent_id);
+	  					
+	  			String jsonChildren="{\"parent_Id\":"+"\""+Parent_id+"\",\"children\":[";
+	  			
+	  			for(int i=0; i<Array1.length(); i++)  
+	  			{  
+	  				String Name=Array1.getJSONObject(i).getString("name").toString();
+	  				String Id=Array1.getJSONObject(i).getString("folder_id").toString();
+	  				//int id=Integer.parseInt(Id);
+	  				//String Parent_id=Array1.getJSONObject(i).getString("parent_id").toString();
+	  				//int parent_id=Integer.parseInt(Parent_id);
+	  						
+	  				jsonChildren+="{\"id\":"+"\""+Id+"\","+"\"name\":"+"\""+Name+"\"}";//,"+"\"parent_id\":"+"\""+parent_id+"\"}";
+	  				if(i<(Array1.length()-1))
+	  					jsonChildren+=",";
+	  			}
+	  			jsonChildren+="]}";
+	  			return jsonChildren;
+	  		}*/
 		
 		
 	
@@ -151,7 +150,9 @@ public class DisplayMessageActivity extends Activity
         
 		
 		
-		
+//------------------------------------------------------------------------------------------//
+//------------------------------ USEFULL ---------------------------------------------------//
+//------------------------------------------------------------------------------------------//		
 		
 /*
 		 JSONObject object = (JSONObject) new JSONTokener(json).nextValue();

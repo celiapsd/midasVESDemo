@@ -1,34 +1,30 @@
 package com.app_example;
 
 //----------------------------------------libraries----------------------------------------//
-import java.util.ArrayList;
-import java.util.Map;
 
-import android.os.Parcel;
-import android.os.Parcelable;
 
 
 //---------- CLASS FOLDER---------------------------------------------------------//
-public class Folder  implements Parcelable 
+public class Folder  //implements Parcelable 
 {
 	
 	//-----Attributes------------------------------------------------------//
 	private int folder_id;
 	private String folder_name ;
-	private ArrayList<Folder> children; //list of all the folders you can access
+	//private List<Folder> children; //list of all the folders you can access
 	
 	//-----Constructors-----------------------------------------------------//
 	public Folder () 
 	{
 		this.setFolder_id(0);
         this.setFolder_name(null);
-        this.setChildren(null);
+        //this.setChildren(null);
 	}
 	
-	public Folder(Parcel in) 
+	/*public Folder(Parcel in) 
 	{
 		readFromParcel(in);
-    }
+    }*/
 
 	//-----GET AND SET ATTRIBUTES-----------------------------------------------------//
 	public int getFolder_id() {
@@ -43,32 +39,52 @@ public class Folder  implements Parcelable
 	public void setFolder_name(String folder_name) {
 		this.folder_name = folder_name;
 	}
-	public ArrayList<Folder> getChildren() {
+	/*public List<Folder> getChildren() {
 		return children;
 	}
-	public void setChildren(ArrayList<Folder> children) {
+	public void setChildren(List<Folder> children) {
 		this.children = children;
-	}
+	}*/
 	
 	//-----GET AND SET ATTRIBUTES TOGETHER -----------------------------------------------------//	
-	public void set_Folder_attributes(int folder_id,String Folder_name,ArrayList<Folder> children)
+	/*public void set_Folder_attributes(int folder_id,String Folder_name,List<Folder> children)
 	{
 		
         this.setFolder_id(folder_id);
         this.setFolder_name(Folder_name);
         this.setChildren(children);
         
-	}
+	}*/
 	public void set_Folder_attributes(int folder_id,String Folder_name)
 	{
         this.setFolder_id(folder_id);
         this.setFolder_name(Folder_name);
 	}
+	//----- TRANSFORM FOLDER Into JSONSTRING -------------------------------------//
 	
+	public String transFolderIntoJSONString ()
+	{
+		String JsonFolder=new String();
+		JsonFolder="{\"folder_id\":\""+this.folder_id+"\",\"name\":\""+this.folder_name+"\"";
+		/*if(this.getChildren()==null)
+			JsonFolder+=",\"children\":[\"null\"";
+		else {
+			for (int i=0;i<this.getChildren().size();i++)
+			{
+				JsonFolder+="{\"id\":"+"\""+this.getChildren().get(i).folder_id+"\","+"\"name\":"+"\""+this.getChildren().get(i).folder_name+"\"}";
+				if(i<(this.children.size()-1))
+					JsonFolder+=",";
+			}
+		}*/
+		
+		JsonFolder+="}";
+		return JsonFolder;
+	}
+
 	//----- to use a parcel -----------------------------------------------------//	
 	
 
-	public int describeContents() {
+	/*public int describeContents() {
 		return 0;
 	}
 
@@ -76,7 +92,6 @@ public class Folder  implements Parcelable
 	public void writeToParcel(Parcel dest, int flags) {
 	   	dest.writeLong(folder_id);
 	    dest.writeString(folder_name);
-  	    //dest.writeSerializable(children);
   	    dest.writeList(children);
      }
 
@@ -100,5 +115,5 @@ public class Folder  implements Parcelable
 	    {
 	    	return new Folder[size];
 		}
-	};
+	};*/
 }
