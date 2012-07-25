@@ -139,19 +139,13 @@ public class LoopListActivity extends Activity{
 	  				if(i<(Array1.length()-1))
 	  					jsonChildren+=",";
 	  			}
-	  			
-	  			
   			}
   			
   			jsonChildren+="],\"items\":[";
   			
   			if(jsonObject2.getJSONArray("items").length() != 0)
   			{
-  				if(jsonObject2.getJSONArray("folders").length() != 0)
-  	  			{
-  					jsonChildren+=",";
-  	  			}
-  				
+  				  				
   				//jsonChildren+="\"items\":[";
   				JSONArray Array1=jsonObject2.optJSONArray("items");
   				
@@ -245,7 +239,6 @@ public class LoopListActivity extends Activity{
 					e.printStackTrace();
 			}
 			
-			//return name;
 		}
 	
 }
