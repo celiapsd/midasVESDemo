@@ -18,6 +18,7 @@ import android.content.Intent;
 
 import android.os.Bundle;
 import android.os.Environment;
+import android.widget.TextView;
 
 
 
@@ -57,6 +58,11 @@ public class DownloadFileActivity extends Activity
 			e.printStackTrace();
 		}
 		System.out.println("file downloaded successfully in the sd card !");	
+		setContentView(R.layout.activity_open_file);
+		TextView textView2 = new TextView(this);
+		textView2.setTextSize(30);
+	 	textView2.setText("file downloaded successfully in the sd card !");
+	  	setContentView(textView2);
 	}
 	
 	//---------- DOWNLOAD FILE -----------------------------------------------------------------//

@@ -1,3 +1,26 @@
+/*----------------------comments----------------------------------------------------------//
+ * Name : Celia Pansard
+ * Date of last modification : 07/27/2012
+ * 
+ * 
+ * A ajouter :
+ * 		Recherche de fichiers
+ * 		Lien pour ouvrir le fichier directement de l'application
+ * 		Le nom du fichier en hqut de l'activite
+ * 		Login/Mp
+ * 		Demander si l'utilisateur a une carte sd --> sinon chercher le dossier approprie
+ * 		bouton return accessible de toutes les pages pour revoir les communities
+ * 		apres les chargement du premier fichier demander si il faut en telecharger un autre ou ouvrir celui ci
+ * 
+ * 
+ * Problemes :
+ * 		Ne pas afficher single litsActivity
+ * 		Ne pas devoir cliauer 2 fois sur le logo Midas
+ * 		Bundle d'objets au lieu de string pour le passage entre les activiteS
+ * 		sTOCKAGE SIL N'Y A PAS DE CARTE SD PLANTE LE PROGRAMME
+ * 
+ */
+
 package com.app_example;
 
 //----------------------------------------libraries----------------------------------------//
@@ -10,6 +33,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageButton;
 
 //------------------------------------------------------------------------------------------//
 public class MainActivity extends Activity 
@@ -17,7 +41,7 @@ public class MainActivity extends Activity
 	
 	//---------- Attributes-----------------------------------------------------------------//
 	public final static String EXTRA_MESSAGE = "com.app_example.MESSAGE";
-	
+	ImageButton imageButton;
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
     @Override
@@ -47,8 +71,12 @@ public class MainActivity extends Activity
       protected void onStop() {
         super.onStop(); } 
     
+    //---------------------------------------------------------------------------------------//
+    //------------------------------Midas image Button---------------------------------------//
+    //---------------------------------------------------------------------------------------//
+      
   	//---------- ACCESS WEB-----------------------------------------------------------------//
-    public void accessWeb(View view) 
+     public void accessMidas(View view)
     {	
     	// Do something in response to button
     	this.get("http://midas3.kitware.com/midas/api/json?method=midas.community.list");
@@ -105,4 +133,7 @@ public class MainActivity extends Activity
 		    startActivity(intent);
 	    }
     }
+    
+    //------------------------------------------------------------------------------------------//
+    //------------------------------------------------------------------------------------------//
 }

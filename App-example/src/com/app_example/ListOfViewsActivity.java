@@ -109,8 +109,6 @@ public class ListOfViewsActivity extends Activity
 				int Id=Array1.getJSONObject(i).getInt("id");
 	            String Name=Array1.getJSONObject(i).getString("name").toString();
 	            int FolderId=Array1.getJSONObject(i).getInt("folder_id");
-				//int id=Integer.parseInt(Id);
-				//int folder_id=Integer.parseInt(FolderId);
 				Community folder=new Community();
 				folder.set_community_attributes(Id,Name,FolderId);
 				communityList.add(folder);

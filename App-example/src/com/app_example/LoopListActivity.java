@@ -37,16 +37,11 @@ public class LoopListActivity extends Activity{
 		try {
 			Intent intent = getIntent();// Get the message from the intent
 			String jsonParent = intent.getStringExtra(SingleListItemActivity.EXTRA_MESSAGE3);//get the retrieve data contained within it
-			int Id = 0;
-			String name=new String();
 			//get_Parent(jsonParent, Id,name);
 			
-			JSONObject jsonObject;
-			
-				jsonObject = new JSONObject(jsonParent);
-			
-			Id=jsonObject.getInt("id");
-			name=jsonObject.getString("name");
+			JSONObject jsonObject= new JSONObject(jsonParent);
+			int Id=jsonObject.getInt("id");
+			String name=jsonObject.getString("name");
 	    	int PositionName=jsonParent.indexOf(",\"name\":\"");
 	    	jsonParent= jsonParent.substring(PositionName+12+name.length(),jsonParent.length());
 		
@@ -189,7 +184,6 @@ public class LoopListActivity extends Activity{
 						Folder folder=new Folder();
 						folder.set_Folder_attributes(Id,Name);
 						childrenList.add(folder);
-						
 			        }
 				}
 			}catch(JSONException e) {
@@ -204,10 +198,8 @@ public class LoopListActivity extends Activity{
 	  			{
 					JSONArray Array1=jsonObject.optJSONArray("items");
 					
-					
 					for(int i=0; i<Array1.length(); i++)  
 			        {  
-						
 						int Item_id=Array1.getJSONObject(i).getInt("item_id");
 			            String Item_Name=Array1.getJSONObject(i).getString("item_name").toString()+"\n"+"				download file";			            
 						Folder folder=new Folder();

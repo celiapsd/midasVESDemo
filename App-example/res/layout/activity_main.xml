@@ -17,21 +17,121 @@
     <!-- "wrap_content"==the button only as big as necessary -->
     <!-- sendMessage==name of method in activity to call when the user selects the button. -->
 
-    <TextView
-        android:id="@+id/textView1"
+   <TextView
+        android:id="@+id/instAccessMidas"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/midasButton"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/Instruction1"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textSize="20sp" />
 
-    <Button
+    <ImageButton
+        android:id="@+id/midasButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@id/instAccessMidas"
+        android:onClick="accessMidas"
+        android:adjustViewBounds="true"
+        android:focusableInTouchMode="true"
+        android:src="@drawable/ic_midas" />
+
+    <TextView
+        android:id="@+id/LoginText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/instAccessMidas"
+        android:text="@string/Login"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView1"
-        android:onClick="accessWeb"
-        android:text="@string/button_access_web" />
+        android:layout_below="@+id/LoginText"
+        android:layout_toLeftOf="@+id/midasButton"
+        android:ems="10"
+        android:hint="@string/Email"
+        android:inputType="textEmailAddress"
+        android:textSize="16sp" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/Password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/Email"
+        android:layout_below="@+id/Email"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/urltext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/Password"
+        android:layout_marginTop="29dp"
+        android:text="@string/Instruction2"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/URL"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/Password"
+        android:layout_below="@+id/urltext"
+        android:ems="10"
+        android:hint="@string/http"
+        android:inputType="text|textUri"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/OkButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/URL"
+        android:layout_toRightOf="@+id/Password"
+        android:text="@string/OK"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/SearchFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/URL"
+        android:layout_marginTop="79dp"
+        android:text="@string/Search"
+        android:textSize="20sp" />
+
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/SearchFile" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Email"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/Email"
+        android:text="@string/Login"
+        android:textSize="16sp" />
 
 </RelativeLayout>
