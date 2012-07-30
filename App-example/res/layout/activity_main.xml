@@ -34,10 +34,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_alignRight="@id/instAccessMidas"
-        android:onClick="accessMidas"
+       	android:onClick="ButtonOnClick"
+       	
         android:adjustViewBounds="true"
         android:focusableInTouchMode="true"
         android:src="@drawable/ic_midas" />
+     	<!--android:onClick="accessMidas"-->
 
     <TextView
         android:id="@+id/LoginText"
@@ -60,7 +62,7 @@
         android:inputType="textEmailAddress"
         android:textSize="16sp" >
 
-        <requestFocus />
+       
     </EditText>
 
     <EditText
@@ -74,6 +76,18 @@
         android:hint="@string/Password"
         android:inputType="textPassword"
         android:textSize="16sp" />
+    <Button
+        android:id="@+id/LoginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/Email"
+        android:layout_marginTop="18dp"
+        android:layout_toRightOf="@+id/Email"
+        android:text="@string/Login"
+        android:textSize="16sp" 
+        android:onClick="ButtonOnClick"/>
+     
 
     <TextView
         android:id="@+id/urltext"
@@ -104,7 +118,10 @@
         android:layout_alignTop="@+id/URL"
         android:layout_toRightOf="@+id/Password"
         android:text="@string/OK"
-        android:textSize="20sp" />
+        android:textSize="20sp" 
+        android:onClick="ButtonOnClick"/>
+        
+   
 
     <TextView
         android:id="@+id/SearchFile"
@@ -123,15 +140,6 @@
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/SearchFile" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/Email"
-        android:layout_marginTop="18dp"
-        android:layout_toRightOf="@+id/Email"
-        android:text="@string/Login"
-        android:textSize="16sp" />
+    
 
 </RelativeLayout>

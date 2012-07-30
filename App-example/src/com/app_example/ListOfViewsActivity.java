@@ -101,15 +101,15 @@ public class ListOfViewsActivity extends Activity
 		try 
 		{
 			JSONObject jsonObject = new JSONObject(jsonString); 
-			JSONArray Array1=jsonObject.optJSONArray("community");
-			List<Community> communityList=new ArrayList<Community> ();
+			JSONArray Array1 = jsonObject.optJSONArray("community");
+			List<Community> communityList = new ArrayList<Community> ();
 			
 			for(int i=0; i<Array1.length(); i++)  
 	        {  
-				int Id=Array1.getJSONObject(i).getInt("id");
-	            String Name=Array1.getJSONObject(i).getString("name").toString();
-	            int FolderId=Array1.getJSONObject(i).getInt("folder_id");
-				Community folder=new Community();
+				int Id = Array1.getJSONObject(i).getInt("id");
+	            String Name = Array1.getJSONObject(i).getString("name").toString();
+	            int FolderId = Array1.getJSONObject(i).getInt("folder_id");
+				Community folder = new Community();
 				folder.set_community_attributes(Id,Name,FolderId);
 				communityList.add(folder);
 				

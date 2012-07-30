@@ -35,9 +35,8 @@ public class SingleListItemActivity extends Activity
 		TextView productlabel = (TextView) findViewById(R.id.product_label);
         productlabel.setText("Folder : " + "\n" + " id : " +child.getFolder_id() + "\n" + " Name : " + child.getFolder_name());
          */
+        
         //----String----//
-        
-        
         Intent i = getIntent();
         // getting attached intent data
         String product = i.getStringExtra(ListOfViewsActivity.EXTRA_MESSAGE3);
@@ -52,7 +51,7 @@ public class SingleListItemActivity extends Activity
 		try 
 		{
 			JSONObject jsonObject = new JSONObject(product); 
-			id=Integer.parseInt(jsonObject.getString("folder_id").toString());
+			id=jsonObject.getInt("folder_id");
 			name=jsonObject.getString("name").toString();
 			
 		} catch (JSONException e) {
@@ -102,7 +101,6 @@ public class SingleListItemActivity extends Activity
 					Log.e("HttpRequest", e.toString());
 			}
 			
-			// call display message activity using our response
 			String response = "{\"id\":"+"\""+SingleListItemActivity.this.id+"\","+"\"name\":"+"\""+SingleListItemActivity.this.name+"\"},"+buff.toString();
 			Intent intent = new Intent(parent, LoopListActivity.class);
 			intent.putExtra(EXTRA_MESSAGE3, response);

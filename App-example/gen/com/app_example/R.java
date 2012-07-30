@@ -23,21 +23,21 @@ public final class R {
     }
     public static final class id {
         public static final int Email=0x7f080004;
+        public static final int LoginButton=0x7f080006;
         public static final int LoginText=0x7f080003;
-        public static final int OkButton=0x7f080008;
+        public static final int OkButton=0x7f080009;
         public static final int Password=0x7f080005;
-        public static final int SearchFile=0x7f080009;
-        public static final int URL=0x7f080007;
-        public static final int button1=0x7f08000b;
+        public static final int SearchFile=0x7f08000a;
+        public static final int URL=0x7f080008;
         public static final int instAccessMidas=0x7f080001;
         public static final int mainListView=0x7f080000;
         public static final int menu_settings=0x7f08000f;
         public static final int midasButton=0x7f080002;
         public static final int product_label=0x7f08000e;
         public static final int rowTextView=0x7f08000d;
-        public static final int spinner1=0x7f08000a;
+        public static final int spinner1=0x7f08000b;
         public static final int textView1=0x7f08000c;
-        public static final int urltext=0x7f080006;
+        public static final int urltext=0x7f080007;
     }
     public static final class layout {
         public static final int activity_list_of_views=0x7f030000;

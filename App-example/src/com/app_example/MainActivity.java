@@ -25,15 +25,36 @@ package com.app_example;
 
 //----------------------------------------libraries----------------------------------------//
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 //------------------------------------------------------------------------------------------//
 public class MainActivity extends Activity 
@@ -71,11 +92,33 @@ public class MainActivity extends Activity
       protected void onStop() {
         super.onStop(); } 
     
+       	  public void ButtonOnClick(View v) 
+	      {
+	    	  
+	    	  switch (v.getId())
+	    	  {
+	    	  		case(R.id.midasButton):
+	    	  			accessMidas(v);
+	    	  			break;
+	    	                   
+	    			case(R.id.LoginButton):
+	    				postData (v);
+	    				
+	    			
+	    			case(R.id.OkButton):
+	    				//urlSearch(v);
+	    				break;
+	      	  }
+	    	} 
+      
+      
+      
     //---------------------------------------------------------------------------------------//
     //------------------------------Midas image Button---------------------------------------//
     //---------------------------------------------------------------------------------------//
       
-  	//---------- ACCESS WEB-----------------------------------------------------------------//
+  	
+	//---------- ACCESS WEB-----------------------------------------------------------------//
      public void accessMidas(View view)
     {	
     	// Do something in response to button
@@ -102,7 +145,7 @@ public class MainActivity extends Activity
     	public HttpThread(MainActivity parent,String sUrl) 
     	{
 			this.parent = parent;
-			this.sUrl=sUrl;
+			this.sUrl = sUrl;
     	}
     	
     	//----- RUN ---------------------------------------------//
@@ -132,8 +175,57 @@ public class MainActivity extends Activity
 		    //putExtra()==takes a string as the key and the value in the second parameter.
 		    startActivity(intent);
 	    }
-    }
     
+    }
     //------------------------------------------------------------------------------------------//
     //------------------------------------------------------------------------------------------//
+    
+	    @SuppressLint("ParserError")
+		public void postData (View view)
+	    {
+	    	EditText email = (EditText)this.findViewById(R.id.Email);
+	    	EditText password = (EditText)this.findViewById(R.id.Password);
+	    	String sEmail = email.getText().toString();
+	        String sPassword = password.getText().toString();
+	     // Create a new HttpClient and Post Header
+            HttpClient httpclient = new DefaultHttpClient();
+            HttpPost httppost = new HttpPost("http://midas3.kitware.com/midas/api/json?method=midas.user.apikey.default");
+            
+            String result = null;
+            try {
+                // Add your data
+                List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+                nameValuePairs.add(new BasicNameValuePair("email", sEmail));
+                nameValuePairs.add(new BasicNameValuePair("password",sPassword));
+                httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+                // Execute HTTP Post Request
+                HttpResponse response = httpclient.execute(httppost);
+                result = EntityUtils.toString(response.getEntity());
+
+                //HttpEntity entity = response.getEntity();
+                //is = entity.getContent();
+                System.out.println(result);
+
+            } catch (ClientProtocolException e) {
+                // TODO Auto-generated catch block
+            } catch (IOException e) {
+                // TODO Auto-generated catch block
+            }
+	       
+	        //conversion de la réponse en chaine de caractère
+            try
+            {
+    	         Toast.makeText(getApplicationContext(), result,Toast.LENGTH_SHORT).show();
+    	         wait(200);  
+            }
+            catch(Exception e)
+            {
+            	Log.i("tagconvertstr",""+e.toString());
+            }
+	        
+	    }
+	    
 }
+    
+
