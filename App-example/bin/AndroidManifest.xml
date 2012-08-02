@@ -28,25 +28,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:label="@string/title_activity_display_message" 
-            android:name="com.app_example.DisplayMessageActivity">
-            <!--declare all activities-->
-        </activity>
-        <activity
             android:label="@string/title_activity_list_of_views" 
             android:name="com.app_example.ListOfViewsActivity">
         </activity>
         <activity 
-            android:label="@string/title_activity_single_list_item"
+            android:label="@string/title_activity_single_list_item" 
             android:name="com.app_example.SingleListItemActivity">
         </activity>
         <activity 
-            android:label="@string/title_activity_loop_list"
-            android:name="com.app_example.LoopListActivity">
-        </activity>
-         <activity 
             android:label="@string/title_activity_download_file"
             android:name="com.app_example.DownloadFileActivity">
+        </activity>
+        <activity 
+            android:label="@string/title_activity_file_explorer"
+            android:name="com.app_example.FileExplorerActivity">
         </activity>
       
      

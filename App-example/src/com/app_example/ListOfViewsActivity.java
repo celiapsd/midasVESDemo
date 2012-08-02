@@ -26,6 +26,7 @@ public class ListOfViewsActivity extends Activity
 	private ArrayAdapter<String> listAdapter ;
 	public  List<Community> ListCommunity;	  
 	public final static String EXTRA_MESSAGE3 = "com.app_example.MESSAGE";
+	public final static int CODE_RETOUR=0;
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
 	@Override
@@ -35,9 +36,9 @@ public class ListOfViewsActivity extends Activity
 		setContentView(R.layout.activity_list_of_views);
 		
 		Intent intent = getIntent();// Get the message from the intent
-		String str_jsonCommunity = intent.getStringExtra(DisplayMessageActivity.EXTRA_MESSAGE2);//get the retrieve data contained within it
+		String str_jsonCommunity = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);//get the retrieve data contained within it
 		
-		ListCommunity=get_Community_Into_List(str_jsonCommunity);//get the retrieve list linked with the json string
+		ListCommunity = get_Community_Into_List(str_jsonCommunity);//get the retrieve list linked with the json string
 	
 		// Find the ListView resource. 
 		mainListView = (ListView) findViewById( R.id.mainListView );
@@ -47,8 +48,7 @@ public class ListOfViewsActivity extends Activity
 		String Names[] = new String[ListCommunity.size()];
 		for(int i=0; i<ListCommunity.size(); i++)  
 		{  
-			Names[i]=ListCommunity.get(i).getName().toString();
-			//System.out.println(Names[i]);
+			Names[i] = ListCommunity.get(i).getName().toString();
 		}	
 		List<String> ListNames = new ArrayList<String>();
 		ListNames.addAll( Arrays.asList(Names) );
@@ -69,10 +69,11 @@ public class ListOfViewsActivity extends Activity
 				//-----retrieve the name of the community selected and send to SingleListItemActivity
 				
 				String name = ((TextView) view).getText().toString();
-				List<Community> ListCommunity=ListOfViewsActivity.this.ListCommunity;
-				int fold_id=ListCommunity.get(position).getId_Folder();
+				setTitle(name);
+				List<Community> ListCommunity = ListOfViewsActivity.this.ListCommunity;
+				int fold_id = ListCommunity.get(position).getId_Folder();
 
-				Folder child=new Folder();
+				Folder child = new Folder();
 				child.set_Folder_attributes(fold_id, name);
 				
 				
@@ -89,12 +90,29 @@ public class ListOfViewsActivity extends Activity
 				
 				Intent in = new Intent(ListOfViewsActivity.this, SingleListItemActivity.class);
 				//System.out.println("This shouldnt be empty: "+child.transFolderIntoJSONString());
-				String childSt=new String(child.transFolderIntoJSONString());
+				String childSt = new String(child.transFolderIntoJSONString());
 				in.putExtra(EXTRA_MESSAGE3,childSt);
-				startActivity(in);
+				startActivityForResult(in,CODE_RETOUR);
 		   	}
 		});		
 	}
+	
+	//---------- FUNCTIONS FOR LIFECYCLE ACTIVITY------------------------------------------//
+    protected void onDestroy() {
+        
+    	super.onDestroy(); 
+        
+    
+    }
+      protected void onPause() {
+        super.onPause(); }
+      protected void onResume() {
+        super.onResume(); }
+      protected void onStart() {
+        super.onStart(); }
+      protected void onStop() {
+        super.onStop(); } 
+      
 	//---------- GET COMMUNITY INTO LIST-----------------------------------------------------------------//
 	public List<Community> get_Community_Into_List(String jsonString)
 	{
@@ -121,6 +139,16 @@ public class ListOfViewsActivity extends Activity
 			e.printStackTrace();
 	    }
 		return null;
+	}
+	protected void onActivityResult(int requestCode) 
+	{
+		super.onActivityResult(requestCode, requestCode, null);
+		if(requestCode == CODE_RETOUR) 
+		{
+			setResult(CODE_RETOUR);
+			
+			System.exit(0);
+		}
 	}
 }
 
