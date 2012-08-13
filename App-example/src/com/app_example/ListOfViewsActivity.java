@@ -93,7 +93,7 @@ public class ListOfViewsActivity extends Activity
 				//System.out.println("This shouldnt be empty: "+child.transFolderIntoJSONString());
 				String childSt = new String(child.transFolderIntoJSONString());
 				in.putExtra(EXTRA_MESSAGE3,childSt);
-				startActivityForResult(in,CODE_RETOUR);
+				startActivity(in);
 		   	}
 		});		
 	}

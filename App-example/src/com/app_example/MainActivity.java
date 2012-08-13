@@ -191,7 +191,7 @@ public class MainActivity extends Activity
     public void get(String sUrl) 
     {
 		HttpThread thread = new HttpThread(this,sUrl);
-		thread.run();
+		thread.start();
 		printThreads();
 		//Thread t = new Thread(thread);
 		//t.setPriority(10);
@@ -245,8 +245,7 @@ public class MainActivity extends Activity
 				Intent intent = new Intent(parent, ListOfViewsActivity.class);
 				intent.putExtra(EXTRA_MESSAGE, str_jsonCommunity);
 			    //putExtra()==takes a string as the key and the value in the second parameter.
-				printThreads();
-			    startActivity(intent);		
+				startActivity(intent);		
 						
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block

@@ -35,11 +35,11 @@ import android.widget.TextView;
 public class SingleListItemActivity extends Activity
 {
 	public final static String EXTRA_MESSAGE3 = "com.app_example.MESSAGE";
-	public int id;
+	public static int id;
 	public String name;
 	private ListView mainListView ;
 	private ArrayAdapter<String> listAdapter ;
-	public  List<Folder> ListChildren;	  
+	public static List<Folder> ListChildren;	  
 	public final static int CODE_RETOUR=0;
 	public static String url;
 	
@@ -69,9 +69,9 @@ public class SingleListItemActivity extends Activity
         url=MainActivity.UrlBeginning+"/api/json?method=midas.folder.children&id="+id;
    	 	if(MainActivity.Token!=null)
    	 		url+="&token="+MainActivity.Token;
+   	 	get(url);
    	 	
-   	 	HttpThread t = new HttpThread(url);
-   	 	t.run();
+   	 
       	//getListChildren(url);
      	
      	setContentView(R.layout.activity_list_of_views);
@@ -81,10 +81,10 @@ public class SingleListItemActivity extends Activity
 		
 
 		//----------------------TO SEE THE string Names into a list---------------------------//
-		String Names[] = new String[this.ListChildren.size()];
-		for(int i1 = 0; i1<this.ListChildren.size(); i1++)  
+		String Names[] = new String[SingleListItemActivity.ListChildren.size()];
+		for(int i1 = 0; i1<SingleListItemActivity.ListChildren.size(); i1++)  
 		{  
-			Names[i1] = this.ListChildren.get(i1).getFolder_name().toString();
+			Names[i1] = SingleListItemActivity.ListChildren.get(i1).getFolder_name().toString();
 			System.out.println(Names[i1]);
 		}	
 		List<String> ListNames = new ArrayList<String>();
@@ -106,7 +106,7 @@ public class SingleListItemActivity extends Activity
 				
 				String name = ((TextView) view).getText().toString();
 				
-				int fold_id = SingleListItemActivity.this.ListChildren.get(position).getFolder_id();
+				int fold_id = SingleListItemActivity.ListChildren.get(position).getFolder_id();
 
 				Folder child = new Folder();
 				child.set_Folder_attributes(fold_id, name);
@@ -131,7 +131,13 @@ public class SingleListItemActivity extends Activity
 		});
 		
 	}
-    private class HttpThread implements Runnable 
+    private void get(String url)
+      {
+      HttpThread t = new HttpThread(url);
+      t.start();
+      
+      }
+    private class HttpThread extends Thread implements Runnable 
     {
     	
     	//-----Attributes---------------------------------------//
@@ -146,7 +152,7 @@ public class SingleListItemActivity extends Activity
     	}
     	
     	//----- RUN ---------------------------------------------//
-	    public synchronized void run() 
+	    public  void run() 
 		{    	
 			String str;
 			StringBuffer buff = new StringBuffer();
@@ -168,7 +174,18 @@ public class SingleListItemActivity extends Activity
 			// call display message activity using our response
 			String response = buff.toString();
 			//try {
-				getListChildren(response);
+				//getListChildren(response);
+			  String str_jsonChildren;
+        try
+          {
+          str_jsonChildren = make_json_Children_tree(response,SingleListItemActivity.id);
+          SingleListItemActivity.ListChildren = get_Children_Into_List(str_jsonChildren);//get the retrieve list linked with the json string
+          } catch (JSONException e)
+          {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+          }
+        
 				//String str_jsonCommunity=make_json_Community_tree(response);
 				/*Intent intent = new Intent(SingleListItemActivity.this, ListOfViewsActivity.class);
 				intent.putExtra(EXTRA_MESSAGE3, str_jsonCommunity);
@@ -230,7 +247,7 @@ public class SingleListItemActivity extends Activity
             //System.out.println(result);
         	
         	String str_jsonChildren;
-				str_jsonChildren = make_json_Children_tree(sUrl,this.id);
+				str_jsonChildren = make_json_Children_tree(sUrl,SingleListItemActivity.id);
 				ListChildren = get_Children_Into_List(str_jsonChildren);//get the retrieve list linked with the json string
 				
 				
