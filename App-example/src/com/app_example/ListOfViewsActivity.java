@@ -34,6 +34,7 @@ public class ListOfViewsActivity extends Activity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_of_views);
+		MainActivity.activities.add(this);
 		
 		Intent intent = getIntent();// Get the message from the intent
 		String str_jsonCommunity = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);//get the retrieve data contained within it

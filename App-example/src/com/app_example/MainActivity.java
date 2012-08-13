@@ -31,6 +31,9 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 
 import org.apache.http.HttpResponse;
@@ -49,7 +52,10 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -69,19 +75,19 @@ public class MainActivity extends Activity
 	public static String sEmail;
 	public static String Apikey;
 	public static String Token;
-	public static final int CODE_RETOUR = 0;
-	private static final String TAG=MainActivity.class.getName();
-    private static ArrayList<Activity> activities=new ArrayList<Activity>();
-
-	
+	public static String UrlBeginning=null;
+	public static final int RETURN_CODE= 0;
+    public static ArrayList<Activity> activities=new ArrayList<Activity>();
+    public final static String TAG="Main Activity";
+    /*Global Debug constant*/
+	public static final boolean DEBUG = true;
+    	
 	//---------- ON CREATE-----------------------------------------------------------------//
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        activities.add(this);
-
     }
 
     //---------- ON CREATE OPTIONS MENU----------------------------------------------------//
@@ -111,29 +117,30 @@ public class MainActivity extends Activity
              activity.finish();
       }
 
-       	  public void ButtonOnClick(View v) 
-	      {
-	    	  
-	    	  switch (v.getId())
-	    	  {
-	    	  		case(R.id.midasButton):
-	    	  			accessMidas(v);
-	    	  			break;
+   	  public void ButtonOnClick(View v) 
+   	  {
+   		  switch (v.getId())
+	   	  {
+	    	  	case(R.id.midasButton):
+	    	  		Log.d(TAG, "MIDAS BUTTON PUSHED");
+	    	  		UrlBeginning="http://midas3.kitware.com/midas";
+	    	  		accessUrl(v);
+	    	  		break;
 	    	                   
-	    			case(R.id.LoginButton):
-	    				postData (v);
-	    				break;
+	    		case(R.id.LoginButton):
+	    			postData(v);
+	    			break;
 	    			
-	    			case(R.id.OkButton):
-	    				urlSearch(v);
-	    				break;
+	    		case(R.id.OkButton):
+	    			urlSearch(v);
+	    			break;
 	    				
-	    			case(R.id.buttonSearch):
-	    				Intent i=new Intent(MainActivity.this,FileExplorerActivity.class);
-	    				startActivityForResult(i, CODE_RETOUR);
-	    				break;
-	      	  }
-	    	} 
+	    		case(R.id.buttonSearch):
+	    			Intent i=new Intent(MainActivity.this,FileExplorerActivity.class);
+	    			startActivityForResult(i, RETURN_CODE);
+	    			break;
+	      	 }
+	    } 
       
       
       
@@ -143,25 +150,61 @@ public class MainActivity extends Activity
       
   		
 	//---------- ACCESS WEB-----------------------------------------------------------------//
-     public void accessMidas(View view)
+     public void accessUrl(View view)
     {	
     	// Do something in response to button
-    	 String url="http://midas3.kitware.com/midas/api/json?method=midas.community.list";
+    	 String url = UrlBeginning + "/api/json?method=midas.community.list";
     	 if(Token!=null)
-    		 url+="&token="+Token;
-    	this.get(url);
+    		 url += "&token=" + Token;
+    	 this.get(url);
+    	 printThreads();
+    	/*// Create a new HttpClient and Post Header
+    	 	HttpClient httpclient = new DefaultHttpClient();          	
+    	 	HttpPost httppost = new HttpPost(url);  
+      
+    	 	// Execute HTTP Post Request
+    	 	HttpResponse response;
+    	 	String Result;
+ 		try {
+ 			response = httpclient.execute(httppost);
+    	 		Result= EntityUtils.toString(response.getEntity());
+    	 		Log.d(TAG, "response : "+Result);
+    	 		String str_jsonCommunity=make_json_Community_tree(Result);
+				Intent intent = new Intent(MainActivity.this, ListOfViewsActivity.class);
+				intent.putExtra(EXTRA_MESSAGE, str_jsonCommunity);
+			    //putExtra()==takes a string as the key and the value in the second parameter.
+			    startActivityForResult(intent, RETURN_CODE);		
+    	 		
+ 		} catch (ClientProtocolException e) {
+ 			Log.d(TAG, "ClientProtocolException");
+ 			e.printStackTrace();
+ 		} catch (IOException e) {
+ 			Log.d(TAG, "IOException");
+ 			e.printStackTrace();
+ 		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
     }
     
   	//---------- GET ----------------------------------------------------------------------//
     public void get(String sUrl) 
     {
-		HttpThread thread = new HttpThread(this, sUrl);
-		Thread t = new Thread(thread);
-		t.start();
+		HttpThread thread = new HttpThread(this,sUrl);
+		thread.run();
+		printThreads();
+		//Thread t = new Thread(thread);
+		//t.setPriority(10);
+		//t.start();
 	}
-    
+    public static void printThreads() {
+        Thread[] ta = new Thread[Thread.activeCount()];
+        int n = Thread.enumerate(ta);
+        for (int i=0; i<n; i++) {
+           System.out.println("Le thread "+ i + " est " + (ta[i].getId()));
+        } } 
   	//---------- CLASS HTTPTHREAD---------------------------------------------------------//
-    private class HttpThread implements Runnable 
+    private class HttpThread  extends Thread  implements Runnable 
     {
     	
     	//-----Attributes---------------------------------------//
@@ -176,7 +219,7 @@ public class MainActivity extends Activity
     	}
     	
     	//----- RUN ---------------------------------------------//
-	    public void run() 
+	    public  void run() 
 		{    	
 			String str;
 			StringBuffer buff = new StringBuffer();
@@ -202,7 +245,8 @@ public class MainActivity extends Activity
 				Intent intent = new Intent(parent, ListOfViewsActivity.class);
 				intent.putExtra(EXTRA_MESSAGE, str_jsonCommunity);
 			    //putExtra()==takes a string as the key and the value in the second parameter.
-			    startActivityForResult(intent, CODE_RETOUR);		
+				printThreads();
+			    startActivity(intent);		
 						
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -210,8 +254,9 @@ public class MainActivity extends Activity
 			}
 			
 	    }
-	    
     }
+	    
+    
   //---------- MAKE JSON COMMUNITY TREE-----------------------------------------------------------------//
 	    String make_json_Community_tree(String message)throws JSONException
 	    {
@@ -236,16 +281,42 @@ public class MainActivity extends Activity
     //---------------------------LOGIN----------------------------------------------------------//
     //------------------------------------------------------------------------------------------//
     
-	    @SuppressLint("ParserError")
-		public void postData (View view)
+	    @SuppressWarnings("deprecation")
+		@SuppressLint("ParserError")
+		public void postData (View view) 
 	    {
+	    	
 	    	EditText email = (EditText)this.findViewById(R.id.Email);
 	    	EditText password = (EditText)this.findViewById(R.id.Password);
 	    	sEmail = email.getText().toString();
 	        String sPassword = password.getText().toString();
+	        
+	        
+	        this.showDialog(0);
+	        /*AlertDialog.Builder choice=new AlertDialog.Builder(MainActivity.this);
+	        choice.setTitle("Choose...");
+	     
+	       
+			choice.setPositiveButton("Midas", new DialogInterface.OnClickListener() 
+		        {
+	    			public void onClick(DialogInterface dialog, int whichButton) {
+	    				UrlBeginning="http://midas3.kitware.com/midas";
+	    			}});
+		        choice.setNegativeButton("Slicer",new DialogInterface.OnClickListener() 
+		    	        {
+		        			public void onClick(DialogInterface dialog, int whichButton) {
+		        				UrlBeginning="http://slicer.kitware.com/midas3";
+		        			}});
+		        choice.show();*/
+		   
+	       if(UrlBeginning!=null)
+	       {
+	        	
+	        
 	     // Create a new HttpClient and Post Header
             HttpClient httpclient = new DefaultHttpClient();
-            HttpPost httppost = new HttpPost("http://midas3.kitware.com/midas/api/json?method=midas.user.apikey.default");
+                        	
+            HttpPost httppost = new HttpPost(UrlBeginning+"/api/json?method=midas.user.apikey.default");
             
             String result = null;
             try {
@@ -275,7 +346,7 @@ public class MainActivity extends Activity
             // Login with the api key retrieved
             Apikey = retrieve_apikey_token(result,"apikey");
             HttpClient httpclient2 = new DefaultHttpClient();
-            HttpPost httppost2 = new HttpPost("http://midas3.kitware.com/midas/api/json?method=midas.login");
+            HttpPost httppost2 = new HttpPost(UrlBeginning+"/api/json?method=midas.login");
             String result2 = null;
             try {
                 // Add your data
@@ -299,7 +370,10 @@ public class MainActivity extends Activity
             {
             	if(Token!=null)
             	{
-            		Toast.makeText(getApplicationContext(), "login successfully",Toast.LENGTH_SHORT).show(); 
+            		if(UrlBeginning.contains("slicer"))
+                  		Toast.makeText(getApplicationContext(), "login successfully on Slicer",Toast.LENGTH_SHORT).show(); 
+            		else
+            			Toast.makeText(getApplicationContext(), "login successfully on Midas",Toast.LENGTH_SHORT).show(); 
             	}
             	else
             	{
@@ -311,7 +385,10 @@ public class MainActivity extends Activity
             {
             	Log.i("tagconvertstr",""+e.toString());
             }
+	        }
 	    }
+
+		
 
 		public String retrieve_apikey_token(String result,String type) 
 		{
@@ -329,7 +406,37 @@ public class MainActivity extends Activity
 				return "Login fail";
 		    }
 		}
-		
+		/**
+		* Create game over and ready dialogs using builders
+		*/
+		  @Override
+		  protected Dialog onCreateDialog(int id) {
+		    if (MainActivity.DEBUG) {
+		      Log.d(TAG, "onCreateDialog(" + id + ")");
+		    }
+		    Dialog dialog = null;
+		    AlertDialog.Builder builder = null;
+		    
+		  
+		   
+		      builder = new AlertDialog.Builder(this);
+		      builder.setMessage("Choose...")
+		          .setPositiveButton("Midas", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		              
+		            	UrlBeginning="http://midas3.kitware.com/midas";
+		            }
+		          }).setNegativeButton("Slicer", new DialogInterface.OnClickListener() {
+		            public void onClick(DialogInterface dialog, int id) {
+		            	UrlBeginning="http://slicer.kitware.com/midas3";
+		            }
+		          });
+		      dialog = builder.create();	  
+		    return dialog;
+
+		  }
+
+
 		
 		//------------------------------------------------------------------------------------------//
 	    //---------------------------URL------------------------------------------------------------//
@@ -337,24 +444,36 @@ public class MainActivity extends Activity
 	    
 		public void urlSearch(View v)
 		{
-			try {
-				EditText url = (EditText)this.findViewById(R.id.URL);
-				HttpClient httpclient = new DefaultHttpClient();
+			
+				String url = (String)((EditText)this.findViewById(R.id.URL)).getText().toString();
+				
+				
+				if (url.contains("midas3.kitware.com"))
+				{
+					UrlBeginning="http://midas3.kitware.com/midas";
+				}
+				else
+				{
+					UrlBeginning="http://slicer.kitware.com/midas3";
+				}
+				Toast.makeText(getApplicationContext(), url,Toast.LENGTH_SHORT).show();
+				accessUrl(v);
+		}
+				
+				
+				
+				/*HttpClient httpclient = new DefaultHttpClient();
 		        HttpPost httppost = new HttpPost(url.getText().toString());
 		        HttpResponse response = httpclient.execute(httppost);
 				String result = EntityUtils.toString(response.getEntity());
-				Toast.makeText(getApplicationContext(), result,Toast.LENGTH_SHORT).show(); 
+				Toast.makeText(getApplicationContext(), result,Toast.LENGTH_SHORT).show(); */
 				
-			} catch (ParseException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-            catch(Exception e)
-            {
-            	Log.i("tagconvertstr",""+e.toString());
-            }
-		}
+			
+			
+			
+			
+			
+		
 }
     
 

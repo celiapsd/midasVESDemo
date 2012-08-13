@@ -38,6 +38,7 @@ public class DownloadFileActivity extends Activity
 	public void onCreate(Bundle savedInstanceState)
 	{    	
 		super.onCreate(savedInstanceState);
+		MainActivity.activities.add(this);
 		setContentView(R.layout.activity_open_file);   
 		// Get the message from the intent
 		Intent intent = getIntent();
@@ -45,7 +46,8 @@ public class DownloadFileActivity extends Activity
 		EXTRA_MESSAGE2 = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 		//transform in string
 		
-		url= "http://midas3.kitware.com/midas/download?items=";
+		url= MainActivity.UrlBeginning+"/download?items=";
+		
 		try 
 		{
 			JSONObject jsonObject = new JSONObject(EXTRA_MESSAGE2);
@@ -105,6 +107,12 @@ public class DownloadFileActivity extends Activity
 					e.printStackTrace();
 				}
   				break;
+  			case(R.id.OpenCurrentFile):
+  	  			//open(v);
+  	  			break;
+  			case(R.id.SearchFile):
+  	  			choosefolder(v);
+  	  			break;
   			
   			case(R.id.ReturnHomepage):
   				returnHomepage(v);

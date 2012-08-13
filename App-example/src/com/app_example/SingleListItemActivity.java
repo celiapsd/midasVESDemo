@@ -2,7 +2,10 @@ package com.app_example;
 
 //----------------------------------------libraries----------------------------------------//
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,6 +23,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,6 +41,7 @@ public class SingleListItemActivity extends Activity
 	private ArrayAdapter<String> listAdapter ;
 	public  List<Folder> ListChildren;	  
 	public final static int CODE_RETOUR=0;
+	public static String url;
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
     @Override
@@ -54,16 +59,20 @@ public class SingleListItemActivity extends Activity
         
         //----String----//
         Intent i = getIntent();
+        MainActivity.activities.add(this);
         // getting attached intent data
         String product = i.getStringExtra(ListOfViewsActivity.EXTRA_MESSAGE3);
         get_Parent(product);
         setTitle(name);
         
         //txtProduct.setText(product);
-        String url="http://midas3.kitware.com/midas/api/json?method=midas..folder.children&id="+id;
+        url=MainActivity.UrlBeginning+"/api/json?method=midas.folder.children&id="+id;
    	 	if(MainActivity.Token!=null)
    	 		url+="&token="+MainActivity.Token;
-      	getListChildren(url);
+   	 	
+   	 	HttpThread t = new HttpThread(url);
+   	 	t.run();
+      	//getListChildren(url);
      	
      	setContentView(R.layout.activity_list_of_views);
 		
@@ -122,6 +131,58 @@ public class SingleListItemActivity extends Activity
 		});
 		
 	}
+    private class HttpThread implements Runnable 
+    {
+    	
+    	//-----Attributes---------------------------------------//
+    	
+		private String sUrl;
+		
+		//-----Constructor--------------------------------------//
+    	public HttpThread(String sUrl) 
+    	{
+			
+			this.sUrl = sUrl;
+    	}
+    	
+    	//----- RUN ---------------------------------------------//
+	    public synchronized void run() 
+		{    	
+			String str;
+			StringBuffer buff = new StringBuffer();
+			try 
+			{	
+				URL url = new URL(this.sUrl);
+				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+				//typical appli : BufferedReader buf = new BufferedReader(new FileReader("file.java"));
+				//InputStreamReader(InputStream in)
+				
+				while ((str = in.readLine()) != null) 
+				{
+					buff.append(str);
+				}
+			} catch (Exception e) {
+					Log.e("HttpRequest", e.toString());
+			}
+			
+			// call display message activity using our response
+			String response = buff.toString();
+			//try {
+				getListChildren(response);
+				//String str_jsonCommunity=make_json_Community_tree(response);
+				/*Intent intent = new Intent(SingleListItemActivity.this, ListOfViewsActivity.class);
+				intent.putExtra(EXTRA_MESSAGE3, str_jsonCommunity);
+			    //putExtra()==takes a string as the key and the value in the second parameter.
+			    startActivityForResult(intent, CODE_RETOUR);*/		
+						
+			/*} catch (JSONException e) {
+				
+				e.printStackTrace();
+			}*/
+			
+	    }
+    }
+	 
   //---------- FUNCTIONS FOR LIFECYCLE ACTIVITY------------------------------------------//
     protected void onDestroy() {
         super.onDestroy(); }
@@ -134,6 +195,8 @@ public class SingleListItemActivity extends Activity
       protected void onStop() {
         super.onStop(); } 
   
+                   
+         
     //---------- GET PARENT-----------------------------------------------------------------//
   	public void get_Parent(String product) {
 		
@@ -147,34 +210,37 @@ public class SingleListItemActivity extends Activity
 				e.printStackTrace();
 		}
 	}
+  	
   	//---------- GET -----------------------------------------------------------------//
   	public void getListChildren(String sUrl) 
   	{
-  		HttpClient httpclient = new DefaultHttpClient();
+  		/*HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(sUrl);
         
         String result = null;
                     // Execute HTTP Post Request
-        HttpResponse response;
+        HttpResponse response;*/
 		
         try {
-			response = httpclient.execute(httppost);
-			result = EntityUtils.toString(response.getEntity());
+			/*response = httpclient.execute(httppost);
+			result = EntityUtils.toString(response.getEntity());*/
 
             //HttpEntity entity = response.getEntity();
             //is = entity.getContent();
             //System.out.println(result);
         	
         	String str_jsonChildren;
-				str_jsonChildren = make_json_Children_tree(result,this.id);
+				str_jsonChildren = make_json_Children_tree(sUrl,this.id);
 				ListChildren = get_Children_Into_List(str_jsonChildren);//get the retrieve list linked with the json string
-		} catch (ClientProtocolException e) {
+				
+				
+		/*} catch (ClientProtocolException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();*/
 			
-		} catch (IOException e) {
+		/*} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e.printStackTrace();*/
 			
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -290,8 +356,6 @@ public class SingleListItemActivity extends Activity
 		}
 	protected void onActivityResult(int requestCode) 
 	{
-		super.onActivityResult(requestCode, requestCode, null);
-
 		if(requestCode == CODE_RETOUR) 
 		{
 			setResult(CODE_RETOUR);
