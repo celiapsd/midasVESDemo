@@ -30,10 +30,25 @@
         <activity
             android:label="@string/title_activity_list_of_views" 
             android:name="com.app_example.ListOfViewsActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDCHILD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity 
             android:label="@string/title_activity_single_list_item" 
             android:name="com.app_example.SingleListItemActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SENDCHILD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
         </activity>
         <activity 
             android:label="@string/title_activity_download_file"

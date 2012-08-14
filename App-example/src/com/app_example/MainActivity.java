@@ -86,6 +86,10 @@ public class MainActivity extends Activity
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
+        if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "OnCreate()");
+          }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
@@ -94,12 +98,20 @@ public class MainActivity extends Activity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) 
     {
+        if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "OnCreateOptionMenu()");
+          }
         getMenuInflater().inflate(R.menu.activity_main, menu);
         return true;
     }
     
   	//---------- FUNCTIONS FOR LIFECYCLE ACTIVITY------------------------------------------//
     protected void onDestroy() {
+        if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "OnDestroy()");
+          }
         super.onDestroy();
         activities.remove(this);}
       protected void onPause() {
@@ -113,12 +125,22 @@ public class MainActivity extends Activity
     
       public static void finishAll()
       {
+          if (MainActivity.DEBUG) 
+            {
+            Log.d(TAG, "finishAll()");
+            }
           for(Activity activity:activities)
              activity.finish();
       }
 
    	  public void ButtonOnClick(View v) 
    	  {
+
+   	    if (MainActivity.DEBUG) 
+   	      {
+   	      Log.d(TAG, "ButtonOnClick()");
+   	      }
+      
    		  switch (v.getId())
 	   	  {
 	    	  	case(R.id.midasButton):
@@ -128,14 +150,17 @@ public class MainActivity extends Activity
 	    	  		break;
 	    	                   
 	    		case(R.id.LoginButton):
+	    		  Log.d(TAG, "LOGIN BUTTON PUSHED");
 	    			postData(v);
 	    			break;
 	    			
 	    		case(R.id.OkButton):
+	    		  Log.d(TAG, "URL ENTERED");
 	    			urlSearch(v);
 	    			break;
 	    				
 	    		case(R.id.buttonSearch):
+	    		  Log.d(TAG, "SEARCH A FILE");
 	    			Intent i=new Intent(MainActivity.this,FileExplorerActivity.class);
 	    			startActivityForResult(i, RETURN_CODE);
 	    			break;
@@ -152,10 +177,18 @@ public class MainActivity extends Activity
 	//---------- ACCESS WEB-----------------------------------------------------------------//
      public void accessUrl(View view)
     {	
+      
+      if (MainActivity.DEBUG) 
+        {
+        Log.d(TAG, "AccessUrl()");
+        }
     	// Do something in response to button
     	 String url = UrlBeginning + "/api/json?method=midas.community.list";
     	 if(Token!=null)
+    	   {
     		 url += "&token=" + Token;
+    	   }
+    	   Log.d(TAG, "URL : "+url);
     	 this.get(url);
     	 printThreads();
     	/*// Create a new HttpClient and Post Header
@@ -189,77 +222,114 @@ public class MainActivity extends Activity
     
   	//---------- GET ----------------------------------------------------------------------//
     public void get(String sUrl) 
-    {
-		HttpThread thread = new HttpThread(this,sUrl);
-		thread.start();
-		printThreads();
+      {
+      if (MainActivity.DEBUG) 
+        {
+        Log.d(TAG, "get()");
+        }
+		  HttpThread Hth = new HttpThread(sUrl);
+		  Log.d(TAG, "Thread Started");
+		  Thread th=new Thread(Hth);
+		  th.start();
+		  try
+        {
+        th.join();
+        } catch (InterruptedException e)
+        {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+        }
+		// call display message activity using our response
+      String response = Hth.getResponse();
+      try {
+        String str_jsonCommunity=make_json_Community_tree(response);
+        Intent intent = new Intent(MainActivity.this, ListOfViewsActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, str_jsonCommunity);
+          //putExtra()==takes a string as the key and the value in the second parameter.
+      
+          Log.d(TAG, "send intent to ListOfVIewsActivity()");
+          
+        startActivity(intent);    
+            
+      } catch (JSONException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+		  
 		//Thread t = new Thread(thread);
 		//t.setPriority(10);
 		//t.start();
 	}
-    public static void printThreads() {
+    public static void printThreads() 
+      {
+        if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "printThread()");
+          }
         Thread[] ta = new Thread[Thread.activeCount()];
         int n = Thread.enumerate(ta);
         for (int i=0; i<n; i++) {
            System.out.println("Le thread "+ i + " est " + (ta[i].getId()));
-        } } 
+        }
+      } 
   	//---------- CLASS HTTPTHREAD---------------------------------------------------------//
-    private class HttpThread  extends Thread  implements Runnable 
+    /*private class HttpThread   implements Runnable 
     {
     	
     	//-----Attributes---------------------------------------//
     	MainActivity parent;
-		private String sUrl;
+    	private String sUrl;
 		
 		//-----Constructor--------------------------------------//
     	public HttpThread(MainActivity parent,String sUrl) 
-    	{
-			this.parent = parent;
-			this.sUrl = sUrl;
-    	}
+      	{
+  			this.parent = parent;
+  			this.sUrl = sUrl;
+      	}
     	
     	//----- RUN ---------------------------------------------//
 	    public  void run() 
-		{    	
-			String str;
-			StringBuffer buff = new StringBuffer();
-			try 
-			{	
-				URL url = new URL(this.sUrl);
-				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
-				//typical appli : BufferedReader buf = new BufferedReader(new FileReader("file.java"));
-				//InputStreamReader(InputStream in)
+	      {  
+	      if (MainActivity.DEBUG) 
+	        {
+	        Log.d(TAG, "runThread()");
+	        }
+  			String str;
+  			StringBuffer buff = new StringBuffer();
+  			try 
+  			{	
+  				URL url = new URL(this.sUrl);
+  				BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+  				//typical appli : BufferedReader buf = new BufferedReader(new FileReader("file.java"));
+  				//InputStreamReader(InputStream in)
+  			
+  	        Log.d(TAG, "Buffer Readed)");
+  	      
 				
-				while ((str = in.readLine()) != null) 
-				{
-					buff.append(str);
-				}
-			} catch (Exception e) {
-					Log.e("HttpRequest", e.toString());
-			}
+  				while ((str = in.readLine()) != null) 
+  				{
+  					buff.append(str);
+  				}
+  				
+  			} catch (Exception e) {
+  					Log.e("HttpRequest", e.toString());
+  			}
 			
-			// call display message activity using our response
-			String response = buff.toString();
-			try {
-				String str_jsonCommunity=make_json_Community_tree(response);
-				Intent intent = new Intent(parent, ListOfViewsActivity.class);
-				intent.putExtra(EXTRA_MESSAGE, str_jsonCommunity);
-			    //putExtra()==takes a string as the key and the value in the second parameter.
-				startActivity(intent);		
-						
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			
 			
 	    }
-    }
+
+     
+    }*/
 	    
     
   //---------- MAKE JSON COMMUNITY TREE-----------------------------------------------------------------//
 	    String make_json_Community_tree(String message)throws JSONException
 	    {
-			  
+	      if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "MakeJsonCommunityTree()");
+          }
 	    	JSONObject jsonObject = new JSONObject(message); 
 	    	JSONArray Array1=jsonObject.optJSONArray("data");
 	    	String jsonCommunity="{\"community\":[";
@@ -274,6 +344,10 @@ public class MainActivity extends Activity
 	    			jsonCommunity+=",";
 	    	}
 	    	jsonCommunity+="]}";
+	    	if (MainActivity.DEBUG) 
+	        {
+	        Log.d(TAG, "json string : "+jsonCommunity);
+	        }
 	    	return jsonCommunity;
 	    }
     //------------------------------------------------------------------------------------------//
@@ -284,12 +358,17 @@ public class MainActivity extends Activity
 		@SuppressLint("ParserError")
 		public void postData (View view) 
 	    {
-	    	
+	      if (MainActivity.DEBUG) 
+          {
+          Log.d(TAG, "PostData()");
+          }
 	    	EditText email = (EditText)this.findViewById(R.id.Email);
 	    	EditText password = (EditText)this.findViewById(R.id.Password);
 	    	sEmail = email.getText().toString();
-	        String sPassword = password.getText().toString();
+	      String sPassword = password.getText().toString();
 	        
+	      
+	        Log.d(TAG, "showDialog");
 	        
 	        this.showDialog(0);
 	        /*AlertDialog.Builder choice=new AlertDialog.Builder(MainActivity.this);
@@ -391,6 +470,10 @@ public class MainActivity extends Activity
 
 		public String retrieve_apikey_token(String result,String type) 
 		{
+		  if (MainActivity.DEBUG) 
+        {
+        Log.d(TAG, "retrieve_apikey_token");
+        }
 			String data=new String();
 			try 
 			{
@@ -409,10 +492,13 @@ public class MainActivity extends Activity
 		* Create game over and ready dialogs using builders
 		*/
 		  @Override
-		  protected Dialog onCreateDialog(int id) {
-		    if (MainActivity.DEBUG) {
+		  protected Dialog onCreateDialog(int id) 
+		    {
+		    
+		    if (MainActivity.DEBUG) 
+		      {
 		      Log.d(TAG, "onCreateDialog(" + id + ")");
-		    }
+		      }
 		    Dialog dialog = null;
 		    AlertDialog.Builder builder = null;
 		    
@@ -443,6 +529,11 @@ public class MainActivity extends Activity
 	    
 		public void urlSearch(View v)
 		{
+  		if (MainActivity.DEBUG) 
+        {
+        Log.d(TAG, "urlSearch()");
+        }
+
 			
 				String url = (String)((EditText)this.findViewById(R.id.URL)).getText().toString();
 				

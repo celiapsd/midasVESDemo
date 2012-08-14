@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -27,23 +28,31 @@ public class ListOfViewsActivity extends Activity
 	public  List<Community> ListCommunity;	  
 	public final static String EXTRA_MESSAGE3 = "com.app_example.MESSAGE";
 	public final static int CODE_RETOUR=0;
+	public final static String TAG="ListOfViewsActivity";
+  /*Global Debug constant*/
+	public static final boolean DEBUG = true;
 	
 	//---------- ON CREATE-----------------------------------------------------------------//
 	@Override
 	public void onCreate(Bundle savedInstanceState) 
 	{
+    if (ListOfViewsActivity.DEBUG) 
+      {
+      Log.d(TAG, "OnCreate()");
+      }
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_of_views);
 		MainActivity.activities.add(this);
 		
 		Intent intent = getIntent();// Get the message from the intent
 		String str_jsonCommunity = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);//get the retrieve data contained within it
-		
+		 Log.d(TAG, "getintent");
 		ListCommunity = get_Community_Into_List(str_jsonCommunity);//get the retrieve list linked with the json string
-	
+		 Log.d(TAG, "LIstcommunity is  null ? "+ListCommunity.isEmpty());
 		// Find the ListView resource. 
 		mainListView = (ListView) findViewById( R.id.mainListView );
-		    
+		Log.d(TAG, "mainListView is  enabled ? "+mainListView.isEnabled());   
 		
 		//----------------------TO SEE THE string Names into a list---------------------------//
 		String Names[] = new String[ListCommunity.size()];
@@ -57,16 +66,19 @@ public class ListOfViewsActivity extends Activity
 			
 		// Set the ArrayAdapter as the ListView's adapter.
 		mainListView.setAdapter( listAdapter ); 
-           	
-		
+		Log.d(TAG, "mainListView is  enabled ? "+mainListView.isEnabled());       	
+		Log.d(TAG, "waiting for a click");
 		//------------------------------listening to single list item on click------------------------------//
 		mainListView.setOnItemClickListener(new OnItemClickListener()
 		{
-			
+
 			//---------------ON ITEM CLICK --------------------------------------------------//
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) 
 		    {	
-				
+		      if (ListOfViewsActivity.DEBUG) 
+		        {
+		        Log.d(TAG, "onItemCLick()");
+		        }
 				//-----retrieve the name of the community selected and send to SingleListItemActivity
 				
 				String name = ((TextView) view).getText().toString();
@@ -90,6 +102,8 @@ public class ListOfViewsActivity extends Activity
 				//----- test string -----//
 				
 				Intent in = new Intent(ListOfViewsActivity.this, SingleListItemActivity.class);
+	        Log.d(TAG, "sending intent to SingleListItemActivity");
+
 				//System.out.println("This shouldnt be empty: "+child.transFolderIntoJSONString());
 				String childSt = new String(child.transFolderIntoJSONString());
 				in.putExtra(EXTRA_MESSAGE3,childSt);
@@ -99,12 +113,17 @@ public class ListOfViewsActivity extends Activity
 	}
 	
 	//---------- FUNCTIONS FOR LIFECYCLE ACTIVITY------------------------------------------//
-    protected void onDestroy() {
-        
+    protected void onDestroy() 
+      {
+      if (ListOfViewsActivity.DEBUG) 
+        {
+        Log.d(TAG, "onDestroy()");
+        }
+ 
     	super.onDestroy(); 
         
     
-    }
+      }
       protected void onPause() {
         super.onPause(); }
       protected void onResume() {
@@ -116,7 +135,12 @@ public class ListOfViewsActivity extends Activity
       
 	//---------- GET COMMUNITY INTO LIST-----------------------------------------------------------------//
 	public List<Community> get_Community_Into_List(String jsonString)
-	{
+	  {
+    if (ListOfViewsActivity.DEBUG) 
+      {
+      Log.d(TAG, "get_Community_Into_List()");
+      }
+
 		try 
 		{
 			JSONObject jsonObject = new JSONObject(jsonString); 
@@ -141,16 +165,7 @@ public class ListOfViewsActivity extends Activity
 	    }
 		return null;
 	}
-	protected void onActivityResult(int requestCode) 
-	{
-		super.onActivityResult(requestCode, requestCode, null);
-		if(requestCode == CODE_RETOUR) 
-		{
-			setResult(CODE_RETOUR);
-			
-			System.exit(0);
-		}
-	}
+	
 }
 
 //------------------------------------------------------------------------------------------//
