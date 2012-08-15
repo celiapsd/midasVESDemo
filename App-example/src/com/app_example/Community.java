@@ -1,11 +1,12 @@
 package com.app_example;
 
 //----------------------------------------libraries----------------------------------------//
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
 //---------- CLASS COMMUNITY---------------------------------------------------------//
-public class Community
+public class Community 
   {
     // -----Attributes--------------------------------------------------------//
     private int id;
