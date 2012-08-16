@@ -1,0 +1,47 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.celiapansard"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        
+        <activity
+            android:name=".ChooseFirstAction"
+            android:label="@string/title_activity_choose_first_action" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            
+        </activity>
+         <activity
+            android:label="@string/title_activity_list_of_views" 
+            android:name="com.celiapansard.ListOfViewsActivity">
+        </activity>
+        <activity 
+            android:label="@string/title_activity_single_list_item" 
+            android:name="com.celiapansard.SingleListItemActivity">
+        </activity>
+        <activity 
+            android:label="@string/title_activity_download_file"
+            android:name="com.celiapansard.DownloadFileActivity">
+        </activity>
+        <activity 
+            android:label="@string/title_activity_file_explorer"
+            android:name="com.celiapansard.FileExplorerActivity">
+        </activity>
+    </application>
+
+</manifest>
