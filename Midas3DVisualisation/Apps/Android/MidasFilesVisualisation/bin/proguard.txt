@@ -1,0 +1,38 @@
+# view AndroidManifest.xml #generated:19
+-keep class com.kitware.midasfilesvisualisation.ChooseFirstAction { <init>(...); }
+
+# view AndroidManifest.xml #generated:224
+-keep class com.kitware.midasfilesvisualisation.DatasetListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:36
+-keep class com.kitware.midasfilesvisualisation.DownloadFileActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class com.kitware.midasfilesvisualisation.FileExplorerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:234
+-keep class com.kitware.midasfilesvisualisation.InfoActivity { <init>(...); }
+
+# view res/layout/kiwivieweractivity.xml #generated:7
+-keep class com.kitware.midasfilesvisualisation.KiwiGLSurfaceView { <init>(...); }
+
+# view AndroidManifest.xml #generated:28
+-keep class com.kitware.midasfilesvisualisation.ListOfViewsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:32
+-keep class com.kitware.midasfilesvisualisation.SingleListItemActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.kitware.midasfilesvisualisation.ViewerActivity { <init>(...); }
+
+# onClick res/layout/homepage.xml #generated:113
+# onClick res/layout/homepage.xml #generated:45
+-keepclassmembers class * { *** ButtonOnClick(...); }
+
+# onClick res/layout/activity_open_file.xml #generated:36
+# onClick res/layout/activity_open_file.xml #generated:45
+# onClick res/layout/activity_open_file.xml #generated:65
+# onClick res/layout/activity_open_file.xml #generated:74
+# onClick res/layout/activity_open_file.xml #generated:83
+-keepclassmembers class * { *** ChooseSave(...); }
+

@@ -1,0 +1,12 @@
+set(vtkFiltersModeling_CLASSES_LOADED 1)
+set(vtkFiltersModeling_CLASSES "vtkBandedPolyDataContourFilter;vtkButterflySubdivisionFilter;vtkDijkstraGraphGeodesicPath;vtkDijkstraImageGeodesicPath;vtkFillHolesFilter;vtkGeodesicPath;vtkGraphGeodesicPath;vtkLinearExtrusionFilter;vtkLinearSubdivisionFilter;vtkLoopSubdivisionFilter;vtkPolyDataPointSampler;vtkProjectedTexture;vtkQuadRotationalExtrusionFilter;vtkRibbonFilter;vtkRotationalExtrusionFilter;vtkRuledSurfaceFilter;vtkSelectEnclosedPoints;vtkSelectPolyData;vtkSpherePuzzleArrows;vtkSpherePuzzle;vtkSubdivideTetra;vtkOutlineFilter;vtkSectorSource")
+
+foreach(class ${vtkFiltersModeling_CLASSES})
+  set(vtkFiltersModeling_CLASS_${class}_EXISTS 1)
+endforeach()
+
+set(vtkFiltersModeling_CLASS_vtkGeodesicPath_ABSTRACT 1)
+set(vtkFiltersModeling_CLASS_vtkGraphGeodesicPath_ABSTRACT 1)
+
+
+

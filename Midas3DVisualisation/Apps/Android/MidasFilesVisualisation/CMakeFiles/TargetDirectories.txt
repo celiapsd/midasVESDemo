@@ -1,0 +1,2 @@
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/jni/CMakeFiles/KiwiNative.dir
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/jni/CMakeFiles/MidasNative.dir
