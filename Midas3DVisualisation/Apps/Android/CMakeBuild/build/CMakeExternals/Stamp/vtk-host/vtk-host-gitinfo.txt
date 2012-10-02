@@ -1,0 +1,3 @@
+repository='git://github.com/patmarion/VTK.git'
+module=''
+tag='origin/kiwi-fixes'

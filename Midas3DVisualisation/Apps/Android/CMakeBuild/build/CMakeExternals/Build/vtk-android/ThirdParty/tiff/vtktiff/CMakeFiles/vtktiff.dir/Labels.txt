@@ -1,0 +1,40 @@
+# Target labels
+ vtktiff
+# Source files and their labels
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_aux.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_close.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_codec.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_compress.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_dir.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_dirinfo.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_dirread.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_dirwrite.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_dumpmode.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_error.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_fax3.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_flush.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_getimage.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_jpeg.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_luv.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_lzw.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_next.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_ojpeg.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_open.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_packbits.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_pixarlog.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_predict.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_print.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_read.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_strip.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_swab.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_thunder.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_tile.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_version.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_warning.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_write.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_zip.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_color.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_extension.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/tif_unix.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-android/ThirdParty/tiff/vtktiff/tif_fax3sm.c
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-android/ThirdParty/tiff/vtktiff/tif_fax3sm.c.rule

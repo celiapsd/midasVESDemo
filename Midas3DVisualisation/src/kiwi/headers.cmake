@@ -1,0 +1,19 @@
+set(headers
+  vesKiwiAnimationRepresentation.h
+  vesKiwiBaseApp.h
+  vesKiwiBrainAtlasRepresentation.h
+  vesKiwiDataConversionTools.h
+  vesKiwiDataLoader.h
+  vesKiwiDataRepresentation.h
+  vesKiwiImagePlaneDataRepresentation.h
+  vesKiwiImageWidgetRepresentation.h
+  vesKiwiPlaneWidget.h
+  vesKiwiPolyDataRepresentation.h
+  vesKiwiText2DRepresentation.h
+  vesKiwiViewerApp.h
+  vesKiwiWidgetRepresentation.h
+  )
+
+set(header_dirs
+  .
+  )
