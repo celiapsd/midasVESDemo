@@ -26,7 +26,7 @@ public:
     midasInternal()
     {
         this->builtinDatasetIndex = -1;//different
-        this->currentDataset = "1";
+        this->currentDataset = "";
         this->storageDir = "";
     }
     //----------------------------------------------------------------------------
@@ -81,5 +81,8 @@ void vesMidasApp::storeCameraState()
   this->Internal->cameraPosition = this->cameraPosition();
   this->Internal->cameraFocalPoint = this->cameraFocalPoint();
     this->Internal->cameraViewUp = this->cameraViewUp();
+}
+void vesMidasApp::addBuiltinDataset(std::string filename, std::string path){
+        this->addBuiltinDataset(filename,path);
 }
 

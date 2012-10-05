@@ -11,6 +11,7 @@
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/R.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/FileExplorerActivity$2.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/FileExplorerActivity.class \
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ViewerActivity$8.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$MyGestureDetector$1.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/DownloadFileActivity.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/DownloadFileActivity$WaitWhileSave.class \
@@ -36,6 +37,7 @@
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$1$1.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$MyGestureDetector$2.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ViewerActivity$BuiltinDataLoader.class \
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ViewerActivity$7.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ListOfViewsActivity$1.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$5.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/InfoActivity.class \
@@ -48,6 +50,7 @@
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$MyGestureDetector.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/SingleListItemActivity.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/DownloadFileActivity$2.class \
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ViewerActivity$9.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/R$menu.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$ConfigChooser.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$MyGestureDetector$3.class \

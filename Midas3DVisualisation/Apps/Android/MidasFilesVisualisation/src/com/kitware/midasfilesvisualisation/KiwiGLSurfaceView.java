@@ -465,7 +465,9 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
       queueEvent(new Runnable() {
         public void run() {
         	Log.d(TAG,"loadDataset+queueevent-->run builtinDatasetIndex = "+ builtinDatasetIndex);
-          final boolean result = KiwiNative.loadDataset(filename, builtinDatasetIndex);
+        	
+        	int size = MidasNative.giveBuiltinDatasetIndex();
+          final boolean result = KiwiNative.loadDataset(filename, size);
           final String errorTitle = KiwiNative.getLoadDatasetErrorTitle();
           final String errorMessage = KiwiNative.getLoadDatasetErrorMessage();
 

@@ -22,6 +22,7 @@
 namespace {
 
 vesMidasApp* app;
+//vesKiwiViewerApp* app;
 
 //-------------------------------------------------------------------------------------------
 void init()
@@ -86,7 +87,7 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_init
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_putInDatabase
   (JNIEnv *env, jobject obj, jstring filename,jstring path)
 {
-   /* LOGI1("JNICALL1 putInDataBase()");
+   LOGI1("JNICALL1 putInDataBase()");
        const char *javaStr1 = env->GetStringUTFChars(filename, NULL);
      LOGI1("JNICALL1 javaStr1()");
     const char *javaStr2 = env->GetStringUTFChars(path, NULL);
@@ -99,7 +100,8 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_putI
       env->ReleaseStringUTFChars(path, javaStr2);
        LOGI1("before putInDataBase()");
 
-       if(app)
+
+      /* if(app)
        {
            LOGI1("app not null");
            app->checkForAdditionalData( pathStr);
@@ -107,20 +109,22 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_putI
            LOGI1("after putInDataBase()");}
        else
          LOGI1("app null");
+    }*/
+    app->addBuiltinDataset(filenameStr,pathStr);
     }
-*/
+
 }
 //-------------------------------------------------------------------------------------------
 JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_giveBuiltinDatasetIndex(JNIEnv* env, jobject obj)
 {
     LOGI1("giveBuiltinDatasetIndex()");
 
-/*  int size= app->numberOfBuiltinDatasets();
+  int size= app->numberOfBuiltinDatasets();
   LOGI1("size = %d",app->numberOfBuiltinDatasets());
-  appState.builtinDatasetIndex=size;
+  //appState.builtinDatasetIndex=size;
 
-   LOGI1("index %d",appState.builtinDatasetIndex);
-  return appState.builtinDatasetIndex;*/
+   //LOGI1("index %d",appState.builtinDatasetIndex);
+  return size;
 }
 
 //-------------------------------------------------------------------------------------------
