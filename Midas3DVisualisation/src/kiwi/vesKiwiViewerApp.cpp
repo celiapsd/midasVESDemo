@@ -286,6 +286,7 @@ int vesKiwiViewerApp::numberOfBuiltinDatasets() const
 int vesKiwiViewerApp::defaultBuiltinDatasetIndex() const
 {
   return 6;
+  //return this->Internal->BuiltinDatasetNames.size();
 }
 
 //----------------------------------------------------------------------------

@@ -199,6 +199,11 @@ bool setupGraphics(int w, int h)
 
   return true;
 }
+/*void storecurentDataset(std::string path,int index)
+{
+  appState.currentDataset=path;
+  appState.builtinDatasetIndex=index;
+}*/
 
 }; // end namespace
 //----------------------------------------------------------------------------
@@ -451,6 +456,9 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_KiwiNative_check
 
     //env->ReleaseStringUTFChars(name, javaStr1);
     app->checkForAdditionalData(/*nameStr,*/storageDirStr);
+
+    //storecurentDataset(storageDirStr,app->defaultBuiltinDatasetIndex());
+    //appState.currentDataset=storageDirStr;
   }
 }
 

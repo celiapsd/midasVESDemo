@@ -74,7 +74,7 @@ public class ViewerActivity extends Activity {
   
   	protected ArrayList<String> mBuiltinDatasetNames;
   
-  	protected String fileToOpen;
+  	protected String filePath;
   	protected int datasetToOpen = -1;
   
   	protected ProgressDialog mProgressDialog = null;
@@ -234,17 +234,23 @@ public class ViewerActivity extends Activity {
 	    if (uri != null) {
                 Log.d(TAG, "uri not null");
 	      if (uri.getScheme().equals("file")) {
-	        fileToOpen = uri.getPath();
+	        filePath = uri.getPath();
 	      }
 	    }
 	  }
 	  
     /*------------------------------getFilePath----------------------------------------------------*/
-  	protected void getFilePath() {
+  	protected String getFilePath() {
 		  Log.d(TAG, "getFilePath()");
 
-	          fileToOpen = DownloadFileActivity.getOutFilename();
+	          return filePath;// = DownloadFileActivity.getOutFilename();
 	    }
+  	/*------------------------------getFilePath----------------------------------------------------*/
+    protected void setFilePath(String myFilePath) {
+      Log.d(TAG, "setFilePath()");
+
+            filePath = myFilePath;
+      }
 
 	  
     /*------------------------------onNewIntent----------------------------------------------------*/
@@ -280,7 +286,7 @@ public class ViewerActivity extends Activity {
 		  Log.d(TAG, "maybeLoadDefaultDataset()");
 
 
-	    if (fileToOpen == null) {
+	    if (getFilePath() == null) {
 			  Log.d(TAG, "maybeLoadDefaultDataset()--> fileToOpen==null");
 
 	      String storageDir = getExternalFilesDir(null).getAbsolutePath();
@@ -297,17 +303,18 @@ public class ViewerActivity extends Activity {
 
 			  //KiwiNative.clearExistingDataset();
 			  //KiwiNative.init(100, 100);
-              String storageDir = DownloadFileActivity.getOutFilename();
-              Log.d(TAG, "maybeLoadDefaultDataset()--> storageDir = "+ storageDir);
+              //String storageDir = DownloadFileActivity.getOutFilename();
+              Log.d(TAG, "maybeLoadDefaultDataset()--> storageDir = "+ getFilePath() );
               //MidasNative.init(100, 100);
              //Log.d(TAG, "filename--> ");
               Log.d(TAG,"filename "+DownloadFileActivity.getFilename());
               //Log.d(TAG,"storageDir "+storageDir);
               //MidasNative.putInDatabase(DownloadFileActivity.filename, storageDir);
                  // Log.d(TAG, "putIndataBaseok()");
-              mView.postLoadDefaultDataset(this, storageDir);
+              mView.postLoadDefaultDataset(this, getFilePath() );
               Log.d(TAG, "postLoadDefaultDatasetok");
-              MidasNative.putInDatabase(DownloadFileActivity.getFilename(), storageDir);
+              
+              //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), getFilePath() );
                //mView.postLoadDefaultDataset(this, getExternalFilesDir(null).getAbsolutePath());
                
 	    }
@@ -330,13 +337,15 @@ public class ViewerActivity extends Activity {
 	    super.onCreate(bundle);
 		  Log.d(TAG, "onCreate()");
 
-		  MidasNative.init(100, 100);
+		 MidasNative.init(100, 100);
         //handleUriFromIntent(getIntent().getData());
-		  finish();
+		  /*finish();*/
 		  
-            /*getFilePath();
-	    this.setContentView(R.layout.kiwivieweractivity);
-		ChooseFirstAction.activities.add(this);
+      setFilePath(DownloadFileActivity.getOutFilename());
+      Log.d(TAG, "set file path ok ()");
+      this.setContentView(R.layout.kiwivieweractivity);
+      Log.d(TAG, "setcontent view ok()");
+      ChooseFirstAction.activities.add(this);
 
 	    mView = (KiwiGLSurfaceView) this.findViewById(R.id.glSurfaceView);
 	    //KiwiNative.init(100,100);
@@ -370,7 +379,7 @@ public class ViewerActivity extends Activity {
 	        public void onClick(View v) {
 	            mView.resetCamera();
 	        }
-	    });*/
+	    });
 
 	  }
 
@@ -555,9 +564,9 @@ public class ViewerActivity extends Activity {
 
 	      mView.onResume();
 
-	      if (fileToOpen != null) {
-	        loadDataset(fileToOpen);
-	        fileToOpen = null;
+	      if (getFilePath()  != null) {
+	        loadDataset(getFilePath() );
+	        setFilePath(null);
 	      }
 	      else if (datasetToOpen >= 0) {
 	        loadDataset(datasetToOpen);
