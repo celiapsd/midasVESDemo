@@ -387,8 +387,8 @@ Common/DataModel/preinstall:
 # Target rules for target Common/DataModel/CMakeFiles/vtkCommonDataModel.dir
 
 # All Build rule for target.
-Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
+Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all: Common/Math/CMakeFiles/vtkCommonMath.dir/all
 Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all: Common/Transforms/CMakeFiles/vtkCommonTransforms.dir/all
 	$(MAKE) -f Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/build.make Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/depend
@@ -592,8 +592,8 @@ Filters/Core/preinstall:
 # Target rules for target Filters/Core/CMakeFiles/vtkFiltersCore.dir
 
 # All Build rule for target.
-Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
+Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/Math/CMakeFiles/vtkCommonMath.dir/all
 Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/Transforms/CMakeFiles/vtkCommonTransforms.dir/all
 Filters/Core/CMakeFiles/vtkFiltersCore.dir/all: Common/ExecutionModel/CMakeFiles/vtkCommonExecutionModel.dir/all
@@ -965,8 +965,8 @@ IO/Core/preinstall:
 # Target rules for target IO/Core/CMakeFiles/vtkIOCore.dir
 
 # All Build rule for target.
-IO/Core/CMakeFiles/vtkIOCore.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
 IO/Core/CMakeFiles/vtkIOCore.dir/all: Utilities/KWSys/vtksys/CMakeFiles/vtksys.dir/all
+IO/Core/CMakeFiles/vtkIOCore.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
 IO/Core/CMakeFiles/vtkIOCore.dir/all: Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all
 IO/Core/CMakeFiles/vtkIOCore.dir/all: Common/ExecutionModel/CMakeFiles/vtkCommonExecutionModel.dir/all
 IO/Core/CMakeFiles/vtkIOCore.dir/all: ThirdParty/zlib/vtkzlib/CMakeFiles/vtkzlib.dir/all
@@ -1069,8 +1069,8 @@ IO/Geometry/preinstall:
 # Target rules for target IO/Geometry/CMakeFiles/vtkIOGeometry.dir
 
 # All Build rule for target.
-IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
+IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all
 IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: ThirdParty/zlib/vtkzlib/CMakeFiles/vtkzlib.dir/all
 IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all: IO/Core/CMakeFiles/vtkIOCore.dir/all
@@ -1450,12 +1450,12 @@ IO/Image/preinstall:
 
 # All Build rule for target.
 IO/Image/CMakeFiles/vtkIOImage.dir/all: ThirdParty/tiff/vtktiff/CMakeFiles/vtktiff.dir/all
-IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
+IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/Math/CMakeFiles/vtkCommonMath.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/Transforms/CMakeFiles/vtkCommonTransforms.dir/all
-IO/Image/CMakeFiles/vtkIOImage.dir/all: Utilities/DICOMParser/CMakeFiles/vtkDICOMParser.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all
+IO/Image/CMakeFiles/vtkIOImage.dir/all: Utilities/DICOMParser/CMakeFiles/vtkDICOMParser.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: Utilities/MetaIO/vtkmetaio/CMakeFiles/vtkmetaio.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all
 IO/Image/CMakeFiles/vtkIOImage.dir/all: ThirdParty/jpeg/vtkjpeg/CMakeFiles/vtkjpeg.dir/all
@@ -1627,8 +1627,8 @@ IO/XML/preinstall:
 # Target rules for target IO/XML/CMakeFiles/vtkIOXML.dir
 
 # All Build rule for target.
-IO/XML/CMakeFiles/vtkIOXML.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/XML/CMakeFiles/vtkIOXML.dir/all: Common/Misc/CMakeFiles/vtkCommonMisc.dir/all
+IO/XML/CMakeFiles/vtkIOXML.dir/all: Common/System/CMakeFiles/vtkCommonSystem.dir/all
 IO/XML/CMakeFiles/vtkIOXML.dir/all: Common/DataModel/CMakeFiles/vtkCommonDataModel.dir/all
 IO/XML/CMakeFiles/vtkIOXML.dir/all: IO/Core/CMakeFiles/vtkIOCore.dir/all
 IO/XML/CMakeFiles/vtkIOXML.dir/all: IO/Geometry/CMakeFiles/vtkIOGeometry.dir/all

@@ -1,3 +1,4 @@
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/src/kiwi/CMakeFiles/kiwi.dir
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/src/midas/CMakeFiles/midas.dir
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/src/ves/CMakeFiles/ves.dir
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/src/shaders/CMakeFiles/vesShaders.dir

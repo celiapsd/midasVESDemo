@@ -83,6 +83,8 @@ libs/armeabi-v7a/libMidasNative.so: jni/CMakeFiles/MidasNative.dir/MidasNative.c
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libves.a
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libvesShaders.a
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libkiwi.a
+libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libmidas.a
+libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libkiwi.a
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libves.a
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libvesShaders.a
 libs/armeabi-v7a/libMidasNative.so: /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-android/lib/libvtkIOPLY-6.0.a

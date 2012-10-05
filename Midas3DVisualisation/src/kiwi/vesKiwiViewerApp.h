@@ -53,7 +53,7 @@ public:
 
   typedef vesKiwiBaseApp Superclass;
   vesKiwiViewerApp();
-  ~vesKiwiViewerApp();
+  virtual ~vesKiwiViewerApp();
 
   int numberOfBuiltinDatasets() const;
   int defaultBuiltinDatasetIndex() const;
@@ -122,8 +122,8 @@ public:
   /// Return the spinner instance used to implement camera rotation inertia.
   vesSharedPtr<vesKiwiCameraSpinner> cameraSpinner() const;
 
-  //protected
-public:
+protected:
+//public:
 
   virtual void willRender();
 
@@ -155,8 +155,8 @@ public:
 
 private:
 
-  //vesKiwiViewerApp(const vesKiwiViewerApp&); // Not implemented
-  //void operator=(const vesKiwiViewerApp&); // Not implemented
+  vesKiwiViewerApp(const vesKiwiViewerApp&); // Not implemented
+  void operator=(const vesKiwiViewerApp&); // Not implemented
 
   class vesInternal;
   vesInternal* Internal;

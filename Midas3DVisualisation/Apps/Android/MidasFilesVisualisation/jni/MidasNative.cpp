@@ -7,10 +7,10 @@
 #include <fstream>
 #include <vesKiwiViewerApp.h>
 #include <string.h>
-#include <KiwiNative.cpp>
+#include <vesMidasApp.h>
 
 
-#define  LOG_TAG1    "MidasFilesVisualisation"
+#define  LOG_TAG1    "MidasNative"
 #define  LOGI1(...)  __android_log_print(ANDROID_LOG_INFO, LOG_TAG1,__VA_ARGS__)
 #define  LOGW1(...)  __android_log_print(ANDROID_LOG_WARN, LOG_TAG1,__VA_ARGS__)
 #define  LOGE1(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG1,__VA_ARGS__)
@@ -21,10 +21,14 @@
 
 namespace {
 
+vesMidasApp* app;
+
 //-------------------------------------------------------------------------------------------
 void init()
 {
    LOGI1("init()");
+   app = new vesMidasApp();
+   LOGI1("MidasApp initialized");
 }
 
 /*void putInDatabase(const std::string& filename, const std::string& path)
@@ -75,14 +79,14 @@ JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_give
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_init(JNIEnv * env, jobject obj,  jint width, jint height)
 {
   LOGI1("JNICALL init(%d, %d)", width, height);
-  //AndroidAppState Kiwi = AndroidAppState();
+
   init();//width, height);
 }
 //-------------------------------------------------------------------------------------------
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_putInDatabase
   (JNIEnv *env, jobject obj, jstring filename,jstring path)
 {
-    LOGI1("JNICALL1 putInDataBase()");
+   /* LOGI1("JNICALL1 putInDataBase()");
        const char *javaStr1 = env->GetStringUTFChars(filename, NULL);
      LOGI1("JNICALL1 javaStr1()");
     const char *javaStr2 = env->GetStringUTFChars(path, NULL);
@@ -104,19 +108,19 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_putI
        else
          LOGI1("app null");
     }
-
+*/
 }
 //-------------------------------------------------------------------------------------------
 JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_giveBuiltinDatasetIndex(JNIEnv* env, jobject obj)
 {
     LOGI1("giveBuiltinDatasetIndex()");
 
-  int size= app->numberOfBuiltinDatasets();
+/*  int size= app->numberOfBuiltinDatasets();
   LOGI1("size = %d",app->numberOfBuiltinDatasets());
   appState.builtinDatasetIndex=size;
 
    LOGI1("index %d",appState.builtinDatasetIndex);
-  return appState.builtinDatasetIndex;
+  return appState.builtinDatasetIndex;*/
 }
 
 //-------------------------------------------------------------------------------------------

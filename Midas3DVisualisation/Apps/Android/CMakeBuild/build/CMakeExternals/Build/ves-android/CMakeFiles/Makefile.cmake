@@ -67,6 +67,9 @@ SET(CMAKE_MAKEFILE_DEPENDS
   "../../../../../../../src/kiwi/CMakeLists.txt"
   "../../../../../../../src/kiwi/headers.cmake"
   "../../../../../../../src/kiwi/vesKiwiVersion.h.in"
+  "../../../../../../../src/midas/CMakeLists.txt"
+  "../../../../../../../src/midas/headers.cmake"
+  "../../../../../../../src/midas/vesMidasVersion.h.in"
   "../../../../../../../src/setup-headers.cmake"
   "../../../../../../../src/shaders/CMakeLists.txt"
   "../../../../../../../src/shaders/headers.cmake"
@@ -109,6 +112,7 @@ SET(CMAKE_MAKEFILE_PRODUCTS
   "src/ves/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/shaders/CMakeFiles/CMakeDirectoryInformation.cmake"
   "src/kiwi/CMakeFiles/CMakeDirectoryInformation.cmake"
+  "src/midas/CMakeFiles/CMakeDirectoryInformation.cmake"
   "Docs/CMakeFiles/CMakeDirectoryInformation.cmake"
   "Docs/Doxygen/CMakeFiles/CMakeDirectoryInformation.cmake"
   )
@@ -118,4 +122,5 @@ SET(CMAKE_DEPEND_INFO_FILES
   "src/ves/CMakeFiles/ves.dir/DependInfo.cmake"
   "src/shaders/CMakeFiles/vesShaders.dir/DependInfo.cmake"
   "src/kiwi/CMakeFiles/kiwi.dir/DependInfo.cmake"
+  "src/midas/CMakeFiles/midas.dir/DependInfo.cmake"
   )

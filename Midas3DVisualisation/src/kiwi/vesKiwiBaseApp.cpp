@@ -32,11 +32,18 @@
 #include <vesNormalMatrixUniform.h>
 #include <vesProjectionUniform.h>
 #include <vesVertexAttributeKeys.h>
+#include <android/log.h>
+
 
 #include <cassert>
 #include <cmath>
 #include <vector>
 #include <iostream>
+
+#define  LOG_TAG    "vesKiwiBaseApp"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 //----------------------------------------------------------------------------
 class vesKiwiBaseApp::vesInternal
@@ -45,10 +52,12 @@ public:
 
   vesInternal()
   {
+
     this->GLSupport = vesOpenGLSupport::Ptr(new vesOpenGLSupport());
     this->Renderer = vesRenderer::Ptr(new vesRenderer());
     this->CameraInteractor = vesKiwiCameraInteractor::Ptr(new vesKiwiCameraInteractor);
     this->CameraInteractor->setRenderer(this->Renderer);
+       LOGI("vesInternal in vesKiwiBaseApp ok ");
   }
 
   ~vesInternal()
@@ -69,6 +78,7 @@ public:
 vesKiwiBaseApp::vesKiwiBaseApp()
 {
   this->Internal = new vesInternal();
+    LOGI("constructor ok ");
 }
 
 //----------------------------------------------------------------------------

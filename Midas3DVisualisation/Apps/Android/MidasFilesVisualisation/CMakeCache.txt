@@ -179,7 +179,7 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 EXECUTABLE_OUTPUT_PATH:PATH=/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/armeabi-v7a
 
 //Dependencies for the target
-KiwiNative_LIB_DEPENDS:STATIC=general;GLESv2;general;log;general;ves;general;vesShaders;general;kiwi;
+KiwiNative_LIB_DEPENDS:STATIC=general;GLESv2;general;log;general;ves;general;vesShaders;general;kiwi;general;midas;
 
 //path for android libs
 LIBRARY_OUTPUT_PATH:PATH=/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/libs/armeabi-v7a
@@ -195,7 +195,7 @@ MidasFilesVisualisation_BINARY_DIR:STATIC=/home/celia/midasVESDemo/Midas3DVisual
 MidasFilesVisualisation_SOURCE_DIR:STATIC=/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation
 
 //Dependencies for the target
-MidasNative_LIB_DEPENDS:STATIC=general;GLESv2;general;log;general;ves;general;vesShaders;general;kiwi;
+MidasNative_LIB_DEPENDS:STATIC=general;GLESv2;general;log;general;ves;general;vesShaders;general;kiwi;general;midas;
 
 //No help, variable specified on the command line.
 VES_DIR:UNINITIALIZED=/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/../CMakeBuild/build/CMakeExternals/Build/ves-android
