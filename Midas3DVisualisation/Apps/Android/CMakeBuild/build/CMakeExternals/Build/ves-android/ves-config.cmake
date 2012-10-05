@@ -9,7 +9,7 @@ get_filename_component(VES_CONFIG_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 
 # setup include dirs
 set(VES_INCLUDE_DIRS)
-set(VES_RELATIVE_INCLUDE_DIRS ./.;ves/.;kiwi/.)
+set(VES_RELATIVE_INCLUDE_DIRS ./.;ves/.;kiwi/.;midas/.)
 
 if(EXISTS "${VES_CONFIG_DIR}/CMakeCache.txt")
    include("${VES_CONFIG_DIR}/ves-build-config.cmake")
@@ -26,4 +26,4 @@ endforeach()
 
 # setup libraries & other targets
 include("${VES_CONFIG_DIR}/ves-targets.cmake")
-set(VES_LIBRARIES ves;vesShaders;kiwi)
+set(VES_LIBRARIES ves;vesShaders;kiwi;midas)

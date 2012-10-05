@@ -1,0 +1,2 @@
+/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ar cr ../../lib/libmidas.a  CMakeFiles/midas.dir/vesMidasApp.cpp.o
+/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ranlib ../../lib/libmidas.a

@@ -91,6 +91,7 @@ SET(CMAKE_C_INCLUDE_PATH
   "/home/celia/midasVESDemo/Midas3DVisualisation/src/./."
   "/home/celia/midasVESDemo/Midas3DVisualisation/src/ves/."
   "/home/celia/midasVESDemo/Midas3DVisualisation/src/kiwi/."
+  "/home/celia/midasVESDemo/Midas3DVisualisation/src/midas/."
   "jni"
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

@@ -68,7 +68,7 @@
 #include <fstream>
 
 
-#define  LOG_TAG    "veskiwiviewerapp"
+#define  LOG_TAG    "vesKiwiViewerApp"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
@@ -94,6 +94,8 @@ public:
     this->IsAnimating = false;//different
     this->CameraRotationInertiaIsEnabled = true;//different
     this->CameraSpinner = vesKiwiCameraSpinner::Ptr(new vesKiwiCameraSpinner);//different
+      LOGI("vesInternal in vesKiwiViewerApp ok ");
+
   }
 
   ~vesInternal()
@@ -244,6 +246,8 @@ vesKiwiViewerApp::vesKiwiViewerApp()
     vesBuiltinShaders::vesClipPlane_frag());
 
   this->setShadingModel("Gouraud");
+    LOGI("constructor ok ");
+
 }
 
 //----------------------------------------------------------------------------

@@ -226,6 +226,9 @@ doxygen_SOURCE_DIR:STATIC=/home/celia/midasVESDemo/Midas3DVisualisation/Docs/Dox
 //Dependencies for the target
 kiwi_LIB_DEPENDS:STATIC=general;ves;general;vesShaders;general;vtkIOGeometry;general;vtkIOXML;general;vtkIOImage;general;vtkIOPLY;general;vtkFiltersCore;general;vtkFiltersSources;general;vtkFiltersGeometry;general;vtkFiltersModeling;general;vtkImagingCore;general;vtkRenderingCore;general;vtkRenderingFreeType;
 
+//Dependencies for the target
+midas_LIB_DEPENDS:STATIC=general;kiwi;general;ves;
+
 //Dependencies for target
 vesShaders_LIB_DEPENDS:STATIC=
 
@@ -350,7 +353,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=7
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=8
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

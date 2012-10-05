@@ -50,4 +50,7 @@ if(VES_USE_VTK)
   process_dir(kiwi)
 endif()
 
+process_dir(midas)
+
+
 

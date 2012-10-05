@@ -19,6 +19,7 @@ SET(CMAKE_C_INCLUDE_PATH
   "src/ves/."
   "src/shaders/."
   "../../../../../../../src/kiwi/."
+  "../../../../../../../src/midas/."
   )
 SET(CMAKE_CXX_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})
 SET(CMAKE_Fortran_INCLUDE_PATH ${CMAKE_C_INCLUDE_PATH})

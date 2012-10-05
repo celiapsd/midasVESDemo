@@ -21,6 +21,9 @@ ADD_LIBRARY(vesShaders STATIC IMPORTED)
 # Create imported target kiwi
 ADD_LIBRARY(kiwi STATIC IMPORTED)
 
+# Create imported target midas
+ADD_LIBRARY(midas STATIC IMPORTED)
+
 # Import target "ves" for configuration "Release"
 SET_PROPERTY(TARGET ves APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
 SET_TARGET_PROPERTIES(ves PROPERTIES
@@ -41,6 +44,14 @@ SET_TARGET_PROPERTIES(kiwi PROPERTIES
   IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
   IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE "ves;vesShaders;vtkIOGeometry;vtkIOXML;vtkIOImage;vtkIOPLY;vtkFiltersCore;vtkFiltersSources;vtkFiltersGeometry;vtkFiltersModeling;vtkImagingCore;vtkRenderingCore;vtkRenderingFreeType"
   IMPORTED_LOCATION_RELEASE "/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libkiwi.a"
+  )
+
+# Import target "midas" for configuration "Release"
+SET_PROPERTY(TARGET midas APPEND PROPERTY IMPORTED_CONFIGURATIONS RELEASE)
+SET_TARGET_PROPERTIES(midas PROPERTIES
+  IMPORTED_LINK_INTERFACE_LANGUAGES_RELEASE "CXX"
+  IMPORTED_LINK_INTERFACE_LIBRARIES_RELEASE "kiwi;ves"
+  IMPORTED_LOCATION_RELEASE "/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/ves-android/lib/libmidas.a"
   )
 
 # Commands beyond this point should not need to know the version.

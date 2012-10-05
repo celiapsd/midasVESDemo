@@ -21,6 +21,9 @@ ADD_LIBRARY(vesShaders STATIC IMPORTED)
 # Create imported target kiwi
 ADD_LIBRARY(kiwi STATIC IMPORTED)
 
+# Create imported target midas
+ADD_LIBRARY(midas STATIC IMPORTED)
+
 # Load information for each installed configuration.
 GET_FILENAME_COMPONENT(_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
 FILE(GLOB CONFIG_FILES "${_DIR}/ves-targets-*.cmake")

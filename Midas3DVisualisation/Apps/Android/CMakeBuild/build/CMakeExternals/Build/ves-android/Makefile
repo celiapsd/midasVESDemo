@@ -178,6 +178,19 @@ kiwi/fast:
 	$(MAKE) -f src/kiwi/CMakeFiles/kiwi.dir/build.make src/kiwi/CMakeFiles/kiwi.dir/build
 .PHONY : kiwi/fast
 
+#=============================================================================
+# Target rules for targets named midas
+
+# Build rule for target.
+midas: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 midas
+.PHONY : midas
+
+# fast build rule for target.
+midas/fast:
+	$(MAKE) -f src/midas/CMakeFiles/midas.dir/build.make src/midas/CMakeFiles/midas.dir/build
+.PHONY : midas/fast
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -193,6 +206,7 @@ help:
 	@echo "... ves"
 	@echo "... vesShaders"
 	@echo "... kiwi"
+	@echo "... midas"
 .PHONY : help
 
 

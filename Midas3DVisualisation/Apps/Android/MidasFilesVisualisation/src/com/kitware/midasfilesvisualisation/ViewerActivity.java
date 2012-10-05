@@ -330,8 +330,11 @@ public class ViewerActivity extends Activity {
 	    super.onCreate(bundle);
 		  Log.d(TAG, "onCreate()");
 
+		  MidasNative.init(100, 100);
         //handleUriFromIntent(getIntent().getData());
-            getFilePath();
+		  finish();
+		  
+            /*getFilePath();
 	    this.setContentView(R.layout.kiwivieweractivity);
 		ChooseFirstAction.activities.add(this);
 
@@ -367,7 +370,7 @@ public class ViewerActivity extends Activity {
 	        public void onClick(View v) {
 	            mView.resetCamera();
 	        }
-	    });
+	    });*/
 
 	  }
 
