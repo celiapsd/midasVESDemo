@@ -187,3 +187,14 @@ bool vesMidasApp::render()
     return this->vesKiwiViewerApp::cameraSpinner()->isEnabled() || this->vesKiwiViewerApp::isAnimating();
 
 }
+
+bool vesMidasApp::getDatasetIsLoaded()
+{
+    if(this->Internal->currentDataset.empty()) {
+        LOGI("getDatasetIsLoaded(), appState.currentDataset.empty-->empty ");
+    }
+    else{
+        LOGI("getDatasetIsLoaded(), appState.currentDataset.empty-->not empty ");
+    }
+    return !this->Internal->currentDataset.empty();
+}

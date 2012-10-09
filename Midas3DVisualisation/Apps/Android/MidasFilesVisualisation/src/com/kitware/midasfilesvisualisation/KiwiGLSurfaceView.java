@@ -97,18 +97,18 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
 
         if (isMulti) {
-          KiwiNative.handleTwoTouchPanGesture(x0, y0, x1, y1);
+          MidasNative.handleTwoTouchPanGesture(x0, y0, x1, y1);
         }
         else {
-          KiwiNative.handleSingleTouchPanGesture(dx, dy);
+          MidasNative.handleSingleTouchPanGesture(dx, dy);
         }
 
         if (isMulti && scale != 1.0f) {
-          KiwiNative.handleTwoTouchPinchGesture(scale);
+          MidasNative.handleTwoTouchPinchGesture(scale);
         }
 
         if (isMulti && angle != 0.0f) {
-          KiwiNative.handleTwoTouchRotationGesture(angle);
+          MidasNative.handleTwoTouchRotationGesture(angle);
         }
 
         requestRender();
@@ -146,7 +146,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
                    public void run() {
                    	Log.d(TAG +"MyGestureDetector-->onDoubleTap()","queueEvent -->run");
 
-                      KiwiNative.handleDoubleTap(displayX, displayY);
+                      MidasNative.handleDoubleTap(displayX, displayY);
                       requestRender();
                    }});
 
@@ -163,7 +163,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
                    public void run() {
                       	Log.d(TAG +"MyGestureDetector-->onLongPress()","queueEvent -->run");
 
-                      KiwiNative.handleLongPress(displayX, displayY);
+                      MidasNative.handleLongPress(displayX, displayY);
                       requestRender();
                    }});
 
@@ -180,7 +180,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
                    public void run() {
                      	Log.d(TAG +"MyGestureDetector-->onSingleTapConfirmed()","queueEvent -->run");
  
-                      KiwiNative.handleSingleTouchTap(displayX, displayY);
+                      MidasNative.handleSingleTouchTap(displayX, displayY);
                       requestRender();
                    }});
 
@@ -268,7 +268,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 	     
 		 Log.d(TAG, "onBackPressed Called");
 		 super.surfaceDestroyed(getHolder());
-		 KiwiNative.onBackPressed();
+		 //MidasNative.onBackPressed();
 
 		 
 		 /*Intent setIntent = new Intent(Intent.ACTION_MAIN);
@@ -324,9 +324,9 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
                Log.d(TAG+" postLoadDefaultDataset()" ,"queue event -->run()-->storagedir = "+storageDir);
 
 
-              //KiwiNative.checkForAdditionalDatasets(storageDir/*,storageDir*/);
+              //MidasNative.checkForAdditionalDatasets(storageDir/*,storageDir*/);
               //Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->KiwiNative.getDatasetIsLoaded() = "+KiwiNative.getDatasetIsLoaded());
-              if (!KiwiNative.getDatasetIsLoaded()) {
+              if (!MidasNative.getDatasetIsLoaded()) {
                final int defaultDatasetIndex = MidasNative.getDefaultBuiltinDatasetIndex();
                 //final int defaultDatasetIndex = MidasNative.giveBuiltinDatasetIndex();
                 Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->defaultDatasetIndex = "+defaultDatasetIndex);
@@ -354,7 +354,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
       if (obj == null) {
         this.queueEvent(new Runnable() {
                  public void run() {
-                    KiwiNative.handleSingleTouchUp();
+                    MidasNative.handleSingleTouchUp();
                     requestRender();
                  }});
       }
@@ -370,7 +370,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
       this.queueEvent(new Runnable() {
                  public void run() {
-                    KiwiNative.handleSingleTouchDown(x, y);
+                    MidasNative.handleSingleTouchDown(x, y);
                     requestRender();
                  }});
 
@@ -498,7 +498,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     	Log.d(TAG,"resetCamera");
       queueEvent(new Runnable() {
                    public void run() {
-                      KiwiNative.resetCamera();
+                      MidasNative.resetCamera();
                       requestRender();
                    }});
     }
@@ -509,7 +509,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
       queueEvent(new Runnable() {
                    public void run() {
-                      KiwiNative.stopInertialMotion();
+                      MidasNative.stopInertialMotion();
                       setRenderMode(RENDERMODE_WHEN_DIRTY);
                    }});
     }

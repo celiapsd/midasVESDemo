@@ -136,6 +136,25 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_clea
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_reshape(JNIEnv * env, jobject obj,  jint width, jint height);
 JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_render(JNIEnv * env, jobject obj);
 
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchPanGesture(JNIEnv * env, jobject obj,  jfloat dx, jfloat dy);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchPanGesture(JNIEnv * env, jobject obj,  jfloat x0, jfloat y0, jfloat x1, jfloat y1);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchPinchGesture(JNIEnv * env, jobject obj,  jfloat scale);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchRotationGesture(JNIEnv * env, jobject obj,  jfloat rotation);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchDown(JNIEnv * env, jobject obj,  jfloat x, jfloat y);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchUp(JNIEnv * env, jobject obj);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchTap(JNIEnv * env, jobject obj,  jfloat x, jfloat y);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleDoubleTap(JNIEnv * env, jobject obj,  jfloat x, jfloat y);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleLongPress(JNIEnv * env, jobject obj,  jfloat x, jfloat y);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_resetCamera(JNIEnv * env, jobject obj);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_stopInertialMotion(JNIEnv * env, jobject obj);
+JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetIsLoaded(JNIEnv* env, jobject obj);
+
+JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetFilename(JNIEnv* env, jobject obj, jint offset);
+JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetName(JNIEnv* env, jobject obj, jint offset);
+JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getNumberOfBuiltinDatasets(JNIEnv* env, jobject obj);
+
+
 };
 //-------------------------------------------------------------------------------------------
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_init(JNIEnv * env, jobject obj,  jint width, jint height)
@@ -275,4 +294,98 @@ JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_
 {
     LOGI1("render()");
     return app->render();
+}
+//-------------------------------------------------------------------------------------------
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchPanGesture
+(JNIEnv * env, jobject obj,  jfloat dx, jfloat dy)
+{
+     app->handleSingleTouchPanGesture(dx, dy);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchPanGesture
+(JNIEnv * env, jobject obj,  jfloat x0, jfloat y0, jfloat x1, jfloat y1)
+{
+    app->handleTwoTouchPanGesture(x0, y0, x1, y1);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchPinchGesture
+(JNIEnv * env, jobject obj,  jfloat scale)
+{
+     app->handleTwoTouchPinchGesture(scale);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleTwoTouchRotationGesture
+(JNIEnv * env, jobject obj,  jfloat rotation)
+{
+      app->handleTwoTouchRotationGesture(rotation);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchDown
+(JNIEnv * env, jobject obj,  jfloat x, jfloat y)
+{
+     app->handleSingleTouchDown(x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchUp
+(JNIEnv * env, jobject obj)
+{
+    app->handleSingleTouchUp();
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleSingleTouchTap
+(JNIEnv * env, jobject obj,  jfloat x, jfloat y)
+{
+      app->handleSingleTouchTap(x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleDoubleTap
+(JNIEnv * env, jobject obj,  jfloat x, jfloat y)
+{
+    app->handleDoubleTap(x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_handleLongPress
+(JNIEnv * env, jobject obj,  jfloat x, jfloat y)
+{
+     app->handleLongPress(x, y);
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_resetCamera
+(JNIEnv * env, jobject obj)
+{
+    LOGI1("resetCamera");
+
+  resetView();
+}
+
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_stopInertialMotion
+(JNIEnv * env, jobject obj)
+{
+  app->haltCameraRotationInertia();
+}
+JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetIsLoaded
+(JNIEnv* env, jobject obj)
+{
+
+   LOGI1("getDatasetIsLoaded()");
+   return app->getDatasetIsLoaded();
+
+
+}
+JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetFilename(JNIEnv* env, jobject obj, jint offset)
+{
+
+  std::string name = app->builtinDatasetFilename(offset);
+  return(env->NewStringUTF(name.c_str()));
+}
+JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetName(JNIEnv* env, jobject obj, jint offset)
+{
+  std::string name = app->builtinDatasetName(offset);
+  return(env->NewStringUTF(name.c_str()));
+}
+JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getNumberOfBuiltinDatasets(JNIEnv* env, jobject obj)
+{
+    LOGI1("getNumberOfBuiltinDatasets()");
+
+  return app->numberOfBuiltinDatasets();
 }
