@@ -830,7 +830,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
 		  Log.d(TAG+"class MyRenderer","onDrawFrame");
 
-      boolean result = KiwiNative.render();
+      boolean result = MidasNative.render();
       if (result) {
         parentView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
       }
@@ -847,7 +847,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     public void onSurfaceChanged(GL10 gl, int width, int height) {
   		Log.d(TAG+"class MyRenderer","onSurfaceChanged");
   
-        KiwiNative.reshape(width, height);
+        MidasNative.reshape(width, height);
     }
 
    

@@ -294,7 +294,7 @@ public class ViewerActivity extends Activity {
 	      
 	    }
 	    else{
-	      KiwiNative.clearExistingDataset();
+	      MidasNative.clearExistingDataset();
 	  	  /*String storageDir = DownloadFileActivity.getOutFilename();
 	  	  //MidasNative.putInDatabase(fileToOpen, storageDir);
 	       mView.postLoadDefaultDataset(this, storageDir);*/
