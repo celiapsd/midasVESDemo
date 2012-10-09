@@ -180,11 +180,15 @@ bool setupGraphics(int w, int h)
 
   app->resizeView(w, h);
 
-  if( isResume && !appState.currentDataset.empty()) {
-      LOGI("isResume == %s && !appState.currentDataset.empty() ==%s",isResume,!appState.currentDataset.empty());
+  if( isResume && appState.currentDataset.empty()) {
+      LOGI("isResume == %s && appState.currentDataset.empty() ==%s",isResume,appState.currentDataset.empty());
   }
   else{
-      LOGI("isResume == null  or !appState.currentDataset.empty() ==null");
+
+      if(isResume)
+        LOGI("isResume == %s,appState.currentDataset.empty() ==false",isResume);
+      if(appState.currentDataset.empty())
+        LOGI("isResume == false , appState.currentDataset.empty() ==true");
   }
 
 

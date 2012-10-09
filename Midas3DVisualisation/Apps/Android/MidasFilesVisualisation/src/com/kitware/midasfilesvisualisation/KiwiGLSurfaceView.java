@@ -324,11 +324,11 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
                Log.d(TAG+" postLoadDefaultDataset()" ,"queue event -->run()-->storagedir = "+storageDir);
 
 
-              KiwiNative.checkForAdditionalDatasets(storageDir/*,storageDir*/);
+              //KiwiNative.checkForAdditionalDatasets(storageDir/*,storageDir*/);
               //Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->KiwiNative.getDatasetIsLoaded() = "+KiwiNative.getDatasetIsLoaded());
               if (!KiwiNative.getDatasetIsLoaded()) {
-                //final int defaultDatasetIndex = KiwiNative.getDefaultBuiltinDatasetIndex();
-                final int defaultDatasetIndex = MidasNative.giveBuiltinDatasetIndex();
+               final int defaultDatasetIndex = MidasNative.getDefaultBuiltinDatasetIndex();
+                //final int defaultDatasetIndex = MidasNative.giveBuiltinDatasetIndex();
                 Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->defaultDatasetIndex = "+defaultDatasetIndex);
 
                 KiwiGLSurfaceView.this.post(new Runnable() {
@@ -452,8 +452,9 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     public void loadDataset(final String filename, final ViewerActivity loader) {
         Log.d(TAG,"loadDataset(filename="+filename+"ViewerActivityloader)");
 
+        //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), filename );
       int builtinDatasetIndex = -1;
-     //int builtinDatasetIndex = MidasNative.giveBuiltinDatasetIndex();
+     //int builtinDatasetIndex = MidasNative.giveCurrentBuiltinDatasetIndex();
       loadDataset(filename, builtinDatasetIndex, loader);
     }
 
@@ -464,12 +465,21 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
       queueEvent(new Runnable() {
         public void run() {
-        	Log.d(TAG,"loadDataset+queueevent-->run builtinDatasetIndex = "+ builtinDatasetIndex);
+        int size;
+        if (MidasNative.giveCurrentBuiltinDatasetIndex() == -1)
+          {
+          size = MidasNative.getDefaultBuiltinDatasetIndex();
+          }
+        else
+          {
+          size = MidasNative.giveCurrentBuiltinDatasetIndex();
+          }
+        Log.d(TAG,"loadDataset+queueevent-->run builtinDatasetIndex = "+ size);
         	
-        	int size = MidasNative.giveBuiltinDatasetIndex();
-          final boolean result = KiwiNative.loadDataset(filename, size);
-          final String errorTitle = KiwiNative.getLoadDatasetErrorTitle();
-          final String errorMessage = KiwiNative.getLoadDatasetErrorMessage();
+        	
+          final boolean result = MidasNative.loadDataset(filename, size);
+          final String errorTitle = MidasNative.getLoadDatasetErrorTitle();
+          final String errorMessage = MidasNative.getLoadDatasetErrorMessage();
 
           requestRender();
 
@@ -845,7 +855,10 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
   		Log.d(TAG+"class MyRenderer","onSurfaceCreated");
 
-      KiwiNative.init(100, 100);
+  		if(!DownloadFileActivity.getFilename().isEmpty() && !DownloadFileActivity.getOutFilename().isEmpty())
+      /*KiwiNative.init(100, 100);*/MidasNative.initFile(100,100,DownloadFileActivity.getFilename(),DownloadFileActivity.getOutFilename());
+  		else
+  		  MidasNative.init(100,100);
       isInitialized = true;
 
       while (mPostInitRunnables.size() > 0) {
