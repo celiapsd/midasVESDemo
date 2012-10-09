@@ -48,6 +48,7 @@ public:
     double fpsT0;
   };
 
+//----------------------------------------------------------------------------
 vesMidasApp::vesMidasApp()
 {
 
@@ -59,14 +60,10 @@ vesMidasApp::vesMidasApp()
     assert (this->builtinDatasetName(0));
     LOGI("dataset name not null");
 
-    this->Internal->fpsFrames = 0;
-    this->Internal->fpsT0 = vtkTimerLog::GetUniversalTime();
-    LOGI("fpsT0 not  null %d",this->Internal->fpsT0);
-
-
-    storeCameraState();
-    LOGI("storeCameraState()ok");
+    /*storeCameraState();
+    LOGI("storeCameraState()ok");*/
 }
+//----------------------------------------------------------------------------
 vesMidasApp::~vesMidasApp()
 {
     this->removeAllDataRepresentations();
@@ -78,11 +75,81 @@ void vesMidasApp::storeCameraState()
 {
     LOGI("storeCameraState()");
 
-  this->Internal->cameraPosition = this->cameraPosition();
-  this->Internal->cameraFocalPoint = this->cameraFocalPoint();
+    this->Internal->cameraPosition = this->cameraPosition();
+    this->Internal->cameraFocalPoint = this->cameraFocalPoint();
     this->Internal->cameraViewUp = this->cameraViewUp();
 }
-void vesMidasApp::addBuiltinDataset(std::string filename, std::string path){
-        this->addBuiltinDataset(filename,path);
+//----------------------------------------------------------------------------
+void vesMidasApp::restoreCameraState()
+{
+    LOGI("restoreCameraState()");
+
+  this->setCameraPosition(this->Internal->cameraPosition);
+  this->setCameraFocalPoint(this->Internal->cameraFocalPoint);
+  this->setCameraViewUp(this->Internal->cameraViewUp);
 }
 
+//----------------------------------------------------------------------------
+void vesMidasApp::initCamera(int w,int h)
+{
+    LOGI("initCamera()");
+    this->initGL();
+    this->resizeView(w, h);
+}
+//----------------------------------------------------------------------------
+void vesMidasApp::addBuiltinDataset(std::string filename, std::string path)
+{
+
+    LOGI("addBuiltinDataset(filename,path)");
+
+    this->Internal->currentDataset = filename;
+    this->Internal->storageDir = path;
+    this->vesKiwiViewerApp::addBuiltinDataset(filename,path);
+}
+//----------------------------------------------------------------------------
+void vesMidasApp::setParametersDataset(std::string filename, int builtinDatasetIndex)
+{
+
+    LOGI("setParametersDataset(filename,index)");
+
+    this->Internal->currentDataset = filename;
+    this->Internal->builtinDatasetIndex = builtinDatasetIndex;
+}
+//----------------------------------------------------------------------------
+void vesMidasApp::initTime()
+{
+    LOGI("initTime()");
+    this->Internal->fpsFrames = 0;
+    this->Internal->fpsT0 = vtkTimerLog::GetUniversalTime();
+    LOGI("fpsT0 not  null = %d",this->Internal->fpsT0);
+
+}
+
+int vesMidasApp::getBuiltinDatasetIndex()
+{
+     LOGI("getBuiltinDatasetIndex");
+     LOGI("bidi =%d ",this->Internal->builtinDatasetIndex);
+    if(this->Internal->builtinDatasetIndex)
+    {
+        LOGI("getBuiltinDatasetIndex not null = %d",this->Internal->builtinDatasetIndex);
+        return this->Internal->builtinDatasetIndex;
+    }
+    if(this->Internal->builtinDatasetIndex == -1)
+    {
+        LOGI("getBuiltinDatasetIndex == -1 ");
+        return -1;
+    }
+    else
+    {
+
+        LOGI("getBuiltinDatasetIndex == 0 ");
+        return 0;
+    }
+    //return this->Internal->builtinDatasetIndex;
+}
+
+//----------------------------------------------------------------------------
+int vesMidasApp::defaultBuiltinDatasetIndex() const
+{
+  return this->numberOfBuiltinDatasets();
+}

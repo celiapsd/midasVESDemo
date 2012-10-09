@@ -23,7 +23,13 @@ public :
   ~vesMidasApp();
 
   void storeCameraState();
+  void restoreCameraState();
+  void initCamera(int w,int h);
   void addBuiltinDataset(std::string filename, std::string path);
+  void initTime();
+  void setParametersDataset(std::string filename, int builtinDatasetIndex);
+  int getBuiltinDatasetIndex();
+  int defaultBuiltinDatasetIndex() const;
 
 
 private :

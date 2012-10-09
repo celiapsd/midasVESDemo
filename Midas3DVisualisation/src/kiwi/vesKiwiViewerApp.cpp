@@ -862,12 +862,12 @@ bool vesKiwiViewerApp::loadDataset(const std::string& filename)
   this->resetScene();//ajout
 
   // this is a hook that can be used to load certain datasets using custom logic
-  if (this->loadDatasetWithCustomBehavior(filename)) {
+  /*if (this->loadDatasetWithCustomBehavior(filename)) {
     return true;
   }
   else if (!this->Internal->ErrorMessage.empty()) {
     return false;
-  }
+  }*/
 
   vtkSmartPointer<vtkDataSet> dataSet = this->Internal->DataLoader.loadDataset(filename);
   if (!dataSet) {

@@ -243,7 +243,7 @@ public class ViewerActivity extends Activity {
   	protected String getFilePath() {
 		  Log.d(TAG, "getFilePath()");
 
-	          return filePath;// = DownloadFileActivity.getOutFilename();
+	          return filePath;
 	    }
   	/*------------------------------getFilePath----------------------------------------------------*/
     protected void setFilePath(String myFilePath) {
@@ -293,12 +293,13 @@ public class ViewerActivity extends Activity {
 	      mView.postLoadDefaultDataset(this, storageDir);
 	      
 	    }
-	    /*else{
-	  	  String storageDir = DownloadFileActivity.outFileName;
+	    else{
+	      KiwiNative.clearExistingDataset();
+	  	  /*String storageDir = DownloadFileActivity.getOutFilename();
 	  	  //MidasNative.putInDatabase(fileToOpen, storageDir);
-	       mView.postLoadDefaultDataset(this, storageDir);
-	    }*/
-	    else {
+	       mView.postLoadDefaultDataset(this, storageDir);*/
+	    }
+	   /* else {
 			  Log.d(TAG, "maybeLoadDefaultDataset()--> fileToOpen!=null");
 
 			  //KiwiNative.clearExistingDataset();
@@ -317,7 +318,7 @@ public class ViewerActivity extends Activity {
               //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), getFilePath() );
                //mView.postLoadDefaultDataset(this, getExternalFilesDir(null).getAbsolutePath());
                
-	    }
+	    }*/
 	  }
 
 
@@ -337,12 +338,12 @@ public class ViewerActivity extends Activity {
 	    super.onCreate(bundle);
 		  Log.d(TAG, "onCreate()");
 
-		 MidasNative.init(100, 100);
-        //handleUriFromIntent(getIntent().getData());
+		 //MidasNative.init(100, 100);
+        handleUriFromIntent(getIntent().getData());
 		  /*finish();*/
 		  
       setFilePath(DownloadFileActivity.getOutFilename());
-      Log.d(TAG, "set file path ok ()");
+      //Log.d(TAG, "set file path ok ()");
       this.setContentView(R.layout.kiwivieweractivity);
       Log.d(TAG, "setcontent view ok()");
       ChooseFirstAction.activities.add(this);
