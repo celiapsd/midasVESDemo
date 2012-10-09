@@ -15,5 +15,8 @@ public class MidasNative {
     public static native synchronized String getLoadDatasetErrorTitle();
     public static native synchronized String getLoadDatasetErrorMessage();
     public static native synchronized int getDefaultBuiltinDatasetIndex();
-    
+    public static native synchronized void clearExistingDataset();
+    public static native synchronized void reshape(int width, int height);
+    public static native synchronized boolean render();
+          
 }

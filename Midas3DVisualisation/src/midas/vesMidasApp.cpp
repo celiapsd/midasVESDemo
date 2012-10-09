@@ -153,3 +153,37 @@ int vesMidasApp::defaultBuiltinDatasetIndex() const
 {
   return this->numberOfBuiltinDatasets();
 }
+//----------------------------------------------------------------------------
+void vesMidasApp::clearExistingDataset()
+{
+    LOGI("clearExistingDataset()");
+
+    this->Internal->currentDataset = "";
+    LOGI(" this->Internal->currentDataset");
+  this->Internal->storageDir = "";
+    LOGI(" this->Internal->storageDir");
+  this->Internal->builtinDatasetIndex = -1;
+    LOGI(" this->Internal->builtinDatasetIndex");
+}
+//----------------------------------------------------------------------------
+
+bool vesMidasApp::render()
+{
+    double currentTime = vtkTimerLog::GetUniversalTime();
+    double dt =  currentTime -  this->Internal->fpsT0;
+
+    if (dt > 1.0) {
+       this->Internal->lastFps = static_cast<int>( this->Internal->fpsFrames/dt);
+       this->Internal->fpsFrames = 0;
+       this->Internal->fpsT0 = currentTime;
+      //LOGI("fps: %d", lastFps);
+    }
+
+    //LOGI("render");
+    this->vesKiwiViewerApp::render();
+
+     this->Internal->fpsFrames++;
+
+    return this->vesKiwiViewerApp::cameraSpinner()->isEnabled() || this->vesKiwiViewerApp::isAnimating();
+
+}

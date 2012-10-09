@@ -30,6 +30,8 @@ public :
   void setParametersDataset(std::string filename, int builtinDatasetIndex);
   int getBuiltinDatasetIndex();
   int defaultBuiltinDatasetIndex() const;
+  void clearExistingDataset();
+  bool render();
 
 
 private :

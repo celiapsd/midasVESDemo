@@ -132,6 +132,10 @@ JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_give
 JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getLoadDatasetErrorTitle(JNIEnv* env, jobject obj);
 JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getLoadDatasetErrorMessage(JNIEnv* env, jobject obj);
 JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDefaultBuiltinDatasetIndex(JNIEnv* env, jobject obj);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_clearExistingDataset(JNIEnv* env, jobject obj);
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_reshape(JNIEnv * env, jobject obj,  jint width, jint height);
+JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_render(JNIEnv * env, jobject obj);
+
 };
 //-------------------------------------------------------------------------------------------
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_init(JNIEnv * env, jobject obj,  jint width, jint height)
@@ -239,11 +243,36 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_load
       loadDataset(filenameStr, builtinDatasetIndex);
     }
 
-
 }
+//-------------------------------------------------------------------------------------------
 JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDefaultBuiltinDatasetIndex(JNIEnv* env, jobject obj)
 {
     LOGI1("getDefaultBuiltinDatasetIndex()");
 
   return app->defaultBuiltinDatasetIndex();
+}
+//-------------------------------------------------------------------------------------------
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_clearExistingDataset(JNIEnv * env, jobject obj)
+{
+  LOGI1("clearExistingDataset()");
+  if(app)
+  {
+    app->clearExistingDataset();
+  }
+  else
+  {
+      LOGI1("Dataset empty");
+  }
+}
+//-------------------------------------------------------------------------------------------
+JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_reshape(JNIEnv * env, jobject obj,  jint width, jint height)
+{
+  LOGI1("reshape(%d, %d)", width, height);
+  app->resizeView(width, height);
+}
+//-------------------------------------------------------------------------------------------
+JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_render(JNIEnv * env, jobject obj)
+{
+    LOGI1("render()");
+    return app->render();
 }
