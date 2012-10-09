@@ -32,6 +32,7 @@ public :
   int defaultBuiltinDatasetIndex() const;
   void clearExistingDataset();
   bool render();
+  bool getDatasetIsLoaded();
 
 
 private :

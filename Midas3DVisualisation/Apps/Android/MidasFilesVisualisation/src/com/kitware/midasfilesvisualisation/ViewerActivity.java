@@ -271,10 +271,10 @@ public class ViewerActivity extends Activity {
 		  Log.d(TAG, "initBuiltinDatasetNames()");
 
 	    if (mBuiltinDatasetNames == null) {
-	        int numberOfDatasets = KiwiNative.getNumberOfBuiltinDatasets();
+	        int numberOfDatasets = MidasNative.getNumberOfBuiltinDatasets();
 	        mBuiltinDatasetNames = new ArrayList<String>();
 	        for(int i = 0; i < numberOfDatasets; ++i) {
-	          mBuiltinDatasetNames.add(KiwiNative.getDatasetName(i));
+	          mBuiltinDatasetNames.add(MidasNative.getDatasetName(i));
 	        }
 	    }
 	  }
@@ -485,7 +485,7 @@ public class ViewerActivity extends Activity {
 		  Log.d(TAG, "loadDataset(builtinDatasetIndex = "+builtinDatasetIndex+")");
 
 
-	    String filename = KiwiNative.getDatasetFilename(builtinDatasetIndex);
+	    String filename = MidasNative.getDatasetFilename(builtinDatasetIndex);
 	    Log.d(TAG, "loadDataset(filename = "+filename+"builtinDatasetIndex = "+builtinDatasetIndex+")");
 
 	    // don't attempt to open large asset files on android api 8
@@ -549,7 +549,7 @@ public class ViewerActivity extends Activity {
 	        Log.d(TAG, "onBackPressed Called");
 	        
 	        mView.onBackPressed();
-	        KiwiNative.onBackPressed();
+	        //KiwiNative.onBackPressed();
 	        ViewerActivity.this.finish();
 	        //mView.surfaceDestroyed(getHolder());
 	        //KiwiGLSurfaceView.this.finish();
