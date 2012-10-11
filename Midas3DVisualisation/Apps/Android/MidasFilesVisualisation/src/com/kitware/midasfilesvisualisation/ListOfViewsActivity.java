@@ -43,11 +43,16 @@ public class ListOfViewsActivity extends Activity {
 		// Intent in=getIntent();
 		ChooseFirstAction.activities.add(this);
 
-		ListCommunity = ChooseFirstAction.comList;
-		Log.d(TAG, "Listcommunity is  null ? " + ListCommunity.isEmpty());
+		boolean isLaunched = ChooseFirstAction.testLauching("DownloadFile");
+		boolean isLaunched2 = ChooseFirstAction.testLauching("FileExplorer");
+		if(isLaunched||isLaunched2)
+		  {
+		  DownloadFileActivity.setFilename(null);
+      DownloadFileActivity.setOutFilename(null);
+		  }
 		
+		ListCommunity = ChooseFirstAction.comList;
 		mainListView = (ListView) findViewById(R.id.mainListView);
-		Log.d(TAG, "mainListView is  enabled ? " + mainListView.isEnabled());
 
 		/*TO SEE THE string Names into a list*/
 		String Names[] = new String[ListCommunity.size()];

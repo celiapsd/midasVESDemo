@@ -9,8 +9,8 @@ add_subdirectory(ves)
 add_subdirectory(shaders)
 
 if(VES_USE_VTK)
-  add_subdirectory(kiwi)
+ add_subdirectory(midas)
 endif()
-if(VES_USE_VTK)
-  add_subdirectory(midas)
-endif()
+
+
+

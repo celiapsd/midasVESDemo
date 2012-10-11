@@ -347,9 +347,9 @@ public class ViewerActivity extends Activity {
 	    mInfoButton.setOnClickListener(new Button.OnClickListener() {
 	        public void onClick(View v) {
 
-	            Intent infoIntent = new Intent();
+	            /*Intent infoIntent = new Intent();
 	            infoIntent.setClass(ViewerActivity.this, InfoActivity.class);
-	            startActivity(infoIntent);
+	            startActivity(infoIntent);*/
 	        }
 	    });
 
@@ -399,8 +399,8 @@ public class ViewerActivity extends Activity {
 	    InputStream in = null;
 	    OutputStream out = null;
 	    try {
-              //in = getAssets().open(filename);
-               in = new FileInputStream(DownloadFileActivity.getOutFilename());
+              in = getAssets().open(filename);
+               //in = new FileInputStream(DownloadFileActivity.getOutFilename());
 	      out = new FileOutputStream(destFilename);
 	      copyFile(in, out);
 	      in.close();
@@ -523,18 +523,18 @@ public class ViewerActivity extends Activity {
 	  }
 	  
     /*------------------------------onBackPressed-----------------------------------------------------------------------------------*/
-  	@Override
-		 public void onBackPressed() {
+  	 /*@Override
+		public void onBackPressed() {
 	        Log.d(TAG, "onBackPressed Called");
 	        
 	        mView.onBackPressed();
 	        //KiwiNative.onBackPressed();
-	        ViewerActivity.this.finish();
+	        //ViewerActivity.this.finish();
 	        //mView.surfaceDestroyed(getHolder());
 	        //KiwiGLSurfaceView.this.finish();
 
 	        return;
-		}
+		}*/
 	  
     /*------------------------------onResume----------------------------------------------------------------------------------------*/
   	@Override 

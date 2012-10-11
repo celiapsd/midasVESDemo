@@ -22,6 +22,7 @@ public :
   vesMidasApp();
   ~vesMidasApp();
 
+  void initBeginning(int width,int height,const std::string& filename, const std::string& path);
   void storeCameraState();
   void restoreCameraState();
   void initCamera(int w,int h);

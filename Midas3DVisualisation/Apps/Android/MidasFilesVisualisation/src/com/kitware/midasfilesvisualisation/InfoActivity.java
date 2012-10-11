@@ -16,7 +16,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
- ========================================================================*/
+ ========================================================================
 
 package com.kitware.midasfilesvisualisation;
 
@@ -33,23 +33,23 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.text.method.LinkMovementMethod;
 
-/*-------------------------------------------------------------------------------------------------------*/
+-------------------------------------------------------------------------------------------------------
 public class InfoActivity extends Activity {
 
 
-  /*--------------onCreate------------------------------------------------------------------------*/
+  --------------onCreate------------------------------------------------------------------------
   @Override
   protected void onCreate(Bundle savedInstanceState) {
 
     super.onCreate(savedInstanceState);
 
-    /*Make us non-modal, so that others can receive touch events.*/
+    Make us non-modal, so that others can receive touch events.
     getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
 
-    /*...but notify us that it happened.*/
+    ...but notify us that it happened.
     getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
 
-    /*fullscreen with no title bar*/
+    fullscreen with no title bar
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     getWindow().setFlags(LayoutParams.FLAG_FULLSCREEN, LayoutParams.FLAG_FULLSCREEN);
 
@@ -74,18 +74,19 @@ public class InfoActivity extends Activity {
 
   }
 
-  /*--------------onTouchEvent------------------------------------------------------------------------*/
+  --------------onTouchEvent------------------------------------------------------------------------
   @Override
   public boolean onTouchEvent(MotionEvent event) {
-    /*If we've received a touch notification that the user has touched
-    outside the app, finish the activity.*/
+    If we've received a touch notification that the user has touched
+    outside the app, finish the activity.
     if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
       finish();
       return true;
     }
 
-    /*Delegate everything else to Activity.*/
+    Delegate everything else to Activity.
     return super.onTouchEvent(event);
   }
 
 }
+*/

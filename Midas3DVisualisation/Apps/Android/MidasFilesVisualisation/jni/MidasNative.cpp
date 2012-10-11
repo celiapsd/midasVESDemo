@@ -22,7 +22,6 @@
 namespace {
 
 vesMidasApp* app;
-//vesKiwiViewerApp* app;
 
 //-------------------------------------------------------------------------------------------
 void init(int width,int height)
@@ -37,14 +36,7 @@ void init(int width,int height,const std::string& filename, const std::string& p
    LOGI1("init(%d %d %s %s )", width, height,filename.c_str(),path.c_str());
    app = new vesMidasApp();
    LOGI1("MidasApp initialized");
-   //putInDatabase(filename,path);
-   app->addBuiltinDataset(filename,path);
-   LOGI1("file added");
-   app->initCamera(width,height);
-   app->loadDataset(filename);
-      LOGI1("file loaded");
-   app->restoreCameraState();
-   app->initTime();
+   app->initBeginning( width, height, filename, path);
 }
 
 
@@ -54,19 +46,15 @@ void loadDataset(const std::string& filename, int builtinDatasetIndex)
     if( filename.c_str()) {
      LOGI1("loadDataset(%s),builtinDatasetIndex = %d", filename.c_str(),builtinDatasetIndex);
     }
-
     else{
         LOGI1("loadDataset(filename == null)" );
     }
-
-
     app->setParametersDataset(filename,builtinDatasetIndex);
 
     bool result = app->loadDataset(filename);
     if (result) {
     app->resetView();
     }
-
 }
 //----------------------------------------------------------------------------
 void resetView()
@@ -285,7 +273,6 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_rese
 (JNIEnv * env, jobject obj)
 {
     LOGI1("resetCamera");
-
   resetView();
 }
 //-------------------------------------------------------------------------------------------
@@ -298,14 +285,12 @@ JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_stop
 JNIEXPORT jboolean JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetIsLoaded
 (JNIEnv* env, jobject obj)
 {
-
    LOGI1("getDatasetIsLoaded()");
    return app->getDatasetIsLoaded();
 }
 //-------------------------------------------------------------------------------------------
 JNIEXPORT jstring JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_getDatasetFilename(JNIEnv* env, jobject obj, jint offset)
 {
-
   std::string name = app->builtinDatasetFilename(offset);
   return(env->NewStringUTF(name.c_str()));
 }

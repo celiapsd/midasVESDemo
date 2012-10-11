@@ -268,18 +268,9 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     /*----------------------onBackPressed--------------------------------------------------------------------*/
     public void onBackPressed() {
 	     
-		 Log.d(TAG, "onBackPressed Called");
+		 Log.d(TAG, "onBackPressed");
 		 super.surfaceDestroyed(getHolder());
 		 //MidasNative.onBackPressed();
-
-		 
-		 /*Intent setIntent = new Intent(Intent.ACTION_MAIN);
-         setIntent.addCategory(Intent.CATEGORY_HOME);
-         setIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-         startActivity(setIntent);
-      return;
-      
-		    */
     }
      
     /*----------------------onStop--------------------------------------------------------------------*/
@@ -465,10 +456,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     /*----------------------loadDataset (2 param)--------------------------------------------------------------------*/
     public void loadDataset(final String filename, final ViewerActivity loader) {
         Log.d(TAG,"loadDataset(filename="+filename+"ViewerActivityloader)");
-
-        //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), filename );
-      //int builtinDatasetIndex = -1;
-        
+       
         int builtinDatasetIndex = -1;
         if(mRenderer.MidasisInitialized)
           {
@@ -481,7 +469,6 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
             builtinDatasetIndex = MidasNative.giveCurrentBuiltinDatasetIndex();
             }
           }
-     //int builtinDatasetIndex = MidasNative.giveCurrentBuiltinDatasetIndex();
       loadDataset(filename, builtinDatasetIndex, loader);
     }
 

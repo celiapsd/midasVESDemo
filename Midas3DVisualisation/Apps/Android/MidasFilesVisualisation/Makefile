@@ -99,19 +99,6 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named KiwiNative
-
-# Build rule for target.
-KiwiNative: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 KiwiNative
-.PHONY : KiwiNative
-
-# fast build rule for target.
-KiwiNative/fast:
-	$(MAKE) -f jni/CMakeFiles/KiwiNative.dir/build.make jni/CMakeFiles/KiwiNative.dir/build
-.PHONY : KiwiNative/fast
-
-#=============================================================================
 # Target rules for targets named MidasNative
 
 # Build rule for target.
@@ -132,7 +119,6 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... KiwiNative"
 	@echo "... MidasNative"
 .PHONY : help
 

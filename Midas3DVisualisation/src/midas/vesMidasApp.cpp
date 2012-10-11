@@ -60,8 +60,8 @@ vesMidasApp::vesMidasApp()
     assert (this->builtinDatasetName(0));
     LOGI("dataset name not null");
 
-    /*storeCameraState();
-    LOGI("storeCameraState()ok");*/
+    storeCameraState();
+    LOGI("storeCameraState()ok");
 }
 //----------------------------------------------------------------------------
 vesMidasApp::~vesMidasApp()
@@ -70,6 +70,17 @@ vesMidasApp::~vesMidasApp()
     delete this->Internal;
     LOGI("destructor ok");
 }
+void vesMidasApp::initBeginning(int width,int height,const std::string& filename, const std::string& path)
+{
+    this->addBuiltinDataset(filename,path);
+    LOGI("file added");
+    this->initCamera(width,height);
+    this->loadDataset(filename);
+       LOGI("file loaded");
+    this->restoreCameraState();
+    this->initTime();
+}
+
 //----------------------------------------------------------------------------
 void vesMidasApp::storeCameraState()
 {
@@ -140,11 +151,9 @@ int vesMidasApp::getBuiltinDatasetIndex()
     }
     else
     {
-
         LOGI("getBuiltinDatasetIndex == 0 ");
         return 0;
     }
-    //return this->Internal->builtinDatasetIndex;
 }
 //----------------------------------------------------------------------------
 int vesMidasApp::defaultBuiltinDatasetIndex() const

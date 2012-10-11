@@ -25,9 +25,9 @@
 # view AndroidManifest.xml #generated:71
 -keep class com.kitware.midasfilesvisualisation.ViewerActivity { <init>(...); }
 
-# onClick res/layout/homepage.xml #generated:125
-# onClick res/layout/homepage.xml #generated:134
-# onClick res/layout/homepage.xml #generated:156
+# onClick res/layout/homepage.xml #generated:127
+# onClick res/layout/homepage.xml #generated:136
+# onClick res/layout/homepage.xml #generated:158
 -keepclassmembers class * { *** ButtonOnClick(...); }
 
 # onClick res/layout/activity_open_file.xml #generated:38

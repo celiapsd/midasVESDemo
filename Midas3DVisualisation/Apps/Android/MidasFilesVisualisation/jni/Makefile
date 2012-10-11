@@ -99,20 +99,6 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-jni/CMakeFiles/KiwiNative.dir/rule:
-	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f CMakeFiles/Makefile2 jni/CMakeFiles/KiwiNative.dir/rule
-.PHONY : jni/CMakeFiles/KiwiNative.dir/rule
-
-# Convenience name for target.
-KiwiNative: jni/CMakeFiles/KiwiNative.dir/rule
-.PHONY : KiwiNative
-
-# fast build rule for target.
-KiwiNative/fast:
-	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f jni/CMakeFiles/KiwiNative.dir/build.make jni/CMakeFiles/KiwiNative.dir/build
-.PHONY : KiwiNative/fast
-
-# Convenience name for target.
 jni/CMakeFiles/MidasNative.dir/rule:
 	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f CMakeFiles/Makefile2 jni/CMakeFiles/MidasNative.dir/rule
 .PHONY : jni/CMakeFiles/MidasNative.dir/rule
@@ -125,30 +111,6 @@ MidasNative: jni/CMakeFiles/MidasNative.dir/rule
 MidasNative/fast:
 	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f jni/CMakeFiles/MidasNative.dir/build.make jni/CMakeFiles/MidasNative.dir/build
 .PHONY : MidasNative/fast
-
-KiwiNative.o: KiwiNative.cpp.o
-.PHONY : KiwiNative.o
-
-# target to build an object file
-KiwiNative.cpp.o:
-	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f jni/CMakeFiles/KiwiNative.dir/build.make jni/CMakeFiles/KiwiNative.dir/KiwiNative.cpp.o
-.PHONY : KiwiNative.cpp.o
-
-KiwiNative.i: KiwiNative.cpp.i
-.PHONY : KiwiNative.i
-
-# target to preprocess a source file
-KiwiNative.cpp.i:
-	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f jni/CMakeFiles/KiwiNative.dir/build.make jni/CMakeFiles/KiwiNative.dir/KiwiNative.cpp.i
-.PHONY : KiwiNative.cpp.i
-
-KiwiNative.s: KiwiNative.cpp.s
-.PHONY : KiwiNative.s
-
-# target to generate assembly for a file
-KiwiNative.cpp.s:
-	cd /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation && $(MAKE) -f jni/CMakeFiles/KiwiNative.dir/build.make jni/CMakeFiles/KiwiNative.dir/KiwiNative.cpp.s
-.PHONY : KiwiNative.cpp.s
 
 MidasNative.o: MidasNative.cpp.o
 .PHONY : MidasNative.o
@@ -180,13 +142,9 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
-	@echo "... KiwiNative"
 	@echo "... MidasNative"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... KiwiNative.o"
-	@echo "... KiwiNative.i"
-	@echo "... KiwiNative.s"
 	@echo "... MidasNative.o"
 	@echo "... MidasNative.i"
 	@echo "... MidasNative.s"
