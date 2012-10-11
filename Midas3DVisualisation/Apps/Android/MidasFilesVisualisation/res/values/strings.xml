@@ -1,6 +1,6 @@
 <resources>
 
-    <string name="app_name">CeliaPansard</string>
+    <string name="app_name">Midas files Visualisation</string>
     <string name="menu_settings">Settings</string>
     <string name="title_activity_choose_first_action">Welcome</string>
     <string name="title_activity_list_of_views">Communities</string>
@@ -11,6 +11,9 @@
     <string name="Instruction1">Midas Database</string>
     <string name="Instruction2">Enter URL</string>
     <string name="Instruction3">Save in SD Card or choose another folder</string>
+    <string name="goToViewer">Open the viewer with default data</string>
+    <string name="buttonViewer">Viewer</string>
+    
     <string name="http">http://</string>
     <string name="OK">OK</string>
     <string name="Go">Go</string>

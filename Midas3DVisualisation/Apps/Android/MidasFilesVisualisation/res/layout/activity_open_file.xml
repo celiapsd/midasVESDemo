@@ -28,19 +28,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="24dp"
+        android:gravity="center_horizontal"
         android:text="@string/Instruction3"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/Save"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Inst3"
-        android:onClick="ChooseSave"
-        android:text="@string/buttonSave" />
 
     <Button
         android:id="@+id/ReturnHomepage"
@@ -57,28 +50,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/Save"
-        android:layout_marginTop="52dp"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/Inst3"
+        android:layout_marginTop="70dp"
+        android:gravity="center_horizontal"
         android:text="@string/Instruction4"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/Save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Inst3"
+        android:layout_centerHorizontal="true"
+        android:onClick="ChooseSave"
+        android:text="@string/buttonSave" />
 
     <Button
         android:id="@+id/OpenCurrentFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignLeft="@+id/Save"
         android:layout_below="@+id/instOpen"
         android:onClick="ChooseSave"
         android:text="@string/buttonOpenCurrentFile" />
-
-    <Button
-        android:id="@+id/SearchFile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/instOpen"
-        android:layout_toRightOf="@+id/OpenCurrentFile"
-        android:onClick="ChooseSave"
-        android:text="@string/buttonSearchFile" />
 
     <Button
         android:id="@+id/Folder"
@@ -89,5 +84,14 @@
         android:layout_toRightOf="@+id/Save"
         android:onClick="ChooseSave"
         android:text="@string/buttonFolder" />
+
+    <Button
+        android:id="@+id/SearchFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/instOpen"
+        android:layout_toRightOf="@+id/Save"
+        android:onClick="ChooseSave"
+        android:text="@string/buttonSearchFile" />
 
 </RelativeLayout>

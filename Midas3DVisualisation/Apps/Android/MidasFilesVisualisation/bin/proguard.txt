@@ -25,14 +25,15 @@
 # view AndroidManifest.xml #generated:71
 -keep class com.kitware.midasfilesvisualisation.ViewerActivity { <init>(...); }
 
-# onClick res/layout/homepage.xml #generated:113
-# onClick res/layout/homepage.xml #generated:45
+# onClick res/layout/homepage.xml #generated:125
+# onClick res/layout/homepage.xml #generated:134
+# onClick res/layout/homepage.xml #generated:156
 -keepclassmembers class * { *** ButtonOnClick(...); }
 
-# onClick res/layout/activity_open_file.xml #generated:36
-# onClick res/layout/activity_open_file.xml #generated:45
-# onClick res/layout/activity_open_file.xml #generated:65
-# onClick res/layout/activity_open_file.xml #generated:74
-# onClick res/layout/activity_open_file.xml #generated:83
+# onClick res/layout/activity_open_file.xml #generated:38
+# onClick res/layout/activity_open_file.xml #generated:60
+# onClick res/layout/activity_open_file.xml #generated:69
+# onClick res/layout/activity_open_file.xml #generated:78
+# onClick res/layout/activity_open_file.xml #generated:88
 -keepclassmembers class * { *** ChooseSave(...); }
 

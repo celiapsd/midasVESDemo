@@ -74,12 +74,13 @@ public class ViewerActivity extends Activity {
   
   	protected ArrayList<String> mBuiltinDatasetNames;
   
-  	protected String filePath;
+  	protected static String filePath;
   	protected int datasetToOpen = -1;
   
   	protected ProgressDialog mProgressDialog = null;
   
   	public static final int DATASETTABLE_REQUEST_CODE = 1;
+  	public static boolean midasInitialized = false;
 
 
     /*------------------------------showProgressDialog------------------------------------------------*/
@@ -94,7 +95,7 @@ public class ViewerActivity extends Activity {
 
 	    mProgressDialog = new ProgressDialog(this);
 	    mProgressDialog.setIndeterminate(true);
-	    mProgressDialog.setCancelable(true);
+	    mProgressDialog.setCancelable(false);
 	    mProgressDialog.setMessage(message);
 	    mProgressDialog.show();
 	    
@@ -123,7 +124,6 @@ public class ViewerActivity extends Activity {
 	      return;
 	      }});
 	    dialog.show();
-	    dismissProgressDialog();
 	  }
 
 
@@ -240,7 +240,7 @@ public class ViewerActivity extends Activity {
 	  }
 	  
     /*------------------------------getFilePath----------------------------------------------------*/
-  	protected String getFilePath() {
+  	protected static String getFilePath() {
 		  Log.d(TAG, "getFilePath()");
 
 	          return filePath;
@@ -295,30 +295,7 @@ public class ViewerActivity extends Activity {
 	    }
 	    else{
 	      MidasNative.clearExistingDataset();
-	  	  /*String storageDir = DownloadFileActivity.getOutFilename();
-	  	  //MidasNative.putInDatabase(fileToOpen, storageDir);
-	       mView.postLoadDefaultDataset(this, storageDir);*/
 	    }
-	   /* else {
-			  Log.d(TAG, "maybeLoadDefaultDataset()--> fileToOpen!=null");
-
-			  //KiwiNative.clearExistingDataset();
-			  //KiwiNative.init(100, 100);
-              //String storageDir = DownloadFileActivity.getOutFilename();
-              Log.d(TAG, "maybeLoadDefaultDataset()--> storageDir = "+ getFilePath() );
-              //MidasNative.init(100, 100);
-             //Log.d(TAG, "filename--> ");
-              Log.d(TAG,"filename "+DownloadFileActivity.getFilename());
-              //Log.d(TAG,"storageDir "+storageDir);
-              //MidasNative.putInDatabase(DownloadFileActivity.filename, storageDir);
-                 // Log.d(TAG, "putIndataBaseok()");
-              mView.postLoadDefaultDataset(this, getFilePath() );
-              Log.d(TAG, "postLoadDefaultDatasetok");
-              
-              //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), getFilePath() );
-               //mView.postLoadDefaultDataset(this, getExternalFilesDir(null).getAbsolutePath());
-               
-	    }*/
 	  }
 
 
@@ -515,12 +492,13 @@ public class ViewerActivity extends Activity {
   	public void postLoadDataset(String filename, boolean result, String errorTitle, String errorMessage) {
 		  Log.d(TAG, "postLoadDataset(filename = "+filename+",errorTitle = "+errorTitle+",result = "+result+",errorMessage = "+errorMessage+")");
 
-	    dismissProgressDialog();
+      dismissProgressDialog();
 	    if (!result) {
 	      showErrorDialog(errorTitle, errorMessage);
 
 	    }
 	    else {
+
 	      if (filename.endsWith("model_info.txt")) {
 	        showBrainAtlasDialog();
 	      }
@@ -532,6 +510,7 @@ public class ViewerActivity extends Activity {
 	      }
 	    }
 	  }
+  	
 
 
     /*------------------------------onPause-------------------------------------------------------------------------------------------*/

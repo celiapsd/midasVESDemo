@@ -35,7 +35,7 @@ public class MidasNative {
     public static native synchronized String getDatasetFilename(int offset);
     public static native synchronized String getDatasetName(int offset);
     public static native synchronized int getNumberOfBuiltinDatasets();
-    
-
+    public static native synchronized int getNextBuiltinDatasetIndex();
+      
           
 }
