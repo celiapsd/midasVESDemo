@@ -364,7 +364,7 @@ public class DownloadFileActivity extends Activity {
         	
         	Intent i = new Intent(DownloadFileActivity.this,ViewerActivity.class);
         	startActivity(i);
-      		ChooseFirstAction.finishAllExceptParam("ViewerActivity");
+      		//ChooseFirstAction.finishAllExceptParam("ViewerActivity");
        		//ChooseFirstAction.finishAll();
           
           }

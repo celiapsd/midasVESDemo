@@ -43,15 +43,21 @@ import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Toast;
 
 //------------------------------------------------------------------------------------------//
-public class ChooseFirstAction extends Activity 
+public class ChooseFirstAction extends Activity implements TextWatcher 
   {
 
   /**  Email of the user entered in the textView*/
@@ -109,6 +115,19 @@ public class ChooseFirstAction extends Activity
 		  }
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
+
+		AutoCompleteTextView myAutoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete_URL); 
+    String[] URLS = getResources().getStringArray(R.array.url_array);
+    myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
+    myAutoComplete.addTextChangedListener(this);
+    //String url = (String) ((EditText) this.findViewById(R.id.autocomplete_URL)).getText().toString();
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
+    myAutoComplete.setAdapter(adapter);
+    myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
+      public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+      }
+    });
+    
 	  }
 
 	/* ---------- ON CREATE OPTIONS MENU----------------------------------------*/
@@ -186,9 +205,11 @@ public class ChooseFirstAction extends Activity
 			activity.finish();
 			}
 		comList.clear();
+    DownloadFileActivity.setFilename(null);
+    DownloadFileActivity.setOutFilename(null);
 	  }
 	/**
-	 * ---------- FINISH ALL THE ACTIVITIES LISTED EXCEPT THE ONE PUT IN PARAM------------------------------------------
+         * ---------- FINISH ALL THE ACTIVITIES LISTED EXCEPT THE ONE PUT IN PARAM-----------------------
 	 * 
 	 *  @param String ActName
 	 * 
@@ -207,6 +228,7 @@ public class ChooseFirstAction extends Activity
 			}
 		  }
 		comList.clear();
+
 	  }
 
 	/**
@@ -349,8 +371,10 @@ public class ChooseFirstAction extends Activity
 		  {
 			Log.d(TAG, "urlSearch()");
 		  }
-		String url = (String) ((EditText) this.findViewById(R.id.URL)).getText().toString();
+		
+                String url = (String) ((AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL)).getText().toString();
 
+    
 		if (url.length() == 0) 
 		  {
 			setUrlBeginning("http://midas3.kitware.com/midas");
@@ -376,6 +400,17 @@ public class ChooseFirstAction extends Activity
 		{
 			Log.e(TAG, "error searching url, UrlBeginning--> empty");
 		}
+	}
+        /*
+         * ---------- Functions for AutoCompleteTextView ------------------------------------------------------
+         */
+	public void afterTextChanged(Editable arg0) {
+	}
+
+	public void beforeTextChanged(CharSequence s, int start, int count,int after) {
+	}
+
+	public void onTextChanged(CharSequence s, int start, int before, int count) {
 	}
 
 	/**
@@ -598,7 +633,7 @@ public class ChooseFirstAction extends Activity
     {
     sPassword = myPassword;
     }
-	public static String getToken()
+  public static String getToken()
     {
       return Token;
     }
@@ -618,8 +653,7 @@ public class ChooseFirstAction extends Activity
     {
     for (Activity activity : ChooseFirstAction.activities) 
       {
-      Log.d(TAG, activity.getTitle().toString());
-        if (activity.getTitle().toString().contentEquals(myActivityName))
+      if (activity.getTitle().toString().contentEquals(myActivityName))
         {
           return true;
         }

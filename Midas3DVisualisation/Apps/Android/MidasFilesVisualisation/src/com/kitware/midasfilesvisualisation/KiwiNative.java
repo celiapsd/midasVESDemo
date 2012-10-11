@@ -16,7 +16,7 @@
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
- ========================================================================*/
+ ========================================================================
 
 package com.kitware.midasfilesvisualisation;
 
@@ -49,7 +49,7 @@ public class KiwiNative {
      public static native synchronized boolean getDatasetIsLoaded();
      public static native synchronized void clearExistingDataset();
      public static native synchronized boolean loadDataset(String filename, int builtinDatasetIndex);
-     public static native synchronized void checkForAdditionalDatasets(/*String name, */String storageDir);
+     public static native synchronized void checkForAdditionalDatasets(String name, String storageDir);
      public static native synchronized String getLoadDatasetErrorTitle();
      public static native synchronized String getLoadDatasetErrorMessage();
      
@@ -60,3 +60,4 @@ public class KiwiNative {
      public static native synchronized void onBackPressed();
 
 }
+*/

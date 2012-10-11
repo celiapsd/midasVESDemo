@@ -9,28 +9,18 @@ include_directories(${VES_INCLUDE_DIRS})
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(sources
-  KiwiNative.cpp
-  
-)
 
-set(deps
-  GLESv2
-  log
-  ${VES_LIBRARIES}
-)
-
-set(kiwi_lib KiwiNative)
-
-add_library(${kiwi_lib} SHARED ${sources})
-target_link_libraries(${kiwi_lib} ${deps})
 
 
 set(sources
   MidasNative.cpp
   
 )
-
+set(deps
+  GLESv2
+  log
+  ${VES_LIBRARIES}
+)
 set(midas_lib MidasNative)
 
 add_library(${midas_lib} SHARED ${sources})

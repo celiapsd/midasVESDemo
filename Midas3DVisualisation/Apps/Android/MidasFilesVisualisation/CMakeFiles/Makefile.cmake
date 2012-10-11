@@ -101,6 +101,5 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 SET(CMAKE_DEPEND_INFO_FILES
-  "jni/CMakeFiles/KiwiNative.dir/DependInfo.cmake"
   "jni/CMakeFiles/MidasNative.dir/DependInfo.cmake"
   )

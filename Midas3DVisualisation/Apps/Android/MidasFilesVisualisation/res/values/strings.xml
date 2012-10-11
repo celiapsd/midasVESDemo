@@ -61,4 +61,13 @@ Interactions:\n\n
     <string name="cannot_open_asset_title">Sorry</string>
     <string name="cannot_open_asset_message">KiwiViewer for Android 2.2 is unable to open apk asset files greater than 1MB.  Instead, you can download the data from http://www.kiwiviewer.org/data and then open it in KiwiViewer.</string>
 
+    <string-array name="url_array">
+        <item>http://midas3.kitware.com/midas</item>
+        <item>http://slicer.kitware.com/midas3</item>
+    </string-array>
+    
+    
+    
+    
+    
 </resources>

@@ -4,7 +4,9 @@
     android:id="@+id/ScrollView01"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/kitware_logo" >
+    android:background="@drawable/kitware_logo"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp" >
    	
 	<RelativeLayout
 	    xmlns:android="http://schemas.android.com/apk/res/android"
@@ -56,10 +58,11 @@
 	        android:textSize="20sp"
 	        android:textStyle="bold" />
 	
-	    <EditText
-	        android:id="@+id/URL"
+	    <AutoCompleteTextView
+	        android:id="@+id/autocomplete_URL"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
+	        android:completionThreshold="2"
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/urltext"
 	        android:layout_toLeftOf="@+id/ButtonGo"
@@ -70,14 +73,13 @@
 	        android:paddingLeft="10sp"
 	        android:textSize="10sp" >
 	
-	        <requestFocus />
-	    </EditText>
+	        </AutoCompleteTextView>
 	
 	    <TextView
 	        android:id="@+id/LoginText"
 	        android:layout_width="match_parent"
 	        android:layout_height="wrap_content"
-	        android:layout_below="@+id/URL"
+	        android:layout_below="@+id/autocomplete_URL"
 	        android:layout_marginTop="29dp"
 	        android:gravity="center_horizontal"
 	        android:text="@string/Login"
@@ -88,7 +90,7 @@
 	        android:id="@+id/Email"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:layout_alignLeft="@+id/URL"
+	        android:layout_alignLeft="@+id/autocomplete_URL"
 	        android:layout_below="@+id/LoginText"
 	        android:layout_toLeftOf="@+id/ButtonGo"
 	        android:ems="10"
@@ -136,7 +138,7 @@
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:layout_alignRight="@+id/LoginText"
-	        android:layout_below="@+id/URL"
+	        android:layout_below="@+id/autocomplete_URL"
 	        android:onClick="ButtonOnClick"
 	        android:text="@string/Go" />
 
