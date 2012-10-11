@@ -88,7 +88,6 @@ void vesMidasApp::restoreCameraState()
   this->setCameraFocalPoint(this->Internal->cameraFocalPoint);
   this->setCameraViewUp(this->Internal->cameraViewUp);
 }
-
 //----------------------------------------------------------------------------
 void vesMidasApp::initCamera(int w,int h)
 {
@@ -124,11 +123,11 @@ void vesMidasApp::initTime()
     LOGI("fpsT0 not  null = %d",this->Internal->fpsT0);
 
 }
-
+//----------------------------------------------------------------------------
 int vesMidasApp::getBuiltinDatasetIndex()
 {
      LOGI("getBuiltinDatasetIndex");
-     LOGI("bidi =%d ",this->Internal->builtinDatasetIndex);
+     assert(app);
     if(this->Internal->builtinDatasetIndex)
     {
         LOGI("getBuiltinDatasetIndex not null = %d",this->Internal->builtinDatasetIndex);
@@ -147,10 +146,17 @@ int vesMidasApp::getBuiltinDatasetIndex()
     }
     //return this->Internal->builtinDatasetIndex;
 }
-
 //----------------------------------------------------------------------------
 int vesMidasApp::defaultBuiltinDatasetIndex() const
+
 {
+     LOGI("defaultBuiltinDatasetIndex");
+  return 6;
+}
+//----------------------------------------------------------------------------
+int vesMidasApp::nextBuiltinDatasetIndex() const
+{
+    LOGI("nextBuiltinDatasetIndex()");
   return this->numberOfBuiltinDatasets();
 }
 //----------------------------------------------------------------------------
@@ -158,15 +164,11 @@ void vesMidasApp::clearExistingDataset()
 {
     LOGI("clearExistingDataset()");
 
-    this->Internal->currentDataset = "";
-    LOGI(" this->Internal->currentDataset");
+  this->Internal->currentDataset = "";
   this->Internal->storageDir = "";
-    LOGI(" this->Internal->storageDir");
   this->Internal->builtinDatasetIndex = -1;
-    LOGI(" this->Internal->builtinDatasetIndex");
 }
 //----------------------------------------------------------------------------
-
 bool vesMidasApp::render()
 {
     double currentTime = vtkTimerLog::GetUniversalTime();
@@ -187,7 +189,7 @@ bool vesMidasApp::render()
     return this->vesKiwiViewerApp::cameraSpinner()->isEnabled() || this->vesKiwiViewerApp::isAnimating();
 
 }
-
+//----------------------------------------------------------------------------
 bool vesMidasApp::getDatasetIsLoaded()
 {
     if(this->Internal->currentDataset.empty()) {

@@ -35,6 +35,7 @@ public class FileExplorerActivity extends ListActivity
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
+        
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_list_item_view);
         ChooseFirstAction.activities.add(this);

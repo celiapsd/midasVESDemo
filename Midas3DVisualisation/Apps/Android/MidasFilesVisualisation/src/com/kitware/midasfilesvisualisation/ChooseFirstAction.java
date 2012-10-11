@@ -201,7 +201,7 @@ public class ChooseFirstAction extends Activity
 		  }
 		for (Activity activity : activities) 
 		  {
-			if (activity.getLocalClassName() != ActName)
+			if (activity.getTitle().toString() != ActName)
 			{
 				activity.finish();
 			}
@@ -236,6 +236,12 @@ public class ChooseFirstAction extends Activity
   			Intent i = new Intent(ChooseFirstAction.this,FileExplorerActivity.class);
   			startActivity(i);
   			break;
+  			
+  		case (R.id.buttonViewer):
+        Log.d(TAG, "START VIEWER");
+        Intent intent = new Intent(ChooseFirstAction.this,ViewerActivity.class);
+        startActivity(intent);
+        break;
 		  }
 	  }
 
@@ -607,6 +613,18 @@ public class ChooseFirstAction extends Activity
   public static void setUrlBeginning(String myUrlBeginning)
     {
     UrlBeginning = myUrlBeginning;
+    }
+  public static boolean testLauching(String myActivityName)
+    {
+    for (Activity activity : ChooseFirstAction.activities) 
+      {
+      Log.d(TAG, activity.getTitle().toString());
+        if (activity.getTitle().toString().contentEquals(myActivityName))
+        {
+          return true;
+        }
+      }
+    return false;
     }
 
 }

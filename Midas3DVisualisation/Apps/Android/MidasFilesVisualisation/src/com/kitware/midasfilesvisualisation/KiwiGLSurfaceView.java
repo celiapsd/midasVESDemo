@@ -54,6 +54,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 
 import java.util.ArrayList;
@@ -76,6 +77,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     /*----------------- Attributes ----------------------------------------------------*/
     private static String TAG = "KiwiGLSurfaceView";
     private static final boolean DEBUG = false;
+    
 
     private MyRenderer mRenderer;
 
@@ -304,7 +306,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
         Log.d(TAG ,"queueEvent()");
 
-      if (mRenderer.isInitialized) {
+      if (mRenderer.MidasisInitialized) {
     	  Log.d(TAG ,"mRenderer.isInitialized == true");
         super.queueEvent(r);
       }
@@ -326,8 +328,20 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
               //MidasNative.checkForAdditionalDatasets(storageDir/*,storageDir*/);
               //Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->KiwiNative.getDatasetIsLoaded() = "+KiwiNative.getDatasetIsLoaded());
-              if (!MidasNative.getDatasetIsLoaded()) {
-               final int defaultDatasetIndex = MidasNative.getDefaultBuiltinDatasetIndex();
+              if (!MidasNative.getDatasetIsLoaded()) 
+                {
+                int Index = -1;
+                
+                if (ViewerActivity.getFilePath() == null)
+                  {
+                  Log.d(TAG + "postLoadDefaultDataset()","ViewerActivity.getFilePath() is null");
+                  Index = MidasNative.getDefaultBuiltinDatasetIndex();
+                  }
+                else
+                  {
+                  Index = MidasNative.getNextBuiltinDatasetIndex();
+                  }
+                final int defaultDatasetIndex = Index; 
                 //final int defaultDatasetIndex = MidasNative.giveBuiltinDatasetIndex();
                 Log.d(TAG+"postLoadDefaultDataset()" ,"queue event -->run()-->defaultDatasetIndex = "+defaultDatasetIndex);
 
@@ -453,7 +467,20 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
         Log.d(TAG,"loadDataset(filename="+filename+"ViewerActivityloader)");
 
         //MidasNative.putInDatabase(DownloadFileActivity.getFilename(), filename );
-      int builtinDatasetIndex = -1;
+      //int builtinDatasetIndex = -1;
+        
+        int builtinDatasetIndex = -1;
+        if(mRenderer.MidasisInitialized)
+          {
+          if (MidasNative.giveCurrentBuiltinDatasetIndex() == -1)
+            {
+            builtinDatasetIndex = MidasNative.getDefaultBuiltinDatasetIndex();
+            }
+          else
+            {
+            builtinDatasetIndex = MidasNative.giveCurrentBuiltinDatasetIndex();
+            }
+          }
      //int builtinDatasetIndex = MidasNative.giveCurrentBuiltinDatasetIndex();
       loadDataset(filename, builtinDatasetIndex, loader);
     }
@@ -465,19 +492,27 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
 
       queueEvent(new Runnable() {
         public void run() {
-        int size;
-        if (MidasNative.giveCurrentBuiltinDatasetIndex() == -1)
-          {
-          size = MidasNative.getDefaultBuiltinDatasetIndex();
-          }
-        else
-          {
-          size = MidasNative.giveCurrentBuiltinDatasetIndex();
-          }
-        Log.d(TAG,"loadDataset+queueevent-->run builtinDatasetIndex = "+ size);
+        
+          boolean Result = false;
+          Log.d(TAG,"loadDataset+queueevent-->run builtinDatasetIndex = "+ builtinDatasetIndex);
+          if(mRenderer.MidasisInitialized)
+            {
+            int IndexChanged;
+            if (MidasNative.giveCurrentBuiltinDatasetIndex() == -1)
+              {
+              IndexChanged = MidasNative.getNextBuiltinDatasetIndex();
+              }
+            else
+              {
+              IndexChanged = MidasNative.giveCurrentBuiltinDatasetIndex();
+              }
+            Result = MidasNative.loadDataset(filename, IndexChanged);
+            }
+          else{
+            Result = MidasNative.loadDataset(filename, builtinDatasetIndex);
+            }
         	
-        	
-          final boolean result = MidasNative.loadDataset(filename, size);
+          final boolean result = Result;
           final String errorTitle = MidasNative.getLoadDatasetErrorTitle();
           final String errorMessage = MidasNative.getLoadDatasetErrorMessage();
 
@@ -807,7 +842,7 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
   
     private static final String TAG = "KiwiGLSurfaceView";
     public GLSurfaceView parentView;
-    public boolean isInitialized = false;
+    public boolean MidasisInitialized = false;
     public ArrayList<Runnable> mPostInitRunnables = new ArrayList<Runnable>();
     public ArrayList<Runnable> mPreRenderRunnables = new ArrayList<Runnable>();
   
@@ -855,11 +890,26 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
   		Log.d(TAG+"class MyRenderer","onSurfaceCreated");
 
-  		if(!DownloadFileActivity.getFilename().isEmpty() && !DownloadFileActivity.getOutFilename().isEmpty())
-      /*KiwiNative.init(100, 100);*/MidasNative.initFile(100,100,DownloadFileActivity.getFilename(),DownloadFileActivity.getOutFilename());
+  		boolean launchActivity = ChooseFirstAction.testLauching("DownloadFile");
+  		boolean launchActivity2 = ChooseFirstAction.testLauching("FileExplorer");
+  	  
+  	  if (launchActivity || launchActivity2)
+  	    {
+  	    if(!DownloadFileActivity.getFilename().isEmpty() && !DownloadFileActivity.getOutFilename().isEmpty())
+  	      {
+  	      MidasNative.initFile(100,100,DownloadFileActivity.getFilename(),DownloadFileActivity.getOutFilename());
+  	      
+  	      }
+  	      else{
+            MidasNative.init(100,100);
+  	      }
+  	    }
   		else
+  		  {
   		  MidasNative.init(100,100);
-      isInitialized = true;
+  		  }
+  		
+      MidasisInitialized = true;
 
       while (mPostInitRunnables.size() > 0) {
         mPostInitRunnables.remove(0).run();
