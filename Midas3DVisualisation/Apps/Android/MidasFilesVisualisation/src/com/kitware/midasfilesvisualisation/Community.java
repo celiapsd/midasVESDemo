@@ -1,8 +1,7 @@
 package com.kitware.midasfilesvisualisation;
 
 //----------------------------------------libraries----------------------------------------//
-import android.os.Parcel;
-import android.os.Parcelable;
+
 
 //----------COMMUNITY CLASS ---------------------------------------------------------//
 public class Community {

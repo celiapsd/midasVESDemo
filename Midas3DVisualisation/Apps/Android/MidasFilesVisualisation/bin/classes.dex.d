@@ -49,6 +49,7 @@
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/R$style.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/KiwiGLSurfaceView$MyGestureDetector.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/SingleListItemActivity.class \
+/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/MidasToolsNative.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/DownloadFileActivity$2.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/ViewerActivity$9.class \
 /home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/MidasFilesVisualisation/bin/classes/com/kitware/midasfilesvisualisation/R$menu.class \

@@ -24,7 +24,6 @@ package com.kitware.midasfilesvisualisation;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -117,16 +116,16 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		setContentView(R.layout.homepage);
 
 		AutoCompleteTextView myAutoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete_URL); 
-    String[] URLS = getResources().getStringArray(R.array.url_array);
-    myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
-    myAutoComplete.addTextChangedListener(this);
-    //String url = (String) ((EditText) this.findViewById(R.id.autocomplete_URL)).getText().toString();
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
-    myAutoComplete.setAdapter(adapter);
-    myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
-      public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-      }
-    });
+            String[] URLS = getResources().getStringArray(R.array.url_array);
+            myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
+            myAutoComplete.addTextChangedListener(this);
+            //String url = (String) ((EditText) this.findViewById(R.id.autocomplete_URL)).getText().toString();
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
+            myAutoComplete.setAdapter(adapter);
+            myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
+              public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+              }
+            });
     
 	  }
 
@@ -372,7 +371,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 			Log.d(TAG, "urlSearch()");
 		  }
 		
-                String url = (String) ((AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL)).getText().toString();
+     String url = (String) ((AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL)).getText().toString();
 
     
 		if (url.length() == 0) 
@@ -653,7 +652,8 @@ public class ChooseFirstAction extends Activity implements TextWatcher
     {
     for (Activity activity : ChooseFirstAction.activities) 
       {
-      if (activity.getTitle().toString().contentEquals(myActivityName))
+      Log.d(TAG, activity.getClass().getSimpleName().toString());
+      if (activity.getClass().getSimpleName().toString().contentEquals(myActivityName))
         {
           return true;
         }
