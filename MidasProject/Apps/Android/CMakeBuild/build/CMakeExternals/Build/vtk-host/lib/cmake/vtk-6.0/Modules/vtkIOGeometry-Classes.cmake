@@ -1,0 +1,11 @@
+set(vtkIOGeometry_CLASSES_LOADED 1)
+set(vtkIOGeometry_CLASSES "vtkAVSucdReader;vtkBYUReader;vtkBYUWriter;vtkChacoReader;vtkFacetWriter;vtkGAMBITReader;vtkGaussianCubeReader;vtkIVWriter;vtkMCubesReader;vtkMCubesWriter;vtkMFIXReader;vtkMoleculeReaderBase;vtkMultiBlockPLOT3DReader;vtkOBJReader;vtkOpenFOAMReader;vtkParticleReader;vtkPDBReader;vtkProStarReader;vtkSESAMEReader;vtkSTLReader;vtkSTLWriter;vtkTecplotReader;vtkUGFacetReader;vtkXYZMolReader")
+
+foreach(class ${vtkIOGeometry_CLASSES})
+  set(vtkIOGeometry_CLASS_${class}_EXISTS 1)
+endforeach()
+
+set(vtkIOGeometry_CLASS_vtkMoleculeReaderBase_ABSTRACT 1)
+
+
+

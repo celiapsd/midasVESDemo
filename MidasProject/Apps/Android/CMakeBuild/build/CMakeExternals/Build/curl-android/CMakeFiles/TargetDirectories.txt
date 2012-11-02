@@ -1,0 +1,1 @@
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Build/curl-android/lib/CMakeFiles/libcurl.dir

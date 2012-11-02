@@ -1,0 +1,2 @@
+/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ar cr ../../lib/libvtkIOXMLParser-6.0.a  CMakeFiles/vtkIOXMLParser.dir/vtkXMLDataParser.cxx.o CMakeFiles/vtkIOXMLParser.dir/vtkXMLParser.cxx.o CMakeFiles/vtkIOXMLParser.dir/vtkXMLUtilities.cxx.o
+/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ranlib ../../lib/libvtkIOXMLParser-6.0.a

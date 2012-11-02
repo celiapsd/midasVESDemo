@@ -1,0 +1,3 @@
+repository='git://github.com/patmarion/curl.git'
+module=''
+tag='origin/v7.24.0-with-cmake-patches'

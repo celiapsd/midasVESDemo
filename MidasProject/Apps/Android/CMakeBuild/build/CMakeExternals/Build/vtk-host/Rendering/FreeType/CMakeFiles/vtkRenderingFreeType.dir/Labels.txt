@@ -1,0 +1,22 @@
+# Target labels
+ vtkRenderingFreeType
+# Source files and their labels
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkFreeTypeStringToImage.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkFreeTypeTools.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkVectorText.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_arial_bold.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_arial_bold_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_arial.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_arial_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_courier_bold.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_courier_bold_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_courier.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_courier_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_times_bold.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_times_bold_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_times.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/fonts/face_times_italic.cxx
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkFreeTypeStringToImage.h
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkFreeTypeTools.h
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Rendering/FreeType/vtkVectorText.h
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-host/Rendering/FreeType/vtkRenderingFreeTypeModule.h

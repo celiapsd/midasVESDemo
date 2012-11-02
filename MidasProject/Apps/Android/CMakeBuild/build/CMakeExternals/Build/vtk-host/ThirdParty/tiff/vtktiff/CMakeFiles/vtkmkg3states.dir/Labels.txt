@@ -1,0 +1,4 @@
+# Target labels
+ vtktiff
+# Source files and their labels
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/tiff/vtktiff/mkg3states.c

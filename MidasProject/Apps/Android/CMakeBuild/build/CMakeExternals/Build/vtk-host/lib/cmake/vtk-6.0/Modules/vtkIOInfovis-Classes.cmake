@@ -1,0 +1,10 @@
+set(vtkIOInfovis_CLASSES_LOADED 1)
+set(vtkIOInfovis_CLASSES "vtkBiomTableReader;vtkBiomTableReader;vtkChacoGraphReader;vtkChacoGraphReader;vtkDelimitedTextReader;vtkDelimitedTextReader;vtkDIMACSGraphReader;vtkDIMACSGraphReader;vtkDIMACSGraphWriter;vtkDIMACSGraphWriter;vtkFixedWidthTextReader;vtkFixedWidthTextReader;vtkISIReader;vtkISIReader;vtkNewickTreeReader;vtkNewickTreeReader;vtkRISReader;vtkRISReader;vtkTulipReader;vtkTulipReader;vtkXGMLReader;vtkXGMLReader;vtkXMLTreeReader;vtkXMLTreeReader")
+
+foreach(class ${vtkIOInfovis_CLASSES})
+  set(vtkIOInfovis_CLASS_${class}_EXISTS 1)
+endforeach()
+
+
+
+

@@ -1,0 +1,8 @@
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/curl-android.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/curl-download.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/eigen.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/libarchive-android.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/libarchive-fetch.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/ves-android.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/vtk-android.dir
+/home/celia/midasVESDemo/MidasProject/Apps/Android/CMakeBuild/build/CMakeFiles/vtk-host.dir

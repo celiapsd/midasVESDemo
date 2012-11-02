@@ -1,0 +1,10 @@
+set(vtkIOLegacy_CLASSES_LOADED 1)
+set(vtkIOLegacy_CLASSES "vtkCompositeDataReader;vtkCompositeDataWriter;vtkDataObjectReader;vtkDataObjectWriter;vtkDataReader;vtkDataSetReader;vtkDataSetWriter;vtkDataWriter;vtkGenericDataObjectReader;vtkGenericDataObjectWriter;vtkGraphReader;vtkGraphWriter;vtkPolyDataReader;vtkPolyDataWriter;vtkRectilinearGridReader;vtkRectilinearGridWriter;vtkSimplePointsReader;vtkSimplePointsWriter;vtkStructuredGridReader;vtkStructuredGridWriter;vtkStructuredPointsReader;vtkStructuredPointsWriter;vtkTableReader;vtkTableWriter;vtkTreeReader;vtkTreeWriter;vtkUnstructuredGridReader;vtkUnstructuredGridWriter")
+
+foreach(class ${vtkIOLegacy_CLASSES})
+  set(vtkIOLegacy_CLASS_${class}_EXISTS 1)
+endforeach()
+
+
+
+

@@ -1,0 +1,39 @@
+# view AndroidManifest.xml #generated:19
+-keep class com.kitware.KiwiViewer.ChooseFirstAction { <init>(...); }
+
+# view AndroidManifest.xml #generated:224
+-keep class com.kitware.KiwiViewer.DatasetListActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:36
+-keep class com.kitware.KiwiViewer.DownloadFileActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:67
+-keep class com.kitware.KiwiViewer.FileExplorerActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:234
+-keep class com.kitware.KiwiViewer.InfoActivity { <init>(...); }
+
+# view res/layout/kiwivieweractivity.xml #generated:7
+-keep class com.kitware.KiwiViewer.KiwiGLSurfaceView { <init>(...); }
+
+# view AndroidManifest.xml #generated:28
+-keep class com.kitware.KiwiViewer.ListOfViewsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:32
+-keep class com.kitware.KiwiViewer.SingleListItemActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:71
+-keep class com.kitware.KiwiViewer.ViewerActivity { <init>(...); }
+
+# onClick res/layout/homepage.xml #generated:124
+# onClick res/layout/homepage.xml #generated:133
+# onClick res/layout/homepage.xml #generated:155
+-keepclassmembers class * { *** ButtonOnClick(...); }
+
+# onClick res/layout/activity_open_file.xml #generated:38
+# onClick res/layout/activity_open_file.xml #generated:60
+# onClick res/layout/activity_open_file.xml #generated:69
+# onClick res/layout/activity_open_file.xml #generated:78
+# onClick res/layout/activity_open_file.xml #generated:88
+-keepclassmembers class * { *** ChooseSave(...); }
+
