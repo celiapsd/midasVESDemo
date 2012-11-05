@@ -259,20 +259,24 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		
 		EditText email = (EditText) this.findViewById(R.id.Email);
 		EditText password = (EditText) this.findViewById(R.id.Password);
+		AutoCompleteTextView URL = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
 		String mEmail = email.getText().toString();
 		String mPassword = password.getText().toString();
-		String url = (String) ((AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL)).getText().toString();
+		String url = (String) URL.getText().toString();
        
 		result = MidasToolsNative.init(url,mEmail,mPassword);
 		checkLogin(result);
        
 		communityList=MidasToolsNative.findCommunities();
+		MidasResource[] resources = new MidasResource[communityList.length];
 		for(int i=0;i<communityList.length;i++)
 		  {
+		  resources[i] = new MidasResource(i, communityList[i].toString(), MidasResource.Type.COMMUNITY);
 		  Log.d(TAG, communityList[i].toString());
 		  }
 		
 		Intent intent = new Intent(ChooseFirstAction.this,ListOfViewsActivity.class);
+		intent.putExtra("test test test", resources);
 		Log.d(TAG, "intent sent to List of Views Activity");
     startActivity(intent);
       
@@ -305,7 +309,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		  {
 			Log.d(TAG, "CheckLogin()");
 		  }
-		
+		//case 
 		if (result == 0) 
 		  {
 			Log.d(TAG, "no email or password()");
@@ -314,13 +318,13 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		  }
 		else if (result == 1) 
       {
-      Log.d(TAG, "no email or password()");
+      Log.d(TAG, "Login or password incorrect");
       Toast.makeText(getApplicationContext(),"Login or password incorrect",Toast.LENGTH_SHORT).show();
       return;
       }
 		else if (result == 2) 
       {
-      Log.d(TAG, "no email or password()");
+      Log.d(TAG, "Login successfully");
       Toast.makeText(getApplicationContext(),"Login successfully",Toast.LENGTH_SHORT).show();
       return;
       }
@@ -332,7 +336,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
     {
     for (Activity activity : ChooseFirstAction.activities) 
       {
-      if (activity.getTitle().toString().contentEquals(myActivityName))
+      if (activity.getTitle().toString().equals(myActivityName))
         {
           return true;
         }

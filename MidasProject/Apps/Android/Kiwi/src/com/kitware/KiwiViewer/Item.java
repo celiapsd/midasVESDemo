@@ -1,9 +1,12 @@
 package com.kitware.KiwiViewer;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /*----------------------------------------libraries----------------------------------------*/
 
 /*---------- CLASS Item---------------------------------------------------------*/
-public class Item {
+public class Item{
 
 	/*-----Attributes------------------------------------------------------*/
 	private int item_id;

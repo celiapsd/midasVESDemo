@@ -6,8 +6,8 @@
 #include <fstream>
 #include <midasFilesTools.h>
 #include <string.h>
-#include <vector.h>
-#include <iterator.h>
+//#include <vector.h>
+//#include <iterator.h>
 
 
 /*#include <vesKiwiViewerApp.h>
@@ -95,14 +95,14 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     std::vector<std::string> names = appTools->findCommunities();
     objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
 
-    /*for(i=0;i<names.size();i++)
+    for(i=0;i<names.size();i++)
       {
         env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
-      }*/
-    for(std::vector<string>::const_iterator iter = names.begin(); iter != names.end(); ++iter)
+      }
+    /*for(std::vector<std::string>::const_iterator iter = names.begin(); iter != names.end(); ++iter)
           {
             env->SetObjectArrayElement(objNames,i,env->NewStringUTF(*iter.c_str()));
-          }
+          }*/
 
     /*
   for (RequestArgs::const_iterator iter = args.begin(); iter != args.end(); ++iter) {

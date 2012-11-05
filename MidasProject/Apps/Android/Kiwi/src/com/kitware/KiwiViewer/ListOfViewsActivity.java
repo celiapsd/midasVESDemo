@@ -8,6 +8,7 @@ import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.util.Log;
@@ -33,6 +34,15 @@ public class ListOfViewsActivity extends Activity {
 		if (ListOfViewsActivity.DEBUG) {
 			Log.d(TAG, "OnCreate()");
 		}
+		Bundle x = this.getIntent().getExtras();
+		Parcelable[] comms = x.getParcelableArray("test test test");
+		for( Parcelable parcel : comms) {
+		  MidasResource comm = (MidasResource) parcel;
+		  Log.d(TAG,comm.getName());
+		  Log.d(TAG,Integer.toString(comm.getId()));
+		  Log.d(TAG,Integer.toString(comm.getType().ordinal()));
+		}
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_of_views);
 

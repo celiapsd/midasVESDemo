@@ -1,0 +1,15 @@
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+#folders
+
+android-ndk-r6
+android-ndk-r8b
+eigen
+eigen-bin
+MidasProject-old
+Midas3DVisualisation

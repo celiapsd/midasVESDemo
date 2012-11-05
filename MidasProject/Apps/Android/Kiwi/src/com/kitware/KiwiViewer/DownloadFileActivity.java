@@ -171,6 +171,8 @@ public class DownloadFileActivity extends Activity {
 		Log.d(TAG, "returnHomepage()");
 		setFilename(null);
 		ChooseFirstAction.finishAll();
+		//start ch again
+		
 	}
 
 	/* -------------CHOOSE FOLDER---------------------------------------------------------------*/

@@ -35,7 +35,7 @@ midasFilesTools::~midasFilesTools()
     delete this->midas;
 }
 //----------------------------------------------------------------------------
-int midasFilesTools::init(std::string url,std::string email,std::string password)
+int midasFilesTools::init(const std::string& url,const std::string& email,const std::string& password)
 {
     LOGI("init");
 
@@ -57,7 +57,7 @@ std::vector<std::string> midasFilesTools::findCommunities()
 
 }
 //----------------------------------------------------------------------------
-void midasFilesTools::setHost(std::string url)
+void midasFilesTools::setHost(const std::string& url)
 {
     if (!url.size())
     {
@@ -72,7 +72,7 @@ void midasFilesTools::setHost(std::string url)
 
 }
 //----------------------------------------------------------------------------
-int midasFilesTools::login (std::string email,std::string password)
+int midasFilesTools::login (const std::string& email,const std::string& password)
 {
     if (!email.size() && !password.size())
     {
@@ -92,7 +92,7 @@ int midasFilesTools::login (std::string email,std::string password)
     }
 }
 //----------------------------------------------------------------------------
-std::vector<std::string> midasFilesTools::findCommunityChildren(std::string communityName)
+std::vector<std::string> midasFilesTools::findCommunityChildren(const std::string& communityName)
 {
     LOGI("findCommunityChildren");
 
@@ -123,7 +123,7 @@ std::vector<std::string> midasFilesTools::findCommunityChildren(std::string comm
 
 }
 //----------------------------------------------------------------------------
-std::vector<std::string> midasFilesTools::findFolderChildren(std::string myName)
+std::vector<std::string> midasFilesTools::findFolderChildren(const std::string& myName)
 {
     LOGI("findFolderChildren");
 
@@ -208,7 +208,7 @@ std::vector<std::string> midasFilesTools::findFolderChildren(std::string myName)
 
 }
 //----------------------------------------------------------------------------
- std::string midasFilesTools::ToString(size_t sz)
+std::string midasFilesTools::ToString(const size_t& sz)
 {
 
  std::stringstream ss;
@@ -218,9 +218,10 @@ std::vector<std::string> midasFilesTools::findFolderChildren(std::string myName)
   return ss.str();
 }
 //----------------------------------------------------------------------------
-std::string midasFilesTools::downloadItem(std::string itemName,std::string itemPath)
+std::string midasFilesTools::downloadItem(const std::string& itemName,const std::string& itemPath)
 {
     std::string itemId;
+    std::string mItemPath = itemPath;
     for (size_t i = 0; i < itemNames.size(); ++i)
     {
       if (itemNames[i] == itemName) {
@@ -233,9 +234,9 @@ std::string midasFilesTools::downloadItem(std::string itemName,std::string itemP
     vesKiwiCurlDownloader downloader;
     if(!itemPath.size())
     {
-        itemPath = "/tmp";
+        mItemPath = "/tmp";
     }
-    std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, itemPath);
+    std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, mItemPath);
     if (!downloadedFile.size()) {
         std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
       return downloadedError;
