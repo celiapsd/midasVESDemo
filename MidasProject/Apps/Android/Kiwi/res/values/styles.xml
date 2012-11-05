@@ -1,0 +1,11 @@
+<resources>
+
+    <style name="AppTheme" parent="android:Theme.Light"></style>
+
+    <style name="ThemeHoloDialog" parent="android:style/Theme.Dialog" />
+
+    <style name="ThemeDialogWhenLarge" parent="android:style/Theme" />
+
+    <style name="ThemeFullscreen" parent="android:style/Theme.NoTitleBar.Fullscreen" />
+
+</resources>

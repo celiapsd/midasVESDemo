@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/kitware_logo"
-    android:paddingLeft="10sp"
-    android:paddingRight="10sp" >
+    android:paddingLeft="200sp"
+    android:paddingRight="200sp" >
    	
 	<RelativeLayout
 	    xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,7 +40,7 @@
 	        android:layout_marginTop="5sp"
 	        android:gravity="center_horizontal"
 	        android:text="@string/Instruction1"
-	        android:textSize="40sp"
+	        android:textSize="60sp"
 	        android:textStyle="bold" />
 	
 	    <!-- android:onClick="accessMidas" -->
@@ -55,7 +55,7 @@
 	        android:layout_marginTop="30dp"
 	        android:gravity="center_horizontal"
 	        android:text="@string/Instruction2"
-	        android:textSize="20sp"
+	        android:textSize="30sp"
 	        android:textStyle="bold" />
 	
 	    <AutoCompleteTextView
@@ -71,7 +71,7 @@
 	        android:inputType="text|textUri"
 	        android:padding="@dimen/padding_large"
 	        android:paddingLeft="10sp"
-	        android:textSize="10sp" >
+ >
 	
 	        </AutoCompleteTextView>
 	
@@ -83,7 +83,7 @@
 	        android:layout_marginTop="29dp"
 	        android:gravity="center_horizontal"
 	        android:text="@string/Login"
-	        android:textSize="20sp"
+	        android:textSize="30sp"
 	        android:textStyle="bold" />
 	
 	    <EditText
@@ -98,7 +98,7 @@
 	        android:inputType="textEmailAddress"
 	        android:padding="@dimen/padding_large"
 	        android:paddingLeft="10sp"
-	        android:textSize="10sp" />
+ />
 	
 	    <EditText
 	        android:id="@+id/Password"
@@ -111,7 +111,7 @@
 	        android:hint="@string/Password"
 	        android:inputType="textPassword"
 	        android:padding="@dimen/padding_large"
-	        android:textSize="10sp" />
+ />
 	
 	    <TextView
 	        android:id="@+id/SearchFile"
@@ -121,7 +121,7 @@
 	        android:layout_centerHorizontal="true"
 	        android:layout_marginTop="28dp"
 	        android:text="@string/Search"
-	        android:textSize="20sp"
+	        android:textSize="30sp"
 	        android:textStyle="bold" />
 	
 	    <Button
@@ -152,7 +152,7 @@
 	        android:layout_marginTop="20sp"
 	        android:gravity="center_horizontal"
 	        android:text="@string/goToViewer"
-	        android:textSize="20sp"
+	        android:textSize="30sp"
 	        android:textStyle="bold" />
 
 	    <Button

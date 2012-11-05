@@ -15,7 +15,6 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.ProgressDialog;
 
 import android.content.DialogInterface;
@@ -23,7 +22,6 @@ import android.content.Intent;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -165,6 +163,16 @@ public class DownloadFileActivity extends Activity {
 			Log.d(TAG, "onStop()");
 		}
 		super.onStop();
+	}
+	@Override
+	public void onBackPressed() {
+    if (DownloadFileActivity.DEBUG) {
+      Log.d(TAG, "onBackPressed()");
+    }
+    setOutFilename(null);
+    setFilename(null);
+    super.onBackPressed();
+    
 	}
 
 	/*----------- CHOOSE SAVE----------------------------------------------------------*/

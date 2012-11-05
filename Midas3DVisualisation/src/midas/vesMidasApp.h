@@ -28,7 +28,7 @@ public :
   void initCamera(int w,int h);
   void addBuiltinDataset(std::string filename, std::string path);
   void initTime();
-  void setParametersDataset(std::string filename, int builtinDatasetIndex);
+  void setParametersDataset(std::string filename, int builtinDatasetIndex/*, std::string path*/);
   int getBuiltinDatasetIndex();
   int defaultBuiltinDatasetIndex() const;
   int nextBuiltinDatasetIndex() const;

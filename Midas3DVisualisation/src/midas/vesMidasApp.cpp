@@ -87,6 +87,7 @@ void vesMidasApp::storeCameraState()
     LOGI("storeCameraState()");
 
     this->Internal->cameraPosition = this->cameraPosition();
+   // LOGI("storeCameraState()",this->Internal->cameraPosition);
     this->Internal->cameraFocalPoint = this->cameraFocalPoint();
     this->Internal->cameraViewUp = this->cameraViewUp();
 }
@@ -114,16 +115,20 @@ void vesMidasApp::addBuiltinDataset(std::string filename, std::string path)
 
     this->Internal->currentDataset = filename;
     this->Internal->storageDir = path;
+    this->Internal->builtinDatasetIndex = this->nextBuiltinDatasetIndex();
+
     this->vesKiwiViewerApp::addBuiltinDataset(filename,path);
 }
 //----------------------------------------------------------------------------
-void vesMidasApp::setParametersDataset(std::string filename, int builtinDatasetIndex)
+void vesMidasApp::setParametersDataset(std::string filename, int builtinDatasetIndex/*, const std::string& path*/)
 {
 
-    LOGI("setParametersDataset(filename,index)");
+    LOGI("setParametersDataset(filename,index,path)");
 
     this->Internal->currentDataset = filename;
     this->Internal->builtinDatasetIndex = builtinDatasetIndex;
+    //this->Internal->storageDir = path;
+
 }
 //----------------------------------------------------------------------------
 void vesMidasApp::initTime()
@@ -144,11 +149,6 @@ int vesMidasApp::getBuiltinDatasetIndex()
         LOGI("getBuiltinDatasetIndex not null = %d",this->Internal->builtinDatasetIndex);
         return this->Internal->builtinDatasetIndex;
     }
-    if(this->Internal->builtinDatasetIndex == -1)
-    {
-        LOGI("getBuiltinDatasetIndex == -1 ");
-        return -1;
-    }
     else
     {
         LOGI("getBuiltinDatasetIndex == 0 ");
@@ -166,6 +166,7 @@ int vesMidasApp::defaultBuiltinDatasetIndex() const
 int vesMidasApp::nextBuiltinDatasetIndex() const
 {
     LOGI("nextBuiltinDatasetIndex()");
+
   return this->numberOfBuiltinDatasets();
 }
 //----------------------------------------------------------------------------

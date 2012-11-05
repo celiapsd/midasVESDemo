@@ -41,26 +41,17 @@ import org.metalev.multitouch.controller.MultiTouchController.MultiTouchObjectCa
 import org.metalev.multitouch.controller.MultiTouchController.PointInfo;
 import org.metalev.multitouch.controller.MultiTouchController.PositionAndScale;
 
-import android.view.GestureDetector.OnGestureListener;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.GestureDetector;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-
 import java.util.ArrayList;
-
-import java.lang.Thread;
-import java.lang.InterruptedException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -880,8 +871,10 @@ public class KiwiGLSurfaceView extends GLSurfaceView implements MultiTouchObject
   		boolean launchActivity = ChooseFirstAction.testLauching("DownloadFile");
   		boolean launchActivity2 = ChooseFirstAction.testLauching("FileExplorer");
   	  
+  		Log.d(TAG+"class MyRenderer"," launchActivity = "+launchActivity+"launchActivity2 = "+launchActivity2);
   	  if (launchActivity || launchActivity2)
   	    {
+  	    
   	    if(!DownloadFileActivity.getFilename().isEmpty() && !DownloadFileActivity.getOutFilename().isEmpty())
   	      {
   	      MidasNative.initFile(100,100,DownloadFileActivity.getFilename(),DownloadFileActivity.getOutFilename());

@@ -20,6 +20,8 @@ set(sources
   vesKiwiText2DRepresentation.cpp
   vesKiwiViewerApp.cpp
   vesKiwiWidgetRepresentation.cpp
+
+
   )
 
 set(deps

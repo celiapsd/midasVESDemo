@@ -1,0 +1,81 @@
+
+<resources>
+
+    <string name="app_name">Midas Kiwi Viewer</string>
+    <string name="menu_settings">Settings</string>
+    <string name="version_string">version 1.0.0</string>
+
+<!-- Titles of activities -->
+    <string name="title_activity_choose_first_action">Welcome</string>
+    <string name="title_activity_list_of_views">Communities</string>
+    <string name="title_activity_single_list_item">loading children</string>
+    <string name="title_activity_download_file">Download File</string>
+    <string name="title_activity_open_file"> File</string>
+    <string name="title_activity_viewer">Viewer</string>
+    <string name="title_activity_file_explorer">FileExplorer</string>
+
+<!-- Strings for homepage -->
+    <string name="Instruction1">Midas Database</string>
+    <string name="Instruction2">Enter URL</string>
+    <string name="http">http://</string>
+    <string-array name="url_array">
+        <item>http://midas3.kitware.com/midas</item>
+        <item>http://slicer.kitware.com/midas3</item>
+    </string-array>
+
+    <string name="Login">Login</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="Go">Go</string>
+    <string name="buttonGo">Go</string>
+
+    <string name="Search">Search for a file to open</string>
+    <string name="buttonFolder">Folder</string>
+
+    <string name="goToViewer">Open the viewer with default data</string>
+    <string name="buttonViewer">Viewer</string>
+
+  <!-- Strings for FileExplorer -->
+    <string name="buttonChoose">Choose this directory</string>
+
+ <!-- Strings for DownloadFile -->
+    <string name="Instruction3">Save in SD Card or choose another folder</string>
+    <string name="buttonSave">Save</string>
+
+    <string name="Instruction4">Open this file or search another file</string>
+    <string name="buttonOpenCurrentFile">Open</string>
+    <string name="buttonSearchFile">Search File</string>
+
+    <string name="ReturnHomepage">Return Homepage</string>
+
+    <string name="OK">OK</string>
+
+ <!-- Strings for ViewerActitivty -->
+    <string name="brainatlas_title">SPL-PNL Brain Atlas</string>
+    <string name="brainatlas_message">The brain atlas is distributed under the Slicer license.  For more information please visit http://www.slicer.org/publications/item/view/1265\n\n
+        Interactions:\n\n
+        -single tap a model to hide it\n\n
+        -double tap a model to single it out\n\n
+        -long press anywhere to show all models again\n\n
+        -touch and drag the clip plane to move it\n\n
+        -touch and drag the handle to rotate the clip plane\n\n
+        -tap the top left corner of the screen to hide/show the clip plane\n\n</string>
+    <string name="can_title">Can Simulation</string>
+    <string name="can_message">This dataset contains 44 timesteps from a simulation of a block crushing a can.  The models are colored by velocity magnitude.\n\n
+        Interactions:\n\n
+        -touch Play to start the animation\n\n
+        -while animation is paused, touch and drag up/down on the left edge of the screen to advance the animation\n\n
+        -while animation is playing, touch and drag up/down on the left edge of the screen to adjust animation speed\n\n</string>
+    <string name="head_image_title">Head CT Image</string>
+    <string name="head_image_message">This dataset is a CT scan of a human head.  The image is displayed using three orthogonal slice planes.  An isosurface of the skull is computed on the fly and displayed as a translucent surface mesh.\n\n
+        Interactions:\n\n
+        -touch and drag a slice plane to move it\n\n
+        -double tap anywhere to toggle transparency of the skull\n\n</string>
+    <string name="external_data_url">http://www.kiwiviewer.org/data</string>
+    <string name="cannot_open_asset_title">Sorry</string>
+    <string name="cannot_open_asset_message">KiwiViewer for Android 2.2 is unable to open apk asset files greater than 1MB.  Instead, you can download the data from http://www.kiwiviewer.org/data and then open it in KiwiViewer.</string>
+
+    <string name="copyright_text">\u00A9 2011 <a href="http://www.kitware.com">Kitware, Inc.</a></string>
+    <string name="license_link"><a href="http://kiwiviewer.org/kiwiviewer/project/parti.html">Acknowledgements</a></string>
+
+</resources>

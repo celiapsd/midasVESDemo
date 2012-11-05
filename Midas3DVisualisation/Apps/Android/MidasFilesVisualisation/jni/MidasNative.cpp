@@ -41,7 +41,7 @@ void init(int width,int height,const std::string& filename, const std::string& p
 
 
 //----------------------------------------------------------------------------
-void loadDataset(const std::string& filename, int builtinDatasetIndex)
+void loadDataset(const std::string& filename, int builtinDatasetIndex/*, const std::string& path*/)
 {
     if( filename.c_str()) {
      LOGI1("loadDataset(%s),builtinDatasetIndex = %d", filename.c_str(),builtinDatasetIndex);
@@ -49,7 +49,7 @@ void loadDataset(const std::string& filename, int builtinDatasetIndex)
     else{
         LOGI1("loadDataset(filename == null)" );
     }
-    app->setParametersDataset(filename,builtinDatasetIndex);
+    app->setParametersDataset(filename,builtinDatasetIndex/*,path*/);
 
     bool result = app->loadDataset(filename);
     if (result) {
@@ -59,15 +59,16 @@ void loadDataset(const std::string& filename, int builtinDatasetIndex)
 //----------------------------------------------------------------------------
 void resetView()
 {
-  if (app->getBuiltinDatasetIndex() >= 0) {
+  /*if (app->getBuiltinDatasetIndex() >= 0) {
 
     LOGI1("applyBuiltinDatasetCameraParameters");
     app->applyBuiltinDatasetCameraParameters(app->getBuiltinDatasetIndex());
-  }
-  else {
+  }*/
+  //else {
         LOGI1("resetView");
+
     app->resetView();
-  }
+  //}
 }
 };// end namespace
 
@@ -157,21 +158,31 @@ JNIEXPORT jint JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_give
 
 //-------------------------------------------------------------------------------------------
 JNIEXPORT void JNICALL Java_com_kitware_midasfilesvisualisation_MidasNative_loadDataset
-  (JNIEnv *env, jobject obj, jstring filename, jint builtinDatasetIndex)
+  (JNIEnv *env, jobject obj, jstring filename, jint builtinDatasetIndex/*,jstring path*/)
 {
     LOGI1("JNICALL loadDataset()");
 
-    const char *javaStr = env->GetStringUTFChars(filename, NULL);
-    if (javaStr) {
-      std::string filenameStr = javaStr;
-      env->ReleaseStringUTFChars(filename, javaStr);
-      if( javaStr ) {
+    const char *javaStrFilename = env->GetStringUTFChars(filename, NULL);
+   // const char *javaStrPath = env->GetStringUTFChars(path, NULL);
+    if (javaStrFilename /*&& javaStrPath*/) {
+
+      std::string filenameStr = javaStrFilename;
+      //std::string pathStr = javaStrpath;
+
+      env->ReleaseStringUTFChars(filename, javaStrFilename);
+      //env->ReleaseStringUTFChars(path, javaStrPath);
+
+      /*if( javaStr ) {
           LOGI1("loadDataset(), filename = not null,buildindatatsetindex = %d",builtinDatasetIndex);
         }
       else{
           LOGI1("loadDataset(), filename = null ");
-          }
-      loadDataset(filenameStr, builtinDatasetIndex);
+          }*/
+      loadDataset(filenameStr, builtinDatasetIndex/*, pathStr*/);
+    }
+    else{
+        LOGI1("java objects not created");
+
     }
 
 }

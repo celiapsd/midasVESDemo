@@ -22,45 +22,33 @@ package com.kitware.midasfilesvisualisation;
 
 /*------------------------------Libraries----------------------------------------------------------*/
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.res.Configuration;
 import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
-import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Build;
-import android.os.Environment;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.text.InputType;
 import android.text.SpannableString;
 import android.text.util.Linkify;
 import android.text.method.LinkMovementMethod;
 import android.net.Uri;
 import android.view.View;
-import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.app.ProgressDialog;
 
 /*-------------------------------------------------------------------------------------------------------------------*/
+@SuppressWarnings("unused")
 public class ViewerActivity extends Activity {
 
     /*------------------------------Attributes------------------------------------------------*/
@@ -278,6 +266,22 @@ public class ViewerActivity extends Activity {
 	        }
 	    }
 	  }
+  	/*------------------------------addNameInDatabase----------------------------------------*/
+    protected void addNameInDatabase(String myFileName, int builtinDatasetIndex) {
+
+      Log.d(TAG, "addNameInDatabase()");
+
+      if (mBuiltinDatasetNames == null) {
+        initBuiltinDatasetNames();
+        }
+      /*if (builtinDatasetIndex == -1 )
+        {}*/
+      
+      int nextIndex = MidasNative.getNextBuiltinDatasetIndex();
+      mBuiltinDatasetNames.add(MidasNative.getDatasetName(nextIndex));
+          
+      
+    }
 
 	  
     /*------------------------------maybeLoadDefaultDataset----------------------------------------*/
@@ -493,10 +497,10 @@ public class ViewerActivity extends Activity {
 		  Log.d(TAG, "postLoadDataset(filename = "+filename+",errorTitle = "+errorTitle+",result = "+result+",errorMessage = "+errorMessage+")");
 
       dismissProgressDialog();
-	    if (!result) {
-	      showErrorDialog(errorTitle, errorMessage);
+      if (!result || !(errorTitle.isEmpty()) || !(errorMessage.isEmpty())) {
+      showErrorDialog(errorTitle, errorMessage);
 
-	    }
+    }
 	    else {
 
 	      if (filename.endsWith("model_info.txt")) {

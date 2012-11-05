@@ -1,0 +1,167 @@
+
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView01"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/kitware_logo"
+    android:paddingLeft="10sp"
+    android:paddingRight="10sp" >
+   	
+	<RelativeLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    xmlns:tools="http://schemas.android.com/tools"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical"
+	    android:scrollbars="horizontal|vertical"
+	    android:weightSum="100" >
+	
+	    <!-- fill_parent" has been renamed "match_parent" to better reflect the behavior -->
+	    <!-- Add a text field -->
+	    <!-- android:id==unique identifier for the view -->
+	    <!-- (@) ==refer to a resource object from XML -->
+	    <!-- (edit_message)==resource name -->
+	    <!-- (+)==defining a resource ID for the first time -->
+	    <!-- android:layout_width and android:layout_height==the "wrap_content" view only as big as needed -->
+	    <!-- android:layout_weight="1"==fill the remaining space with the EditText element -->
+	    <!-- android:hint==default string to display when the text field is empty -->
+	    <!-- add a <Button> -->
+	    <!-- "wrap_content"==the button only as big as necessary -->
+	    <!-- sendMessage==name of method in activity to call when the user selects the button. -->
+	
+	    <TextView
+	        android:id="@+id/instAccessMidas"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:layout_marginTop="5sp"
+	        android:gravity="center_horizontal"
+	        android:text="@string/Instruction1"
+	        android:textSize="40sp"
+	        android:textStyle="bold" />
+	
+	    <!-- android:onClick="accessMidas" -->
+	
+	    <TextView
+	        android:id="@+id/urltext"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@id/instAccessMidas"
+	        android:layout_marginTop="30dp"
+	        android:gravity="center_horizontal"
+	        android:text="@string/Instruction2"
+	        android:textSize="20sp"
+	        android:textStyle="bold" />
+	
+	    <AutoCompleteTextView
+	        android:id="@+id/autocomplete_URL"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:completionThreshold="2"
+	        android:layout_alignParentLeft="true"
+	        android:layout_below="@+id/urltext"
+	        android:layout_toLeftOf="@+id/ButtonGo"
+	        android:ems="10"
+	        android:hint="@string/http"
+	        android:inputType="text|textUri"
+	        android:padding="@dimen/padding_large"
+	        android:paddingLeft="10sp" >
+	
+	        </AutoCompleteTextView>
+	
+	    <TextView
+	        android:id="@+id/LoginText"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/autocomplete_URL"
+	        android:layout_marginTop="29dp"
+	        android:gravity="center_horizontal"
+	        android:text="@string/Login"
+	        android:textSize="20sp"
+	        android:textStyle="bold" />
+	
+	    <EditText
+	        android:id="@+id/Email"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/autocomplete_URL"
+	        android:layout_below="@+id/LoginText"
+	        android:layout_toLeftOf="@+id/ButtonGo"
+	        android:ems="10"
+	        android:hint="@string/Email"
+	        android:inputType="textEmailAddress"
+	        android:padding="@dimen/padding_large"
+	        android:paddingLeft="10sp" />
+	
+	    <EditText
+	        android:id="@+id/Password"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignLeft="@+id/Email"
+	        android:layout_alignRight="@+id/Email"
+	        android:layout_below="@+id/Email"
+	        android:ems="10"
+	        android:hint="@string/Password"
+	        android:inputType="textPassword"
+	        android:padding="@dimen/padding_large" />
+	
+	    <TextView
+	        android:id="@+id/SearchFile"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/Password"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="28dp"
+	        android:text="@string/Search"
+	        android:textSize="20sp"
+	        android:textStyle="bold" />
+	
+	    <Button
+	        android:id="@+id/buttonSearch"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/SearchFile"
+	        android:layout_centerHorizontal="true"
+	        android:onClick="ButtonOnClick"
+	        android:text="@string/buttonFolder" />
+	
+	    <Button
+	        android:id="@+id/ButtonGo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignRight="@+id/LoginText"
+	        android:layout_below="@+id/autocomplete_URL"
+	        android:onClick="ButtonOnClick"
+	        android:text="@string/Go" />
+
+	    <TextView
+	        android:id="@+id/instAccessViewer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/buttonSearch"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginLeft="42dp"
+	        android:layout_marginTop="20sp"
+	        android:gravity="center_horizontal"
+	        android:text="@string/goToViewer"
+	        android:textSize="20sp"
+	        android:textStyle="bold" />
+
+	    <Button
+	        android:id="@+id/buttonViewer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/instAccessViewer"
+	        android:layout_centerHorizontal="true"
+	        android:onClick="ButtonOnClick"
+	        android:text="@string/buttonViewer" />
+	
+	</RelativeLayout>
+	
+</ScrollView>
+	

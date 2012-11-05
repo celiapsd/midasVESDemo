@@ -7,6 +7,7 @@ set(tests
   TestTexture
   TestTexturedBackground
   TestWireframe
+  TestMidas
   )
 
 
