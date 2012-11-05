@@ -213,33 +213,35 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 	 * * @param View
 	 * 
 	 * */
-	public void ButtonOnClick(View v) 
+	public void ButtonOnClickGoMidas(View v) 
 	  {
 		if (ChooseFirstAction.DEBUG) 
 		  {
-			Log.d(TAG, "ButtonOnClick()");
+			Log.d(TAG, "ButtonOnClickGoMidas()");
 		  }
-		switch (v.getId()) 
-		  {
-  		case (R.id.ButtonGo):
-  			Log.d(TAG, "Go Button pushed");
-  		  communityList = null;
-  			urlSearch(v);
-  			break;
-
-  		case (R.id.buttonSearch):
-  			Log.d(TAG, "SEARCHING A FILE");
-  			Intent i = new Intent(ChooseFirstAction.this,FileExplorerActivity.class);
-  			startActivity(i);
-  			break;
-  			
-  		case (R.id.buttonViewer):
-        Log.d(TAG, "START VIEWER");
-        Intent intent = new Intent(ChooseFirstAction.this,ViewerActivity.class);
-        startActivity(intent);
-        break;
-		  }
+		communityList = null;
+		urlSearch(v);
 	  }
+	
+	public void ButtonOnClickSearchFile(View v) 
+    {
+    if (ChooseFirstAction.DEBUG) 
+      {
+      Log.d(TAG, "ButtonOnClickSearchFile()");
+      }
+      Intent i = new Intent(ChooseFirstAction.this,FileExplorerActivity.class);
+      startActivity(i);
+    }
+	  public void ButtonOnClickViewer(View v) 
+    {
+    if (ChooseFirstAction.DEBUG) 
+      {
+      Log.d(TAG, "ButtonOnClickViewer()");
+      }
+    Intent intent = new Intent(ChooseFirstAction.this,ViewerActivity.class);
+    startActivity(intent);
+    }
+  	
 
 	
 	/**

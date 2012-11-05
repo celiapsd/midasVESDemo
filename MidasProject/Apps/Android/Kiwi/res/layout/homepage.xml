@@ -127,7 +127,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/SearchFile"
 	        android:layout_centerHorizontal="true"
-	        android:onClick="ButtonOnClick"
+	        android:onClick="ButtonOnClickSearchFile"
 	        android:text="@string/buttonFolder" />
 	
 	    <Button
@@ -136,7 +136,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_alignRight="@+id/LoginText"
 	        android:layout_below="@+id/autocomplete_URL"
-	        android:onClick="ButtonOnClick"
+	        android:onClick="ButtonOnClickGoMidas"
 	        android:text="@string/Go" />
 
 	    <TextView
@@ -158,7 +158,7 @@
 	        android:layout_height="wrap_content"
 	        android:layout_below="@+id/instAccessViewer"
 	        android:layout_centerHorizontal="true"
-	        android:onClick="ButtonOnClick"
+	        android:onClick="ButtonOnClickViewer"
 	        android:text="@string/buttonViewer" />
 	
 	</RelativeLayout>

@@ -124,47 +124,37 @@ public class DownloadFileActivity extends Activity {
 	}
 
 	/*----------- CHOOSE SAVE----------------------------------------------------------*/
-	public void ChooseSave(View v)  {
-
-		
-		Log.d(TAG, "ChooseSave(view)");
-		
-		switch (v.getId()) {
-		case (R.id.Folder):
+	public void ButtonOnClickSearchFolder(View v)  
+	  {
 			Log.d(TAG, "FOLDER CHOOSE");
-
 			choosefolder(v);
-			break;
-
-		case (R.id.Save):
-			try {
-				Log.d(TAG, "SAVE CHOOSE");
-				//if(getPath().isEmpty())
-				  {
-				setPath("/mnt/sdcard/Android/data/com.kitware.KiwiViewer/files");
-				  }
-				SaveFile(getPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			break;
-
-		case (R.id.OpenCurrentFile):
-			Log.d(TAG, "OPEN CURRENT CHOOSE");
-			openFile(v);
-			break;
-
-		case (R.id.SearchFile):
-			Log.d(TAG, "SEARCH FILE CHOOSE");
-			choosefolder(v);
-			break;
-
-		case (R.id.ReturnHomepage):
-			Log.d(TAG, "RETURNHOMEPAGE CHOOSE");
-			returnHomepage(v);
-			break;
+	}	
+	public void ButtonOnClickSave(View v)  
+	  {
+		Log.d(TAG, "SAVE CHOOSE");
+		  //if(getPath().isEmpty())
+		  //{
+		  setPath("/mnt/sdcard/Android/data/com.kitware.KiwiViewer/files");
+		  //}
+		try
+      {
+      SaveFile(getPath());
+      } catch (IOException e)
+      {
+      e.printStackTrace();
+      }
 		}
-	}
+	public void ButtonOnClickOpenFile(View v)  
+    {
+    Log.d(TAG, "OPEN CURRENT CHOOSE");
+    openFile(v);
+    }
+	
+	public void ButtonOnClickReturnHomepage(View v)  
+	  {
+	  Log.d(TAG, "ButtonOnClickReturnHomepage()");
+	  returnHomepage(v);
+		}
 
 	/*-------------RETURN HOMEPAGE--------------------------------------------------------------*/
 	public void returnHomepage(View v) {
