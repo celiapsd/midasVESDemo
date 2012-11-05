@@ -1,2 +1,0 @@
-/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-host/CMakeTmp/TestExplicitInstantiation/Build/CMakeFiles/A.dir
-/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-host/CMakeTmp/TestExplicitInstantiation/Build/CMakeFiles/B.dir

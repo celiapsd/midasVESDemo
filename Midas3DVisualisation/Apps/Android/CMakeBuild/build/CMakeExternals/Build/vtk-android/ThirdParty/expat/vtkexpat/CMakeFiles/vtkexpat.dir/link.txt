@@ -1,2 +1,0 @@
-/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ar cr ../../../lib/libvtkexpat-6.0.a  CMakeFiles/vtkexpat.dir/xmlparse.c.o CMakeFiles/vtkexpat.dir/xmltok.c.o CMakeFiles/vtkexpat.dir/xmlrole.c.o
-/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ranlib ../../../lib/libvtkexpat-6.0.a

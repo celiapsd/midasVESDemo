@@ -1,6 +1,0 @@
-set(vtkCommonTransforms_LOADED 1)
-set(vtkCommonTransforms_DEPENDS "vtkCommonMath")
-set(vtkCommonTransforms_LIBRARIES "vtkCommonTransforms")
-set(vtkCommonTransforms_INCLUDE_DIRS "/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-host/Common/Transforms;/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/Common/Transforms")
-set(vtkCommonTransforms_LIBRARY_DIRS "")
-

@@ -1,6 +1,0 @@
-# Target labels
- vtkexpat
-# Source files and their labels
-/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/expat/vtkexpat/xmlparse.c
-/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/expat/vtkexpat/xmltok.c
-/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Source/vtk/ThirdParty/expat/vtkexpat/xmlrole.c

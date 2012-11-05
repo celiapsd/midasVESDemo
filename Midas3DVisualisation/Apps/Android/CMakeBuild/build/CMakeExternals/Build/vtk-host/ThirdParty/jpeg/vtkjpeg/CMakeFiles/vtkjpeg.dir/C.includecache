@@ -1,8 +1,0 @@
-#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
-
-#IncludeRegexScan: ^(jchuff|jconfig|jdct|jdhuff|jerror|jinclude|jmemsys|jmorecfg|jpegint|jpeglib|jversion|jpeg|vtk).*$
-
-#IncludeRegexComplain: ^$
-
-#IncludeRegexTransform: 
-

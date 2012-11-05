@@ -1,1 +1,0 @@
-/usr/bin/c++     -O3 -DNDEBUG  -Wl,--fatal-warnings -Wl,--no-undefined -lc -Wl,--fatal-warnings -Wl,--no-undefined -lc    CMakeFiles/ProcessShader.dir/ProcessShader.cxx.o  -o ../../bin/ProcessShader -rdynamic ../../lib/libvtksys-6.0.so.1 -ldl -Wl,-rpath,/home/celia/midasVESDemo/Midas3DVisualisation/Apps/Android/CMakeBuild/build/CMakeExternals/Build/vtk-host/lib 

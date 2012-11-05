@@ -1,2 +1,0 @@
-/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ar cr ../../lib/libvtkIOPLY-6.0.a  CMakeFiles/vtkIOPLY.dir/vtkPLY.cxx.o CMakeFiles/vtkIOPLY.dir/vtkPLYReader.cxx.o CMakeFiles/vtkIOPLY.dir/vtkPLYWriter.cxx.o
-/home/celia/midasVESDemo/android-ndk-r6/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-ranlib ../../lib/libvtkIOPLY-6.0.a
