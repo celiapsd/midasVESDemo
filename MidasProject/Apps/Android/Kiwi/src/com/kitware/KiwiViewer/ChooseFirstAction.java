@@ -23,6 +23,9 @@ package com.kitware.KiwiViewer;
 
 import java.util.ArrayList;
 
+import com.kitware.KiwiViewer.DownloadFileActivity.WaitWhileSave;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -64,6 +67,9 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 
 	/** logging tag */
 	public static String TAG = "ChooseFirstAction";
+	
+	/** AutoCompleteTextView for URL */
+  public static AutoCompleteTextView myAutoComplete;
 
 	/**
 	 * ---------- Default constructor----------------
@@ -92,20 +98,74 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		  }
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-
+		new AutoCompleteTextViewListener().execute(this);
 		/*autocomplete url*/
-		AutoCompleteTextView myAutoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete_URL);
+		/*AutoCompleteTextViewListener(this);
 		String[] URLS = getResources().getStringArray(R.array.url_array);
     myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
     myAutoComplete.addTextChangedListener(this);
     ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
     myAutoComplete.setAdapter(adapter);
+    */
+	  }
+	 /**
+   * ---------- CLASS AutoCompleteTextViewListener (AsyncTask)-------------------------------------------------------------
+  *
+  * @Param String, Integer, Integer =  one string parameter, publishing the progress, returning a value
+  *  
+  **/
+	private class AutoCompleteTextViewListener extends AsyncTask<ChooseFirstAction, void, void >
+	{
+	  
+  /*------------------------------------------------------------*/
+  
+    protected Integer doInBackground(ChooseFirstAction... loader) {
+      
+      String[] URLS = getResources().getStringArray(R.array.url_array);
+      myAutoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete_URL);
+      myAutoComplete.addTextChangedListener(loader);
+      ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
+      myAutoComplete.setAdapter(adapter);
+      myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
+        public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+          }
+        });
+    
+
+    }
+  /*------------------------onPreExecute-------------------------------------------------------*/
+    @Override
+    protected void onPreExecute() {
+      Log.d(TAG + "AsyncTask :WaitWhileSave ", "onPreExecute()");
+
+        super.onPreExecute();
+      
+    }
+    /*---------------------onProgressUpdate-----------------------------------------------------*/
+    @Override
+    protected void onProgressUpdate() {
+    Log.d(TAG + "AsyncTask :WaitWhileSave ", "onProgressUpdate()");
+
+    }
+     /*------------------onPostExecute----------------------------------------------------------*/
+    protected void onPostExecute() {
+    Log.d(TAG + "AsyncTask :WaitWhileSave ", "onPostExecute()");
+
+      super.onPostExecute();    
+    }
+	}
+	
+	/*(ChooseFirstAction loader)
+    String[] URLS = getResources().getStringArray(R.array.url_array);
+    loader.myAutoComplete = (AutoCompleteTextView) loader.findViewById(R.id.autocomplete_URL);
+    loader.myAutoComplete.addTextChangedListener(loader);
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(loader, android.R.layout.simple_dropdown_item_1line, URLS);
+    myAutoComplete.setAdapter(adapter);
     myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
       public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
         }
       });
-	  }
-
+	}*/
 	/* ---------- ON CREATE OPTIONS MENU----------------------------------------*/
 	public boolean onCreateOptionsMenu(Menu menu) 
 	  {
@@ -125,7 +185,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 			Log.d(TAG, "onDestroy()");
 		  }
 		super.onDestroy();
-		activities.remove(this);
+		//activities.remove(this);
 	  }
 
 	protected void onPause() 
