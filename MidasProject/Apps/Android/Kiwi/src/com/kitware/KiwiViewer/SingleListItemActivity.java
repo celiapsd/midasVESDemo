@@ -41,8 +41,8 @@ public class SingleListItemActivity extends Activity {
 			Log.d(TAG, "OnCreate()");
 		}
 		super.onCreate(savedInstanceState);
-		ChooseFirstAction.activities.add(this);
-		setTitle(ChooseFirstAction.getCurrentName());
+		ChooseFirstActivity.activities.add(this);
+		setTitle(ChooseFirstActivity.getCurrentName());
 		setContentView(R.layout.activity_list_of_views);
 
 		mainListView = (ListView) findViewById(R.id.mainListView);
@@ -65,7 +65,7 @@ public class SingleListItemActivity extends Activity {
 				/* retrieve the name of the community selected and send toSingleListItemActivity*/ 
 				String name = ((TextView) view).getText().toString();
 				//setTitle(name);
-				ChooseFirstAction.setCurrentName(name);
+				ChooseFirstActivity.setCurrentName(name);
 				ListChildren = MidasToolsNative.findFolderChildren(name);
 				ListOfViewsActivity.ListChildren=ListChildren;
 				if (ListChildren.length == 0 )

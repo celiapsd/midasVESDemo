@@ -328,7 +328,7 @@ public class ViewerActivity extends Activity {
       //Log.d(TAG, "set file path ok ()");
       this.setContentView(R.layout.kiwivieweractivity);
       Log.d(TAG, "setcontent view ok()");
-      ChooseFirstAction.activities.add(this);
+      ChooseFirstActivity.activities.add(this);
 
 	    mView = (KiwiGLSurfaceView) this.findViewById(R.id.glSurfaceView);
 	    maybeLoadDefaultDataset();

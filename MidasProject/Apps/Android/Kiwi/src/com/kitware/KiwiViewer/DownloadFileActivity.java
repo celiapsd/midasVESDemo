@@ -54,7 +54,7 @@ public class DownloadFileActivity extends Activity {
 		Log.d(TAG, "Oncreate()");
 
 		super.onCreate(savedInstanceState);
-		ChooseFirstAction.activities.add(this);
+		ChooseFirstActivity.activities.add(this);
 		setContentView(R.layout.activity_open_file);
 		
 		myItem = retrieveItemAtributes(SingleListItemActivity.ListChildren);
@@ -160,7 +160,7 @@ public class DownloadFileActivity extends Activity {
 	public void returnHomepage(View v) {
 		Log.d(TAG, "returnHomepage()");
 		setFilename(null);
-		ChooseFirstAction.finishAll();
+		//ChooseFirstActivity.finishAll();
 		//start ch again
 		
 	}
@@ -272,7 +272,7 @@ public class DownloadFileActivity extends Activity {
 	/*---------------Open File ---------------------------------------------- */
 	public void openFile(View v) {
 		AlertDialog.Builder alt_open = new AlertDialog.Builder(this);
-		alt_open.setTitle("[" + ChooseFirstAction.getCurrentName() + "]");
+		alt_open.setTitle("[" + ChooseFirstActivity.getCurrentName() + "]");
 		alt_open.setPositiveButton("open", new DialogInterface.OnClickListener(){
 		
 		
@@ -282,8 +282,8 @@ public class DownloadFileActivity extends Activity {
         	
         	Intent i = new Intent(DownloadFileActivity.this,ViewerActivity.class);
         	startActivity(i);
-      		//ChooseFirstAction.finishAllExceptParam("ViewerActivity");
-       		//ChooseFirstAction.finishAll();
+      		//ChooseFirstActivity.finishAllExceptParam("ViewerActivity");
+       		//ChooseFirstActivity.finishAll();
           
           }
       });
