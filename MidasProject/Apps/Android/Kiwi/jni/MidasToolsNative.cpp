@@ -7,7 +7,7 @@
 #include <midasFilesTools.h>
 #include <string.h>
 #include <vector>
-//#include <iterator.h>
+#include <iterator>
 
 
 /*#include <vesKiwiViewerApp.h>
@@ -92,21 +92,26 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 {
     LOGI("JNICALL findCommunities");
     jobjectArray objNames;
-
+    jclass classe = env->FindClass( "midasResource");
+    jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
     int i;
 
-    vectorOfStrings names = appTools->findCommunities();
-    objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
+    //vectorOfStrings names = appTools->findCommunities();
+    std::vector<midasResource> communitiesResource = appTools->findCommunities();
+    //midasResource::midasResource *com = new midasResource ();
 
-    for(i=0;i<names.size();i++)
+
+
+    //objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
+     objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
+    /*for(i=0;i<names.size();i++)
       {
         env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
-      }
-    /*for(vectorOfStrings::const_iterator iter = names.begin(); iter != names.end(); ++iter)
+      }*/
+    for(std::vector<midasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
           {
-        env->SetObjectArrayElement(objNames,i,env->NewStringUTF( (*iter).c_str() ));
-          }*/
-
+        env->SetObjectArrayElement(objNames,i,(*iter) );
+          }
     /*
   for (RequestArgs::const_iterator iter = args.begin(); iter != args.end(); ++iter) {
     argString << "&" << iter->first << "=" << iter->second;
