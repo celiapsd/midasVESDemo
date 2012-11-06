@@ -6,7 +6,7 @@
 #include <fstream>
 #include <midasFilesTools.h>
 #include <string.h>
-//#include <vector.h>
+#include <vector>
 //#include <iterator.h>
 
 
@@ -26,16 +26,19 @@
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,__VA_ARGS__)
 
 
+typedef std::vector<std::string> vectorOfStrings;
+
 namespace {
 
-midasFilesTools* appTools;
+    midasFilesTools* appTools;
 
-int initAppTools(std::string url,std::string email,std::string password)
-{
-    LOGI("initAppTools");
-    appTools = new midasFilesTools();
-    return appTools->init(url,email,password);
-}
+    int initAppTools(std::string url,std::string email,std::string password)
+    {
+        LOGI("initAppTools");
+        appTools = new midasFilesTools();
+        return appTools->init(url,email,password);
+    }
+
 
 
 };// end namespace
@@ -92,16 +95,16 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
     int i;
 
-    std::vector<std::string> names = appTools->findCommunities();
+    vectorOfStrings names = appTools->findCommunities();
     objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
 
     for(i=0;i<names.size();i++)
       {
         env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
       }
-    /*for(std::vector<std::string>::const_iterator iter = names.begin(); iter != names.end(); ++iter)
+    /*for(vectorOfStrings::const_iterator iter = names.begin(); iter != names.end(); ++iter)
           {
-            env->SetObjectArrayElement(objNames,i,env->NewStringUTF(*iter.c_str()));
+        env->SetObjectArrayElement(objNames,i,env->NewStringUTF( (*iter).c_str() ));
           }*/
 
     /*
@@ -125,7 +128,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
         jobjectArray objNames;
         int i;
-        std::vector<std::string> nameChildren = appTools->findCommunityChildren(nameStr);
+        vectorOfStrings nameChildren = appTools->findCommunityChildren(nameStr);
         objNames= (jobjectArray)env->NewObjectArray(nameChildren.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
         for(i=0;i<nameChildren.size();i++)
         {
@@ -148,7 +151,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
         jobjectArray objNames;
         int i;
-        std::vector<std::string> namesChildren = appTools->findFolderChildren(nameStr);
+        vectorOfStrings namesChildren = appTools->findFolderChildren(nameStr);
         LOGI("find folder children finished");
         if (namesChildren.empty())
         {
