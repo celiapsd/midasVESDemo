@@ -10,6 +10,14 @@
 // C++ includes
 #include <string>
 
+typedef enum {
+      COMMUNITY,
+      FOLDER,
+      ITEM,
+      BITSTREAM,
+      NOTSET
+   } Type ;
+
 //-------------------------------------------------
 class midasResource
 {
@@ -19,18 +27,17 @@ public :
    midasResource();
    virtual ~midasResource();
 
-   enum Type {
-         COMMUNITY,
-         FOLDER,
-         ITEM,
-         BITSTREAM,
-         NOTSET
-      };
 
-   void init(int id, std::string name, Type type);
-   void setId(int id);
-   void setName(std::string name);
-   void setType(Type type);
+
+   void init(const int& id,const std::string& name, const Type& type);
+
+   void setId(const int& id);
+   void setName(const std::string& name);
+   void setType(const Type& type);
+
+   int getId();
+   std::string getName();
+   Type getType();
 
 
 private :

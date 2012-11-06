@@ -56,3 +56,17 @@ void midasResource::setType(Type type)
 {
     this.type = type;
 }
+int midasResource::getId()
+{
+    return this.id;
+}
+//----------------------------------------------------------------------------
+std::string midasResource::getName()
+{
+    return this.name;
+}
+//----------------------------------------------------------------------------
+Type midasResource::getType()
+{
+    return this.type;
+}
