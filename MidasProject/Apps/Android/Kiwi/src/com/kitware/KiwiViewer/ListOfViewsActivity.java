@@ -35,7 +35,7 @@ public class ListOfViewsActivity extends Activity {
 			Log.d(TAG, "OnCreate()");
 		}
 		Bundle x = this.getIntent().getExtras();
-		Parcelable[] comms = x.getParcelableArray("test test test");
+		Parcelable[] comms = x.getParcelableArray("BundleResourceCommunity");
 		for( Parcelable parcel : comms) {
 		  MidasResource comm = (MidasResource) parcel;
 		  Log.d(TAG,comm.getName());
@@ -46,20 +46,20 @@ public class ListOfViewsActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_list_of_views);
 
-		ChooseFirstAction.activities.add(this);
+		ChooseFirstActivity.activities.add(this);
 
-		boolean isLaunched = ChooseFirstAction.testLauching("DownloadFile");
-		boolean isLaunched2 = ChooseFirstAction.testLauching("FileExplorer");
+		/*boolean isLaunched = ChooseFirstActivity.testLauching("DownloadFile");
+		boolean isLaunched2 = ChooseFirstActivity.testLauching("FileExplorer");
 		if(isLaunched||isLaunched2)
 		  {
 		  DownloadFileActivity.setFilename(null);
       DownloadFileActivity.setPath(null);
-		  }
+		  }*/
 		
 		mainListView = (ListView) findViewById(R.id.mainListView);
 		
 		List<String> ListNames = new ArrayList<String>();
-    ListNames.addAll(Arrays.asList(ChooseFirstAction.communityList));
+    ListNames.addAll(Arrays.asList(ChooseFirstActivity.communityList));
     listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, ListNames);
 
 		Log.d(TAG, "waiting for a click");
@@ -77,7 +77,7 @@ public class ListOfViewsActivity extends Activity {
 				/*retrieve the name of the community selected and send to SingleListItemActivity*/
 				String name = ((TextView) view).getText().toString();
 				setTitle(name);
-				ChooseFirstAction.setCurrentName(name);
+				ChooseFirstActivity.setCurrentName(name);
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
 				Intent in = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);

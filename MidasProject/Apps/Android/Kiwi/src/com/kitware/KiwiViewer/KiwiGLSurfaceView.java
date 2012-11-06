@@ -923,8 +923,8 @@ public void downloadAndOpenFile(final String url, final String downloadDir, fina
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
   		Log.d(TAG+"class MyRenderer","onSurfaceCreated");
 
-  		boolean launchActivity = ChooseFirstAction.testLauching("DownloadFile");
-  		boolean launchActivity2 = ChooseFirstAction.testLauching("FileExplorer");
+  		boolean launchActivity = ChooseFirstActivity.testLauching("DownloadFile");
+  		boolean launchActivity2 = ChooseFirstActivity.testLauching("FileExplorer");
   	  
   	  if (launchActivity || launchActivity2)
   	    {

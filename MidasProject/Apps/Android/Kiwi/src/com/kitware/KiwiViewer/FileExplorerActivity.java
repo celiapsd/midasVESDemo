@@ -37,7 +37,7 @@ public class FileExplorerActivity extends ListActivity
         
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_list_item_view);
-        ChooseFirstAction.activities.add(this);
+        ChooseFirstActivity.activities.add(this);
         
         myPathTV = (TextView)findViewById(R.id.path);
         filenameTV=(TextView)findViewById(R.id.filename);
