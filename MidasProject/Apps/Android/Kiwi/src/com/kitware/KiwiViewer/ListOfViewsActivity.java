@@ -24,6 +24,7 @@ public class ListOfViewsActivity extends Activity {
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
 	public static String [] ListChildren;
+	public static MidasResource [] Communities;
 	public final static String TAG = "ListOfViewsActivity";
 	/** Global Debug constant */
 	public static final boolean DEBUG = true;
@@ -34,19 +35,31 @@ public class ListOfViewsActivity extends Activity {
 		if (ListOfViewsActivity.DEBUG) {
 			Log.d(TAG, "OnCreate()");
 		}
-		Bundle x = this.getIntent().getExtras();
-		Parcelable[] comms = x.getParcelableArray("BundleResourceCommunity");
-		for( Parcelable parcel : comms) {
-		  MidasResource comm = (MidasResource) parcel;
-		  Log.d(TAG,comm.getName());
-		  Log.d(TAG,Integer.toString(comm.getId()));
-		  Log.d(TAG,Integer.toString(comm.getType().ordinal()));
-		}
-		
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list_of_views);
+    setContentView(R.layout.activity_list_of_views);
+    
+		Bundle BundleResourceCommunity = this.getIntent().getExtras();
+		Parcelable[] communitiesParcelable = BundleResourceCommunity.getParcelableArray("BundleResourceCommunity");
+		
+		List<String> ListNames = new ArrayList<String>();
+		Communities = new MidasResource [communitiesParcelable.length];
+		
+		int i = 0;
+		for( Parcelable parcel : communitiesParcelable) 
+		  {
+		  MidasResource comm = (MidasResource) parcel;
+		  ListNames.add(comm.getName());
+		  Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType());
+		  i++;
+		  
+		  Log.d(TAG,comm.getName());
+		  /*Log.d(TAG,Integer.toString(comm.getId()));
+		  Log.d(TAG,Integer.toString(comm.getType().ordinal()));*/
+		  }
+		
+		
 
-		ChooseFirstActivity.activities.add(this);
+		//ChooseFirstActivity.activities.add(this);
 
 		/*boolean isLaunched = ChooseFirstActivity.testLauching("DownloadFile");
 		boolean isLaunched2 = ChooseFirstActivity.testLauching("FileExplorer");
@@ -56,17 +69,15 @@ public class ListOfViewsActivity extends Activity {
       DownloadFileActivity.setPath(null);
 		  }*/
 		
-		mainListView = (ListView) findViewById(R.id.mainListView);
 		
-		List<String> ListNames = new ArrayList<String>();
-    ListNames.addAll(Arrays.asList(ChooseFirstActivity.communityList));
+		
+		mainListView = (ListView) findViewById(R.id.mainListView);
     listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, ListNames);
-
-		Log.d(TAG, "waiting for a click");
 
 		/*Set the ArrayAdapter as the ListView's adapter.*/
     mainListView.setAdapter(listAdapter); 
     
+    Log.d(TAG, "waiting for a click");
 		mainListView.setOnItemClickListener(new OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view,int position, long id) {
 
@@ -76,11 +87,11 @@ public class ListOfViewsActivity extends Activity {
 				
 				/*retrieve the name of the community selected and send to SingleListItemActivity*/
 				String name = ((TextView) view).getText().toString();
-				setTitle(name);
-				ChooseFirstActivity.setCurrentName(name);
+				
+				//ChooseFirstActivity.setCurrentName(name);
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
-				Intent in = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
+				Intent in = new Intent(this,SingleListItemActivity.class);
 				startActivity(in);
 			}
 		});

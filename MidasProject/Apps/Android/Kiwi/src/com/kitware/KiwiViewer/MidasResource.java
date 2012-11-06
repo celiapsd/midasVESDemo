@@ -9,7 +9,7 @@ public class MidasResource implements Parcelable
     /*
      * The type of the resource
      */
-    public enum Type { ITEM, FOLDER, COMMUNITY, BITSTREAM, NOTSET };
+    public enum Type { COMMUNITY, FOLDER, ITEM, BITSTREAM, NOTSET };
     
     /*
      * The id of the resource. This is unique within the given type
