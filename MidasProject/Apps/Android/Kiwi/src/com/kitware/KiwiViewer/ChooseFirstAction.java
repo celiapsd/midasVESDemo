@@ -23,8 +23,8 @@ package com.kitware.KiwiViewer;
 
 import java.util.ArrayList;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.text.Editable;
@@ -41,8 +41,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 //------------------------------------------------------------------------------------------//
-public class ChooseFirstAction extends Activity implements TextWatcher 
-  {
+public class ChooseFirstAction extends Activity 
+{
 
   /**  To know if the user login correctly*/
 	private int result;
@@ -64,6 +64,8 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 
 	/** logging tag */
 	public static String TAG = "ChooseFirstAction";
+	
+	
 
 	/**
 	 * ---------- Default constructor----------------
@@ -92,20 +94,46 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 		  }
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.homepage);
-
-		/*autocomplete url*/
-		AutoCompleteTextView myAutoComplete = (AutoCompleteTextView) findViewById(R.id.autocomplete_URL);
-		String[] URLS = getResources().getStringArray(R.array.url_array);
-    myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
-    myAutoComplete.addTextChangedListener(this);
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
-    myAutoComplete.setAdapter(adapter);
-    myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
-      public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-        }
-      });
+		new AutoCompleteTextViewListener(this);
+		
 	  }
-
+	 /**
+   * ---------- CLASS AutoCompleteTextViewListener ()-------------------------------------------------------------
+  *
+  *   
+  **/
+	private class AutoCompleteTextViewListener implements TextWatcher
+	{
+	
+	  /** AutoCompleteTextView for URL */
+    public AutoCompleteTextView myAutoComplete;
+  
+    /*------------------------------------------------------------*/
+  	 AutoCompleteTextViewListener(ChooseFirstAction loader)
+  	 {
+  	 String[] URLS = getResources().getStringArray(R.array.url_array);
+     myAutoComplete = (AutoCompleteTextView) loader.findViewById(R.id.autocomplete_URL);
+     myAutoComplete.addTextChangedListener(this);
+     
+     ArrayAdapter<String> adapter = new ArrayAdapter<String>(loader, android.R.layout.simple_dropdown_item_1line, URLS);
+     myAutoComplete.setAdapter(adapter);
+     myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
+       public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
+         }
+       });
+  	 } 
+  	 public void beforeTextChanged(CharSequence s, int start, int count, int after)
+  	   {
+  	   }
+  	 public void onTextChanged(CharSequence s, int start, int before, int count)
+  	   {
+       }
+  	 public void afterTextChanged(Editable s)
+       {      
+       }
+	}
+	
+	
 	/* ---------- ON CREATE OPTIONS MENU----------------------------------------*/
 	public boolean onCreateOptionsMenu(Menu menu) 
 	  {
@@ -125,7 +153,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 			Log.d(TAG, "onDestroy()");
 		  }
 		super.onDestroy();
-		activities.remove(this);
+		//activities.remove(this);
 	  }
 
 	protected void onPause() 
@@ -210,7 +238,7 @@ public class ChooseFirstAction extends Activity implements TextWatcher
 	/**
 	 * ---------- CALL A FONCTION CORRESPONDING TO THE BUTTON CLICKED-------------------------
 	 * 
-	 * * @param View
+	 * 
 	 * 
 	 * */
 	public void ButtonOnClickGoMidas(View v) 
@@ -283,18 +311,6 @@ public class ChooseFirstAction extends Activity implements TextWatcher
     startActivity(intent);
       
 	  }
-        /*
-         * ---------- Functions for AutoCompleteTextView ------------------------------------------------------
-         */
-	public void afterTextChanged(Editable arg0) {
-	}
-
-	public void beforeTextChanged(CharSequence s, int start, int count,int after) {
-	}
-
-	public void onTextChanged(CharSequence s, int start, int before, int count) {
-	}
-
 	/**
 	 * ---------- CheckLogin----------------------------------------------------------------------------
 	 * 
