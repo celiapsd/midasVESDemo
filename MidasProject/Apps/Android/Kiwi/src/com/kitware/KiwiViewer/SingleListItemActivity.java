@@ -25,9 +25,10 @@ public class SingleListItemActivity extends Activity {
 	//public int id;
 	//public String name;
 	// public Folder Child;
+
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
-	//public List<Folder> ListChildren;
+
 	public static String [] ListChildren;
 	
 	public final static String TAG = "SingleListItemActivity";

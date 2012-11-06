@@ -287,7 +287,7 @@ public class ChooseFirstActivity extends Activity
 		for(int i=0;i<communityList.length;i++)
 		  {
 		  resources[i] = new MidasResource(i, communityList[i].toString(), MidasResource.Type.COMMUNITY);
-		  Log.d(TAG, communityList[i].toString());
+		  //Log.d(TAG, communityList[i].toString());
 		  }
 		
 		Intent intent = new Intent(this,ListOfViewsActivity.class);

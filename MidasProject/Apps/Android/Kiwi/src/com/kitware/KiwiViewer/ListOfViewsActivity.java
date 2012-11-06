@@ -91,7 +91,7 @@ public class ListOfViewsActivity extends Activity {
 				//ChooseFirstActivity.setCurrentName(name);
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
-				Intent in = new Intent(this,SingleListItemActivity.class);
+				Intent in = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
 				startActivity(in);
 			}
 		});
