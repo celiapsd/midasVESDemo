@@ -7,6 +7,7 @@
 // VES includes
 #include <vesSharedPtr.h>
 #include <vesMidasClient.h>
+#include <midasResource.h>
 
 // C++ includes
 #include <string>
@@ -21,7 +22,7 @@ public :
    virtual ~midasFilesTools();
 
    int init(const std::string& url,const std::string& email,const std::string& password);
-   std::vector<std::string> findCommunities();
+   std::vector<midasResource> findCommunities();
    void setHost(const std::string& url);
    int login(const std::string& email,const std::string& password);
    std::vector<std::string> findCommunityChildren(const std::string& communityName);
@@ -37,6 +38,8 @@ private :
    std::vector<std::string> folderIds;
    std::vector<std::string> itemNames;
    std::vector<std::string> itemIds;
+
+   std::vector<midasResource> resources;
 
 };
 

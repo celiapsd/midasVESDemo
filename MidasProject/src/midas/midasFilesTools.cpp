@@ -8,12 +8,13 @@
 #include <sstream>
 #include <fstream>
 #include <cassert>
-#include <sstream>
+
 
 #include <vesMidasClient.h>
 #include <vesKiwiCurlDownloader.h>
 
 #include <midasFilesTools.h>
+#include <midasResource.h>
 
 
 
@@ -22,12 +23,15 @@
 #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
+typedef std::vector<std::string> vectorOfStrings;
+
 //----------------------------------------------------------------------------
 
 midasFilesTools::midasFilesTools()
 {
     LOGI("constructor MidasFilesTools");
     this->midas = new vesMidasClient();
+
 }
 midasFilesTools::~midasFilesTools()
 {
@@ -47,14 +51,24 @@ int midasFilesTools::init(const std::string& url,const std::string& email,const 
 }
 
 //----------------------------------------------------------------------------
-std::vector<std::string> midasFilesTools::findCommunities()
+std::vector<midasResource> midasFilesTools::findCommunities()
 {
     LOGI("findCommunities");
     this->midas->listCommunities();
+
     folderNames = this->midas->folderNames();
     folderIds = this->midas->folderIds();
-    return folderNames;
 
+    /*for(vectorOfStrings::const_iterator iterName = folderNames.begin() && vectorOfStrings::const_iterator iterId = folderNames.begin();
+        iterName != folderNames.end() && iterId != folderNames.end(); ++iterName && ++iterId)
+    {*/
+    for (int i = 0; i<folderNames.size(); ++i)
+    {
+        midasResource *res = new midasResource();
+        res->init(atoi(folderIds[i].c_str()), folderNames[i], COMMUNITY);
+        resources.push_back(*res);
+    }
+    return resources;
 }
 //----------------------------------------------------------------------------
 void midasFilesTools::setHost(const std::string& url)
