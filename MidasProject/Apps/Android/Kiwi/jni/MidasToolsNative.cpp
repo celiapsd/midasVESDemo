@@ -17,6 +17,7 @@
 
 #include <vesMidasClient.h>
 #include <vesKiwiCurlDownloader.h>
+#include <midasResource.h>
 
 
 
@@ -91,32 +92,42 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 (JNIEnv * env, jobject obj)
 {
     LOGI("JNICALL findCommunities");
+
     jobjectArray objNames;
+    jobject myObject;
+    jsize i;
+
+    /** find the class midasResource **/
     jclass classe = env->FindClass( "midasResource");
+
+    /** create un empty object linked with the midasResource class**/
     jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
-    int i;
 
-    //vectorOfStrings names = appTools->findCommunities();
+    /** get the array of communities **/
     std::vector<midasResource> communitiesResource = appTools->findCommunities();
-    //midasResource::midasResource *com = new midasResource ();
+
+    /** create a new object array with a first element jObjFirst empty**/
+    objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
+
+     /** get the length of the object Array **/
+     jsize length = env->GetArrayLength(objNames);
 
 
-
-    //objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
-     objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
-    /*for(i=0;i<names.size();i++)
+    for (i = 0; i<length; i++)
       {
-        env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
+        /** obtain the current object from the object array **/
+        myObject = (*env).GetObjectArrayElement(objNames, i);
+
+        /** set the current object "myobject" into the object array "objNames" at the index i**/
+        env->SetObjectArrayElement(objNames, i, myObject );
+      }
+
+     /*for(std::vector<midasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
+     {
+        jobject myObject = env->GetObjectArrayElement(env, objNames, *iter);
+        env->SetObjectArrayElement(objNames,i,myObject );
       }*/
-    for(std::vector<midasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
-          {
-        env->SetObjectArrayElement(objNames,i,(*iter) );
-          }
-    /*
-  for (RequestArgs::const_iterator iter = args.begin(); iter != args.end(); ++iter) {
-    argString << "&" << iter->first << "=" << iter->second;
-  }
-      */
+
     return(objNames);
 }
 //-------------------------------------------------------------------------------------------
