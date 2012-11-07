@@ -34,7 +34,7 @@ midasResource::~midasResource()
     delete this;
 }
 //----------------------------------------------------------------------------
-void midasResource::init(int id, std::string name, Type type)
+void midasResource::init(const int& id,const std::string& name,const Type& type)
 {
    LOGI("init");
    setId(id);
@@ -42,31 +42,31 @@ void midasResource::init(int id, std::string name, Type type)
    setType(type);
 }
 //----------------------------------------------------------------------------
-void midasResource::setId(int id)
+void midasResource::setId(const int& id)
 {
-    this.id = id;
+    this->id = id;
 }
 //----------------------------------------------------------------------------
-void midasResource::setName(std::string name)
+void midasResource::setName(const std::string& name)
 {
-    this.name = name;
+    this->name = name;
 }
 //----------------------------------------------------------------------------
-void midasResource::setType(Type type)
+void midasResource::setType(const Type& type)
 {
-    this.type = type;
+    this->type = type;
 }
 int midasResource::getId()
 {
-    return this.id;
+    return this->id;
 }
 //----------------------------------------------------------------------------
 std::string midasResource::getName()
 {
-    return this.name;
+    return this->name;
 }
 //----------------------------------------------------------------------------
 Type midasResource::getType()
 {
-    return this.type;
+    return this->type;
 }
