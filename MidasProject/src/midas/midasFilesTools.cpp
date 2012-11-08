@@ -25,6 +25,28 @@
 
 typedef std::vector<std::string> vectorOfStrings;
 
+
+
+namespace{
+class MyProgressDelegate : public vesKiwiCurlDownloader::ProgressDelegate
+{
+  public:
+
+    MyProgressDelegate():itemKilobytes(0)
+    {
+    }
+
+    virtual int downloadProgress(double totalToDownload, double nowDownloaded)
+    {
+
+
+      int progress = nowDownloaded/itemKilobytes;
+      return progress;
+    }
+
+    int itemKilobytes;
+};
+}
 //----------------------------------------------------------------------------
 
 midasFilesTools::midasFilesTools()
@@ -214,8 +236,12 @@ std::vector<std::string> midasFilesTools::findFolderChildren(const std::string& 
         finalList.reserve(4);
         finalList.push_back("item selected");
         finalList.push_back(myName);
+        myItemName = myName;
         finalList.push_back(ToString(mySize));
+        myItemSize = mySize;
         finalList.push_back(myId);
+        myItemId = myId;
+
         if(finalList.empty())
         {
             LOGI("finalList empty");
@@ -250,8 +276,8 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     LOGI("itemId = %s",itemId.c_str());
     std::string downloadUrl = this->midas->itemDownloadUrl(itemId);
 
-    vesKiwiCurlDownloader downloader;
-    if(!itemPath.size())
+    //vesKiwiCurlDownloader downloader;
+    if(!mItemPath.size())
     {
         mItemPath = "/tmp";
     }
@@ -262,4 +288,12 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     }
     return downloadedFile;
 
+}
+//----------------------------------------------------------------------------
+int midasFilesTools::getProgressDownload ()
+{
+    int mItemKilobytes = myItemSize/1024.0;
+    this->mProgressDelegate->itemKilobytes = mItemKilobytes;
+    downloader.setProgressDelegate(this->mProgressDelegate);
+    return progress_function;
 }

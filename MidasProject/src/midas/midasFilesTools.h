@@ -8,6 +8,7 @@
 #include <vesSharedPtr.h>
 #include <vesMidasClient.h>
 #include <midasResource.h>
+#include <curl/curl.h>
 
 // C++ includes
 #include <string>
@@ -29,6 +30,8 @@ public :
    std::vector<std::string> findFolderChildren(const std::string& myName);
    static std::string ToString(const size_t& sz);
    std::string downloadItem(const std::string& nameItem,const std::string& pathItem);
+   int getProgressDownload();
+
 
 private :
 
@@ -40,6 +43,14 @@ private :
    std::vector<std::string> itemIds;
 
    std::vector<midasResource> resources;
+
+   std::string myItemName;
+   std::string myItemId;
+   size_t myItemSize;
+
+   vesKiwiCurlDownloader downloader;
+
+   vesSharedPtr<MyProgressDelegate> mProgressDelegate;
 
 };
 
