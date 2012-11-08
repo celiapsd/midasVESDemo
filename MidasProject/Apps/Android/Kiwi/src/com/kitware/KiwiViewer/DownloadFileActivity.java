@@ -222,6 +222,7 @@ public class DownloadFileActivity extends Activity {
 			Log.d(TAG + "AsyncTask :WaitWhileSave ", "onProgressUpdate()");
 
 	        super.onProgressUpdate(progress);
+	        progress[0] = MidasToolsNative.getProgressDownload();
 	        mProgressDialog.setProgress(progress[0]);
 	    }
 	     /*------------------onPostExecute----------------------------------------------------------*/
