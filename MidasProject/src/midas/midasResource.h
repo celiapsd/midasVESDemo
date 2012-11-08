@@ -10,20 +10,19 @@
 // C++ includes
 #include <string>
 
-typedef enum {
-      COMMUNITY,
-      FOLDER,
-      ITEM,
-      BITSTREAM,
-      NOTSET
-   } Type ;
-
 //-------------------------------------------------
 class midasResource
 {
 
 public :
 
+    typedef enum {
+          COMMUNITY,
+          FOLDER,
+          ITEM,
+          BITSTREAM,
+          NOTSET
+       } Type ;
    midasResource();
    virtual ~midasResource();
 
