@@ -25,48 +25,63 @@
 midasResource::midasResource()
 {
     LOGI("constructor midasResource");
-    init(-1, NULL, NOTSET);
+    init(-1, "", NOTSET);
+
+}
+midasResource::midasResource(const int& id,const std::string& name,const Type& type)
+{
+    //LOGI("init");
+    setId(id);
+    //LOGI("setID, %d",id);
+    setName(name);
+    LOGI("setName %s",name.c_str());
+    setType(type);
+    //LOGI("setType");
 
 }
 midasResource::~midasResource()
 {
-    LOGI("destructor midasResource");
-    delete this;
 }
+
 //----------------------------------------------------------------------------
 void midasResource::init(const int& id,const std::string& name,const Type& type)
 {
-   LOGI("init");
+   //LOGI("init");
    setId(id);
+   //LOGI("setID, %d",id);
    setName(name);
+   //LOGI("setName %s",name.c_str());
    setType(type);
+   //LOGI("setType");
 }
 //----------------------------------------------------------------------------
-void midasResource::setId(const int& id)
+void midasResource::setId(const int& mId)
 {
-    this->id = id;
+     //LOGI("setID");
+     this->id = mId;
 }
 //----------------------------------------------------------------------------
-void midasResource::setName(const std::string& name)
+void midasResource::setName(const std::string& mName)
 {
-    this->name = name;
+    this->name = mName;
 }
 //----------------------------------------------------------------------------
-void midasResource::setType(const Type& type)
+void midasResource::setType(const Type& mType)
 {
-    this->type = type;
+    this->type = mType;
 }
-int midasResource::getId()
+//----------------------------------------------------------------------------
+int midasResource::getId() const
 {
     return this->id;
 }
 //----------------------------------------------------------------------------
-std::string midasResource::getName()
+std::string midasResource::getName() const
 {
     return this->name;
 }
 //----------------------------------------------------------------------------
-Type midasResource::getType()
+midasResource::Type midasResource::getType() const
 {
     return this->type;
 }

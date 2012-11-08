@@ -23,7 +23,10 @@ public :
           BITSTREAM,
           NOTSET
        } Type ;
+
+
    midasResource();
+   midasResource(const int& id,const std::string& name,const Type& type);
    virtual ~midasResource();
 
 
@@ -34,9 +37,9 @@ public :
    void setName(const std::string& name);
    void setType(const Type& type);
 
-   int getId();
-   std::string getName();
-   Type getType();
+   int getId() const;
+   std::string getName() const;
+   Type getType() const;
 
 
 private :
