@@ -59,15 +59,20 @@ std::vector<midasResource> midasFilesTools::findCommunities()
     folderNames = this->midas->folderNames();
     folderIds = this->midas->folderIds();
 
+    LOGI("folderNames FOldersId");
     /*for(vectorOfStrings::const_iterator iterName = folderNames.begin() && vectorOfStrings::const_iterator iterId = folderNames.begin();
         iterName != folderNames.end() && iterId != folderNames.end(); ++iterName && ++iterId)
     {*/
-    for (int i = 0; i<folderNames.size(); ++i)
+    for (size_t i = 0; i<folderNames.size(); ++i)
     {
-        midasResource *res = new midasResource();
-        res->init(atoi(folderIds[i].c_str()), folderNames[i], COMMUNITY);
-        resources.push_back(*res);
+        midasResource res(atoi(folderIds[i].c_str()), folderNames[i], midasResource::COMMUNITY);
+        //LOGI(" res %d",res.getId());
+        resources.push_back(res);
+        //LOGI(" resources %d",resources[i].getId());
+        //LOGI("push res into ressource");
     }
+
+        LOGI("ressource ok");
     return resources;
 }
 //----------------------------------------------------------------------------

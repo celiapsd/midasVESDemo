@@ -52,7 +52,7 @@ public class ListOfViewsActivity extends Activity {
 		  Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType());
 		  i++;
 		  
-		  Log.d(TAG,comm.getName());
+		  //Log.d(TAG,comm.getName());
 		  /*Log.d(TAG,Integer.toString(comm.getId()));
 		  Log.d(TAG,Integer.toString(comm.getType().ordinal()));*/
 		  }
