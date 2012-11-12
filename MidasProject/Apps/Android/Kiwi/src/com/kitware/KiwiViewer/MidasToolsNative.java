@@ -28,7 +28,7 @@ public class MidasToolsNative {
      }
 
      public static native synchronized int init(String url,String email,String password);
-     public static native synchronized String [] findCommunities();
+     public static native synchronized MidasResource[] findCommunities();
      public static native synchronized String[] findCommunityChildren(String nameCommunity);
      public static native synchronized String[] findFolderChildren(String nameChildren);
      public static native synchronized String downloadItem(String nameItem,String pathItem);

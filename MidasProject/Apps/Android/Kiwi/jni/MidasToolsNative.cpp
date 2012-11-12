@@ -100,8 +100,8 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     //jobject myObject;
     jsize i;
 
-    /** find the class midasResource **/
-    /*jclass classe = env->FindClass( "com/kitware/KiwiViewer/MidasResource");
+    /** find the class MidasResource **/
+    jclass classe = env->FindClass( "com/kitware/KiwiViewer/MidasResource");
     if (classe == NULL) {
             if (env->ExceptionOccurred()) {
                 env->ExceptionDescribe();
@@ -111,35 +111,36 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     else
     {
       LOGI("JNICALL class ok");
-    }*/
+    }
 
-    /** create un empty object linked with the midasResource class**/
-   /* jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
+    /** create un empty object linked with the MidasResource class**/
+    jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
 
-    jmethodID constructor = (*env).GetMethodID(classe, "<init>", "(ILjava/lang/StringLcom/kitware/KiwiViewer/MidasResource$Type;)V");
+    jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
     //if (jObjFirst)
      // LOGI("JNICALL jObjFirst ok");
-*/
+
 
     /** get the array of communities **/
     std::vector<MidasResource> communitiesResource = appTools->findCommunities();
-    std::vector<string> names [communitiesResource.size()];
+    /*std::vector<std::string> names(communitiesResource.size());
+
     for (size_t i=0; i<communitiesResource.size(); ++i)
     {
-        names[i] = communitiesResource[i].getName();
+        names[i] = communitiesResource[i].getName().c_str();
     }
-
+ LOGI("JNICALL names");*/
 
 
 
     //LOGI("communitiesResource [1]= %s",communitiesResource[1].getName().c_str());
 
-    //if (communitiesResource.size())
-     // LOGI("JNICALL communitiesResource ok");
+    if (communitiesResource.size())
+     LOGI("JNICALL communitiesResource ok");
 
     /** create a new object array with a first element jObjFirst empty**/
-    //objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
-    objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
+    objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
+    //objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
     //if (objNames)
       //LOGI("JNICALL objNames ok");
 
@@ -149,35 +150,35 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     //if (length)
        //LOGI("JNICALL length ok");
 
-     //env->DeleteLocalRef(jObjFirst);
-     //env->DeleteLocalRef((jobject)classe);
+     env->DeleteLocalRef(jObjFirst);
 
     for (i = 0; i<length; ++i)
      {
         /** obtain the current object from the object array **/
         //jobject  myObject = (*env).GetObjectArrayElement(communitiesResource, i);
-        /*jobject myObject = env->NewObject(classe, constructor,
+        jobject myObject = env->NewObject(classe, constructor,
                                          (jint)communitiesResource[i].getId(),
                                           env->NewStringUTF(communitiesResource[i].getName().c_str()),
-                                          (jobject)communitiesResource[i].getType());
+                                          (jint)communitiesResource[i].getType());
         //if (myObject)
           //LOGI("JNICALL myObject ok");
 
 
-        */
-        /** set the current object "myobject" into the object array "objNames" at the index i**/
-        e/*nv->SetObjectArrayElement(objNames, i, myObject);
-        env->DeleteLocalRef(myObject);*/
 
-        env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
+        /** set the current object "myobject" into the object array "objNames" at the index i**/
+        env->SetObjectArrayElement(objNames, i, myObject);
+        env->DeleteLocalRef(myObject);
+
+        //env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
       }
 
-     /*for(std::vector<midasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
+     /*for(std::vector<MidasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
      {
         jobject myObject = env->GetObjectArrayElement(env, objNames, *iter);
         env->SetObjectArrayElement(objNames,i,myObject );
       }*/
 
+     env->DeleteLocalRef((jobject)classe);
 
     if (objNames)
         LOGI("JNICALL objNames ok");
