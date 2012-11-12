@@ -2,4 +2,4 @@
 
 source tools.sh
 
-$ADB logcat ChooseFirstAction:D KiwiViewer:D *:s
+$ADB logcat ChooseFirstActivity:D KiwiViewer:D *:s
