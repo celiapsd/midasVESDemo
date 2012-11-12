@@ -59,7 +59,7 @@ public class ListOfViewsActivity extends Activity {
 		
 		
 
-		//ChooseFirstActivity.activities.add(this);
+		ChooseFirstActivity.activities.add(this);
 
 		/*boolean isLaunched = ChooseFirstActivity.testLauching("DownloadFile");
 		boolean isLaunched2 = ChooseFirstActivity.testLauching("FileExplorer");
@@ -88,11 +88,21 @@ public class ListOfViewsActivity extends Activity {
 				/*retrieve the name of the community selected and send to SingleListItemActivity*/
 				String name = ((TextView) view).getText().toString();
 				
-				//ChooseFirstActivity.setCurrentName(name);
+				ChooseFirstActivity.setCurrentName(name);
+				
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
-				Intent in = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
-				startActivity(in);
+				MidasResource[] resources = new MidasResource[ListChildren.length];
+		    for(int i=0;i<ListChildren.length;i++)
+		      {
+		      resources[i] = new MidasResource(i, ListChildren[i].toString(), MidasResource.FOLDER);
+		      //Log.d(TAG, communityList[i].toString());
+		      }
+		    
+		    Intent intent = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
+		    intent.putExtra("BundleResourceFolder", resources);
+		    Log.d(TAG, "intent sent to SingleListItemActivity");
+		    startActivity(intent);
 			}
 		});
 	}

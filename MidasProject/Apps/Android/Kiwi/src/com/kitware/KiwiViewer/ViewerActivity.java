@@ -323,8 +323,20 @@ public class ViewerActivity extends Activity {
 		 //MidasNative.init(100, 100);
         handleUriFromIntent(getIntent().getData());
 		  /*finish();*/
+        Bundle FileBundle = this.getIntent().getExtras();
+        String myItemName = FileBundle.getString("myItemName");
+        
+        if(!myItemName.equals("default"))
+          {
+          String myItemPath = FileBundle.getString("myItemPath");
+          setFilePath(myItemPath+"/"+myItemName);
+          }
+        else
+          {
+          setFilePath(null);
+          }
 		  
-      setFilePath(DownloadFileActivity.getPath()+"/"+DownloadFileActivity.getFilename());
+      //setFilePath(null);
       //Log.d(TAG, "set file path ok ()");
       this.setContentView(R.layout.kiwivieweractivity);
       Log.d(TAG, "setcontent view ok()");

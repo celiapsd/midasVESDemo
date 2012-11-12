@@ -3,6 +3,8 @@ package com.kitware.KiwiViewer;
 /*----------------------------------------libraries----------------------------------------*/
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -13,6 +15,7 @@ import android.content.Intent;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -24,7 +27,8 @@ public class DownloadFileActivity extends Activity {
 	private static String filename;
 	private static String path;
 	
-	public static Item myItem;
+	//public static Item myItem;
+	public static MidasResource myItem;
 	public static TextView location;
 	//private static String url;
 	protected ProgressDialog mProgressDialog;
@@ -57,17 +61,35 @@ public class DownloadFileActivity extends Activity {
 		ChooseFirstActivity.activities.add(this);
 		setContentView(R.layout.activity_open_file);
 		
-		myItem = retrieveItemAtributes(SingleListItemActivity.ListChildren);
+		/*myItem = retrieveItemAtributes(SingleListItemActivity.ListChildren);
 		setTitle(" Item " + myItem.getItem_name());
-		setFilename(myItem.getItem_name());
+		setFilename(myItem.getItem_name());*/
+		
+		Bundle BundleResourceCommunity = this.getIntent().getExtras();
+		if(BundleResourceCommunity.keySet().contains("file"))
+		  {
+		  
+		  
+		  Parcelable itemParcelable = BundleResourceCommunity.getParcelable("file");  
+		  myItem = new MidasResource (((MidasResource) itemParcelable).getId(), ((MidasResource) itemParcelable).getName(), ((MidasResource) itemParcelable).getType());
+		  setTitle(" Item " + myItem.getName());
+		  setFilename(myItem.getName());
+		  }
+		else
+		  {
+		  Bundle directoryBundle = this.getIntent().getExtras();
+      setPath (directoryBundle.getString("myItemPath"));
+      setFilename(directoryBundle.getString("myItemName"));
+		  }
+    
 	}
 
-	private Item retrieveItemAtributes(String[] listChildren)
+	/*private Item retrieveItemAtributes(String[] listChildren)
     {
     Item myItem = new Item();
     myItem.set_item_attributes(Integer.parseInt( listChildren[2] ), listChildren[1], listChildren[3]);
     return myItem;
-    }
+    }*/
   /*-----------------accessors---------------------------------------------*/
 
   public static String getFilename()
@@ -132,10 +154,10 @@ public class DownloadFileActivity extends Activity {
 	public void ButtonOnClickSave(View v)  
 	  {
 		Log.d(TAG, "SAVE CHOOSE");
-		  //if(getPath().isEmpty())
-		  //{
+		  if(path == null)
+		  {
 		  setPath("/mnt/sdcard/Android/data/com.kitware.KiwiViewer/files");
-		  //}
+		  }
 		try
       {
       SaveFile(getPath());
@@ -222,7 +244,7 @@ public class DownloadFileActivity extends Activity {
 			Log.d(TAG + "AsyncTask :WaitWhileSave ", "onProgressUpdate()");
 
 	        super.onProgressUpdate(progress);
-	        progress[0] = MidasToolsNative.getProgressDownload();
+	        //progress[0] = MidasToolsNative.getProgressDownload();
 	        mProgressDialog.setProgress(progress[0]);
 	    }
 	     /*------------------onPostExecute----------------------------------------------------------*/
@@ -282,6 +304,8 @@ public class DownloadFileActivity extends Activity {
         	
         	
         	Intent i = new Intent(DownloadFileActivity.this,ViewerActivity.class);
+        	i.putExtra("myItemName", filename);
+        	i.putExtra("myItemPath", path);
         	startActivity(i);
       		//ChooseFirstActivity.finishAllExceptParam("ViewerActivity");
        		//ChooseFirstActivity.finishAll();

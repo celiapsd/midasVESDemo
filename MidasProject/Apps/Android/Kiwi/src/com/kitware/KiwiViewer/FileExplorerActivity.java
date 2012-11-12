@@ -42,21 +42,41 @@ public class FileExplorerActivity extends ListActivity
         myPathTV = (TextView)findViewById(R.id.path);
         filenameTV=(TextView)findViewById(R.id.filename);
         
-        filenameTV.setText("filename : " + DownloadFileActivity.getFilename());
-        setRoot(Environment.getExternalStorageDirectory().getPath());
+        Bundle typeSearchBundle = this.getIntent().getExtras();
+        String typeSearch = typeSearchBundle.getString("mySearch");
         
-        getDir(getRoot());
-        saveButton = (Button) findViewById(R.id.saveDirectory);
-        saveButton.setOnClickListener(new View.OnClickListener(){	
-    			public void onClick(View view) 
-    		    {	
-    				String directory= new String(myPathTV.getText().toString());
-    				int Position = directory.indexOf("/");
-    		    directory = directory.substring(Position,directory.length());
-    		    Intent in=new Intent(FileExplorerActivity.this,DownloadFileActivity.class);
-    			   startActivity(in);	
-    		    }
-        });
+        if (typeSearch.equals("itemSearch"))
+          {
+         
+          filenameTV.setText("filename : " + "null");
+          setRoot(Environment.getExternalStorageDirectory().getPath());         
+          getDir(getRoot());
+          }
+        else if (typeSearch.equals("directorySearch"))
+          {
+          final String filename = typeSearchBundle.getString("myfile");
+          filenameTV.setText("filename : " + filename);
+          setRoot(Environment.getExternalStorageDirectory().getPath());
+          getDir(getRoot());
+          saveButton = (Button) findViewById(R.id.saveDirectory);
+          saveButton.setOnClickListener(new View.OnClickListener(){ 
+            public void onClick(View view) 
+              { 
+              String directory= new String(myPathTV.getText().toString());
+              int Position = directory.indexOf("/");
+              directory = directory.substring(Position,directory.length());
+              Intent in=new Intent(FileExplorerActivity.this,DownloadFileActivity.class);
+              //in.putExtra("myItemName", file.getName());
+              in.putExtra("myItemPath", directory);
+              in.putExtra("myItemName", filename);
+               startActivity(in); 
+              }
+          });
+          }
+        
+        //filenameTV.setText("filename : " + DownloadFileActivity.getFilename());
+
+        
     }
     /*----------------- Assessors-------------------------------------------------------------*/
     public static String getRoot()
@@ -110,7 +130,7 @@ public class FileExplorerActivity extends ListActivity
 	 protected void onListItemClick(ListView l, View v, int position, long id) 
 	 {
 	  
-		 File file = new File(path.get(position));
+		 final File file = new File(path.get(position));
 	  
 		 if (file.isDirectory())
 		 {
@@ -120,15 +140,18 @@ public class FileExplorerActivity extends ListActivity
 				 new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "] folder can't be read!").setPositiveButton("OK", null).show(); 
 			 } 
 		 }else {
+		    root = path.get(position);
 			 filenameTV.setText("filename : " + file.getName());
-			 DownloadFileActivity.setFilename(file.getName());
-			 DownloadFileActivity.setPath(file.getAbsolutePath());
+			 //DownloadFileActivity.setFilename(file.getName());
+			 //DownloadFileActivity.setPath(file.getAbsolutePath());
 			 AlertDialog.Builder alt_open = new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "]").setPositiveButton("open", new DialogInterface.OnClickListener(){
 						
 			        public void onClick(DialogInterface dialog, int which)
 			          {
 			        	
 			          Intent i = new Intent(FileExplorerActivity.this,ViewerActivity.class);
+			          i.putExtra("myItemName", file.getName());
+			          i.putExtra("myItemPath", root);
 			          startActivity(i);
 			          
 			          }

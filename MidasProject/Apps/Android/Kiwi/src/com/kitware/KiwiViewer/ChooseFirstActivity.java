@@ -42,10 +42,10 @@ public class ChooseFirstActivity extends Activity
 	private int result;
 	
 	/**List of the communities in the database*/
-	public static String [] communityList;
+	//public static String [] communityList;
 	
 	/**List of the communities in the database*/
-  //public static MidasResource [] communityList;
+  public static MidasResource [] communityList;
 	
 	/**Name of the current folder or item*/
   public static String currentName;
@@ -238,6 +238,7 @@ public class ChooseFirstActivity extends Activity
       Log.d(TAG, "ButtonOnClickSearchFile()");
       }
       Intent i = new Intent(this, FileExplorerActivity.class);
+      i.putExtra("mySearch","itemSearch");
       startActivity(i);
     }
 	/**
@@ -254,6 +255,7 @@ public class ChooseFirstActivity extends Activity
       Log.d(TAG, "ButtonOnClickViewer()");
       }
     Intent intent = new Intent(this, ViewerActivity.class);
+    intent.putExtra("myItemName", "default");
     startActivity(intent);
     }
   	
@@ -285,12 +287,13 @@ public class ChooseFirstActivity extends Activity
 		result = MidasToolsNative.init(url, mEmail, mPassword);
 		checkLogin(result);
 		Log.d(TAG, "checkLogin ok ");  
-		communityList = MidasToolsNative.findCommunities();
-		MidasResource[] resources = new MidasResource[communityList.length];
+
+		communityList =  MidasToolsNative.findCommunities();
+		//MidasResource[] resources = new MidasResource[communityList.length];
 		for(int i=0;i<communityList.length;i++)
 		  {
-		  resources[i] = new MidasResource(i, communityList[i].toString(), MidasResource.Type.COMMUNITY);
-		  //Log.d(TAG, communityList[i].toString());
+		  //resources[i] = new MidasResource(i, communityList[i].toString(), MidasResource.Type.COMMUNITY);
+		  Log.d(TAG, communityList[i].getName());
 		  }
 		
 		Intent intent = new Intent(ChooseFirstActivity.this,ListOfViewsActivity.class);
