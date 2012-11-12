@@ -27,7 +27,7 @@ typedef std::vector<std::string> vectorOfStrings;
 
 
 
-namespace{
+/*namespace{
 class MyProgressDelegate : public vesKiwiCurlDownloader::ProgressDelegate
 {
   public:
@@ -46,7 +46,7 @@ class MyProgressDelegate : public vesKiwiCurlDownloader::ProgressDelegate
 
     int itemKilobytes;
 };
-}
+}*/
 //----------------------------------------------------------------------------
 
 midasFilesTools::midasFilesTools()
@@ -78,24 +78,20 @@ std::vector<MidasResource> midasFilesTools::findCommunities()
     LOGI("findCommunities");
     this->midas->listCommunities();
 
-    folderNames = this->midas->folderNames();
-    folderIds = this->midas->folderIds();
+    vectorOfStrings folderNames = this->midas->folderNames();
+    vectorOfStrings folderIds = this->midas->folderIds();
 
     LOGI("folderNames FOldersId");
-    /*for(vectorOfStrings::const_iterator iterName = folderNames.begin() && vectorOfStrings::const_iterator iterId = folderNames.begin();
-        iterName != folderNames.end() && iterId != folderNames.end(); ++iterName && ++iterId)
-    {*/
+
     for (size_t i = 0; i<folderNames.size(); ++i)
     {
         MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::COMMUNITY);
-        //LOGI(" res %d",res.getId());
         resources.push_back(res);
-        //LOGI(" resources %d",resources[i].getId());
-        //LOGI("push res into ressource");
     }
+    LOGI("ressource ok");
 
-        LOGI("ressource ok");
     return resources;
+    //return folderNames;
 }
 //----------------------------------------------------------------------------
 void midasFilesTools::setHost(const std::string& url)
@@ -133,124 +129,116 @@ int midasFilesTools::login (const std::string& email,const std::string& password
     }
 }
 //----------------------------------------------------------------------------
-std::vector<std::string> midasFilesTools::findCommunityChildren(const std::string& communityName)
+std::vector<MidasResource> midasFilesTools::findCommunityChildren(const std::string& communityName)
 {
     LOGI("findCommunityChildren");
+    std::vector<MidasResource> fail;
 
-    std::string communityId;
+    int communityId;
 
-    for (size_t i = 0; i < folderNames.size(); ++i)
+    for (size_t i = 0; i < resources.size(); ++i)
     {
-      if (folderNames[i] == communityName) {
-        communityId = folderIds[i];
+        if (resources[i].getName() == communityName) {
+          communityId = resources[i].getId();
+          LOGI("communityId(resources) %d",communityId);
       }
     }
-    if (!communityId.size()) {
-        LOGI("failed to find community: %s", communityName.c_str());
-      return folderNames;
-    }
 
-    bool result=this->midas->listCommunityChildren(communityId);
+    if (!communityId) {
+        LOGI("failed to find community: %s", communityName.c_str());
+        return fail;
+    }
+    std::stringstream strCommunityId;
+    strCommunityId<<communityId;
+
+    bool result=this->midas->listCommunityChildren(strCommunityId.str());
 
     if (!result)
     {
         LOGI("failed to find children");
-        return folderNames;
+        return fail;
     }
 
-    folderNames = midas->folderNames();
-    folderIds = this->midas->folderIds();
-    return folderNames;
+    vectorOfStrings folderNames = midas->folderNames();
+    vectorOfStrings folderIds = this->midas->folderIds();
 
+    resources.clear();
+
+    for (size_t i = 0; i<folderNames.size(); ++i)
+    {
+        MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::FOLDER);
+        resources.push_back(res);
+    }
+    LOGI("ressource ok");
+
+    return resources;
 }
 //----------------------------------------------------------------------------
-std::vector<std::string> midasFilesTools::findFolderChildren(const std::string& myName)
+std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string& mName)
 {
     LOGI("findFolderChildren");
 
-    std::string myId;
-    size_t mySize;
-    std::vector<std::string> finalList;
+    int mId;
+    int mType = 0;
 
-    int type = 0;
-    /*
-      type = 0 --> Id not found
-      type = 1 --> folder Id
-      type = 2 --> item id
-      */
-
-    for (size_t i = 0; i < folderNames.size(); ++i)
+    for (size_t i = 0; i < resources.size(); ++i)
     {
-      if (folderNames[i] == myName) {
-        myId = folderIds[i];
-        type = 1;
-        LOGI("type = 1");
+        if (resources[i].getName() == mName) {
+          mId = resources[i].getId();
+          LOGI("myId(resources) %d",mId);
+          mType = resources[i].getType();
       }
     }
-    for (size_t i = 0; i < itemNames.size(); ++i)
+    resources.clear();
+
+    switch(mType)
     {
-        if (itemNames[i] == myName) {
-          myId = itemIds[i];
-          mySize = this->midas->itemBytes()[i];
-          type = 2;
-          LOGI("type = 1");
-        }
+        case MidasResource::NOTSET:
+            LOGI("failed to find folder: %s", mName.c_str());
+            LOGI("type = 0 --> finalList null");
+            break;
+
+        case MidasResource::FOLDER:
+            {
+            std::stringstream strMyId;
+            strMyId<<mId;
+
+            LOGI("type folder");
+            this->midas->listFolderChildren(strMyId.str());
+            LOGI("type = folder --> listFolderChildren");
+
+            vectorOfStrings folderNames = this->midas->folderNames();
+            vectorOfStrings folderIds = this->midas->folderIds();
+            vectorOfStrings itemNames = this->midas->itemNames();
+            vectorOfStrings itemIds = this->midas->itemIds();
+
+            for (size_t i = 0; i<folderNames.size(); ++i)
+            {
+                MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::FOLDER);
+                resources.push_back(res);
+            }
+            for (size_t i = 0; i<itemNames.size(); ++i)
+            {
+                MidasResource res(atoi(itemIds[i].c_str()), itemNames[i], MidasResource::ITEM);
+                resources.push_back(res);
+            }
+            LOGI("ressource ok");
+            break;
+            }
+        case MidasResource::ITEM:
+            {
+            MidasResource res(mId, mName, MidasResource::ITEM);
+            resources.push_back(res);
+
+            LOGI("ressource ok");
+            break;
+            }
+        default :
+            LOGI("failed to find folder: %s", mName.c_str());
+            LOGI("type = 0 --> finalList null");
+            break;
     }
-
-
-    if (type == 0) {
-      LOGI("failed to find folder: %s", myName.c_str());
-      LOGI("type = 0 --> finalList null");
-      return finalList;
-    }
-
-    if (type == 1)
-    {
-        LOGI("type folder");
-        this->midas->listFolderChildren(myId);
-        LOGI("type = folder --> listFolderChildren");
-        folderNames = this->midas->folderNames();
-        folderIds = this->midas->folderIds();
-        itemNames = this->midas->itemNames();
-        itemIds = this->midas->itemIds();
-
-
-        finalList.reserve(folderNames.size()+itemNames.size()+2);
-        LOGI("reserve memory");
-        finalList.push_back("-->    Folders    <--");
-        finalList.insert(finalList.end(),folderNames.begin(),folderNames.end());
-        //finalList.push_back(folderNames);
-        finalList.push_back("-->    Items    <--");
-        finalList.insert(finalList.end(),itemNames.begin(),itemNames.end());
-        //finalList.push_back(itemNames);
-        if(finalList.empty())
-        {
-            LOGI("finalList empty");
-
-        }
-        return finalList;
-
-    }
-    if (type == 2)
-    {
-        finalList.reserve(4);
-        finalList.push_back("item selected");
-        finalList.push_back(myName);
-        myItemName = myName;
-        finalList.push_back(ToString(mySize));
-        myItemSize = mySize;
-        finalList.push_back(myId);
-        myItemId = myId;
-
-        if(finalList.empty())
-        {
-            LOGI("finalList empty");
-
-        }
-        return finalList;
-    }
-
-
+    return resources;
 }
 //----------------------------------------------------------------------------
 std::string midasFilesTools::ToString(const size_t& sz)
@@ -265,18 +253,25 @@ std::string midasFilesTools::ToString(const size_t& sz)
 //----------------------------------------------------------------------------
 std::string midasFilesTools::downloadItem(const std::string& itemName,const std::string& itemPath)
 {
-    std::string itemId;
     std::string mItemPath = itemPath;
-    for (size_t i = 0; i < itemNames.size(); ++i)
+
+    myName = itemName;
+
+    for (size_t i = 0; i < resources.size(); ++i)
     {
-      if (itemNames[i] == itemName) {
-        itemId = itemIds[i];
+        if (resources[i].getName() == itemName && resources[i].getType() == MidasResource::ITEM) {
+          myId = resources[i].getId();
+          myType = resources[i].getType();
       }
     }
-    LOGI("itemId = %s",itemId.c_str());
-    std::string downloadUrl = this->midas->itemDownloadUrl(itemId);
+    LOGI("itemId = %d",myId);
 
-    //vesKiwiCurlDownloader downloader;
+    std::stringstream strMyId;
+    strMyId<<myId;
+    std::string downloadUrl = this->midas->itemDownloadUrl(strMyId.str());
+    LOGI("downloadUrl = %s",downloadUrl);
+    vesKiwiCurlDownloader downloader;
+
     if(!mItemPath.size())
     {
         mItemPath = "/tmp";
@@ -284,16 +279,20 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, mItemPath);
     if (!downloadedFile.size()) {
         std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
+           LOGI("downloadedError = %s",downloadedError);
       return downloadedError;
     }
+    LOGI("downloadedFile = ok");
+
     return downloadedFile;
 
 }
 //----------------------------------------------------------------------------
 int midasFilesTools::getProgressDownload ()
 {
-    int mItemKilobytes = myItemSize/1024.0;
+    /*int mItemKilobytes = myItemSize/1024.0;
     this->mProgressDelegate->itemKilobytes = mItemKilobytes;
     downloader.setProgressDelegate(this->mProgressDelegate);
-    return progress_function;
+    return progress_function;*/
+    return 0;
 }

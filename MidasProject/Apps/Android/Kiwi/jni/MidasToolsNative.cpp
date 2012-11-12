@@ -97,7 +97,6 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     LOGI("JNICALL findCommunities");
 
     jobjectArray objNames;
-    //jobject myObject;
     jsize i;
 
     /** find the class MidasResource **/
@@ -108,17 +107,12 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
             }
             LOGI("Failed to get class\n");
       }
-    else
-    {
-      LOGI("JNICALL class ok");
-    }
 
     /** create un empty object linked with the MidasResource class**/
     jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
-
     jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
-    //if (jObjFirst)
-     // LOGI("JNICALL jObjFirst ok");
+    if (!jObjFirst)
+      LOGI("JNICALL jObjFirst nok");
 
 
     /** get the array of communities **/
@@ -129,26 +123,23 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
     {
         names[i] = communitiesResource[i].getName().c_str();
     }
- LOGI("JNICALL names");*/
+    LOGI("JNICALL names");
 
+    LOGI("communitiesResource [1]= %s",communitiesResource[1].getName().c_str());*/
 
-
-    //LOGI("communitiesResource [1]= %s",communitiesResource[1].getName().c_str());
-
-    if (communitiesResource.size())
-     LOGI("JNICALL communitiesResource ok");
+    if (!communitiesResource.size())
+      LOGI("JNICALL communitiesResource nok");
 
     /** create a new object array with a first element jObjFirst empty**/
     objNames= (jobjectArray)env->NewObjectArray(communitiesResource.size(),classe,jObjFirst);
     //objNames= (jobjectArray)env->NewObjectArray(names.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
-    //if (objNames)
-      //LOGI("JNICALL objNames ok");
+    if (!objNames)
+      LOGI("JNICALL objNames nok");
 
      /** get the length of the object Array **/
      jsize length = env->GetArrayLength(objNames);
-
-    //if (length)
-       //LOGI("JNICALL length ok");
+     if (!length)
+       LOGI("JNICALL length nok");
 
      env->DeleteLocalRef(jObjFirst);
 
@@ -160,16 +151,16 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
                                          (jint)communitiesResource[i].getId(),
                                           env->NewStringUTF(communitiesResource[i].getName().c_str()),
                                           (jint)communitiesResource[i].getType());
-        //if (myObject)
-          //LOGI("JNICALL myObject ok");
+        if (!myObject)
+          LOGI("JNICALL myObject nok");
 
 
 
         /** set the current object "myobject" into the object array "objNames" at the index i**/
         env->SetObjectArrayElement(objNames, i, myObject);
         env->DeleteLocalRef(myObject);
-
         //env->SetObjectArrayElement(objNames,i,env->NewStringUTF(names[i].c_str()));
+
       }
 
      /*for(std::vector<MidasResource>::const_iterator iter = communitiesResource.begin(); iter != communitiesResource.end(); ++iter)
@@ -199,13 +190,78 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
         jobjectArray objNames;
         int i;
-        vectorOfStrings nameChildren = appTools->findCommunityChildren(nameStr);
+
+
+        /*vectorOfStrings nameChildren = appTools->findCommunityChildren(nameStr);
         objNames= (jobjectArray)env->NewObjectArray(nameChildren.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
         for(i=0;i<nameChildren.size();i++)
         {
            env->SetObjectArrayElement(objNames,i,env->NewStringUTF(nameChildren[i].c_str()));
         }
+        return(objNames);*/
+
+
+        /** find the class MidasResource **/
+        jclass classe = env->FindClass( "com/kitware/KiwiViewer/MidasResource");
+        if (classe == NULL) {
+                if (env->ExceptionOccurred()) {
+                    env->ExceptionDescribe();
+                }
+                LOGI("Failed to get class\n");
+          }
+
+        /** create un empty object linked with the MidasResource class**/
+        jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
+        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
+        if (!jObjFirst)
+          LOGI("JNICALL jObjFirst nok");
+
+
+        /** get the array of communities **/
+        std::vector<MidasResource> childrenResource = appTools->findCommunityChildren(nameStr);
+
+        if (!childrenResource.size())
+          LOGI("JNICALL childrenResource nok");
+
+        /** create a new object array with a first element jObjFirst empty**/
+        objNames= (jobjectArray)env->NewObjectArray(childrenResource.size(),classe,jObjFirst);
+
+        if (!objNames)
+          LOGI("JNICALL objNames nok");
+
+         /** get the length of the object Array **/
+         jsize length = env->GetArrayLength(objNames);
+         if (!length)
+           LOGI("JNICALL length nok");
+
+         env->DeleteLocalRef(jObjFirst);
+
+        for (i = 0; i<length; ++i)
+         {
+            /** obtain the current object from the object array **/
+            jobject myObject = env->NewObject(classe, constructor,
+                                             (jint)childrenResource[i].getId(),
+                                              env->NewStringUTF(childrenResource[i].getName().c_str()),
+                                              (jint)childrenResource[i].getType());
+            if (!myObject)
+              LOGI("JNICALL myObject nok");
+
+
+
+            /** set the current object "myobject" into the object array "objNames" at the index i**/
+            env->SetObjectArrayElement(objNames, i, myObject);
+            env->DeleteLocalRef(myObject);
+
+          }
+
+         env->DeleteLocalRef((jobject)classe);
+
+        if (objNames)
+            LOGI("JNICALL objNames ok");
+
         return(objNames);
+
+
     }
 }
 //-------------------------------------------------------------------------------------------
@@ -221,25 +277,68 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
 
         jobjectArray objNames;
-        int i;
-        vectorOfStrings namesChildren = appTools->findFolderChildren(nameStr);
-        LOGI("find folder children finished");
-        if (namesChildren.empty())
-        {
-            LOGI("namesChildren empty");
-        }
 
-        objNames= (jobjectArray)env->NewObjectArray(namesChildren.size(),env->FindClass("java/lang/String"),env->NewStringUTF(""));
-        for(i=0;i<namesChildren.size();i++)
-        {
-           env->SetObjectArrayElement(objNames,i,env->NewStringUTF(namesChildren[i].c_str()));
-        }
-        if (objNames == NULL)
-        {
-            LOGI("objNames empty");
-        }
-        LOGI("objNames not empty");
+        /** find the class MidasResource **/
+        jclass classe = env->FindClass( "com/kitware/KiwiViewer/MidasResource");
+        if (classe == NULL) {
+                if (env->ExceptionOccurred()) {
+                    env->ExceptionDescribe();
+                }
+                LOGI("Failed to get class\n");
+          }
+
+        /** create un empty object linked with the MidasResource class**/
+        jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
+        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
+        if (!jObjFirst)
+          LOGI("JNICALL jObjFirst nok");
+
+
+        /** get the array of communities **/
+        std::vector<MidasResource> childrenResource = appTools->findFolderChildren(nameStr);
+
+        if (!childrenResource.size())
+          LOGI("JNICALL childrenResource nok");
+
+        /** create a new object array with a first element jObjFirst empty**/
+        objNames= (jobjectArray)env->NewObjectArray(childrenResource.size(),classe,jObjFirst);
+
+        if (!objNames)
+          LOGI("JNICALL objNames nok");
+
+         /** get the length of the object Array **/
+         jsize length = env->GetArrayLength(objNames);
+         if (!length)
+           LOGI("JNICALL length nok");
+
+         env->DeleteLocalRef(jObjFirst);
+
+        for (int i = 0; i<length; ++i)
+         {
+            /** obtain the current object from the object array **/
+            jobject myObject = env->NewObject(classe, constructor,
+                                             (jint)childrenResource[i].getId(),
+                                              env->NewStringUTF(childrenResource[i].getName().c_str()),
+                                              (jint)childrenResource[i].getType());
+            if (!myObject)
+              LOGI("JNICALL myObject nok");
+
+
+
+            /** set the current object "myobject" into the object array "objNames" at the index i**/
+            env->SetObjectArrayElement(objNames, i, myObject);
+            env->DeleteLocalRef(myObject);
+
+          }
+
+         env->DeleteLocalRef((jobject)classe);
+
+        if (objNames)
+            LOGI("JNICALL objNames ok");
+
         return(objNames);
+
+
     }
 }
 //-------------------------------------------------------------------------------------------

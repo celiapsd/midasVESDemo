@@ -248,10 +248,9 @@ public class ChooseFirstActivity extends Activity
 		Log.d(TAG, "checkLogin ok ");  
 
 		communityList =  MidasToolsNative.findCommunities();
-		//MidasResource[] resources = new MidasResource[communityList.length];
+		
 		for(int i=0;i<communityList.length;i++)
 		  {
-		  //resources[i] = new MidasResource(i, communityList[i].toString(), MidasResource.Type.COMMUNITY);
 		  Log.d(TAG, communityList[i].getName());
 		  }
 		

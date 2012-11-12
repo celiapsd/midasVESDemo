@@ -30,7 +30,7 @@ public class SingleListItemActivity extends Activity {
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
 
-	public static String [] ListChildrenStr;
+	public static MidasResource [] ListChildrenStr;
 	public static MidasResource [] ListChildrenMidas;
 	
 	public final static String TAG = "SingleListItemActivity";
@@ -100,11 +100,11 @@ public class SingleListItemActivity extends Activity {
 	        Log.d(TAG, "LIstChildren empty");
 
 				  }
-				else if(ListChildrenStr[0].contentEquals("item selected"))
+				else if(ListChildrenStr.length == 1)
 				  {
 				  //MidasResource item = new MidasResource();
 	        
-				  MidasResource item = new MidasResource(Integer.parseInt(ListChildrenStr[2]), ListChildrenStr[1], MidasResource.FOLDER);
+				  MidasResource item = new MidasResource(ListChildrenStr[0].getId(), ListChildrenStr[0].getName(), MidasResource.ITEM);
 	          //Log.d(TAG, communityList[i].toString());
 	          
 				  Log.d(TAG, "to DOwnload file");
@@ -114,20 +114,20 @@ public class SingleListItemActivity extends Activity {
 	        startActivity(i);
 
           }
-				else if(ListChildrenStr[0].contains("Folders") || ListChildrenStr[0].contains("Items"))
+				else 
 				  {
-				  MidasResource[] resources = new MidasResource[ListChildrenStr.length];
+				  /*MidasResource[] resources = new MidasResource[ListChildrenStr.length];
 	        for(int i=0;i<ListChildrenStr.length;i++)
 	          {
 	          resources[i] = new MidasResource(i, ListChildrenStr[i].toString(), MidasResource.FOLDER);
 	          //Log.d(TAG, communityList[i].toString());
-	          }
+	          }*/
 	        
 				  Log.d(TAG, "to singleItem activity");
 				  Intent in = new Intent(SingleListItemActivity.this,SingleListItemActivity.class);
          
           
-          in.putExtra("BundleResourceFolder", resources);
+          in.putExtra("BundleResourceFolder", ListChildrenStr);
           Log.d(TAG, "intent sent to SingleListItemActivity");
           startActivity(in);
           

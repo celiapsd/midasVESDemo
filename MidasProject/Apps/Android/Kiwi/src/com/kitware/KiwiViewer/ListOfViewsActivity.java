@@ -23,7 +23,7 @@ public class ListOfViewsActivity extends Activity {
 	/*----------Attributes-----------------------------------------------------------------*/
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
-	public static String [] ListChildren;
+	public static MidasResource [] ListChildren;
 	public static MidasResource [] Communities;
 	public final static String TAG = "ListOfViewsActivity";
 	/** Global Debug constant */
@@ -50,14 +50,9 @@ public class ListOfViewsActivity extends Activity {
 		  MidasResource comm = (MidasResource) parcel;
 		  ListNames.add(comm.getName());
 		  Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType());
+		  Log.d(TAG, "name "+Communities[i].getName()+" Id "+Communities[i].getId()+" type "+Communities[i].getType());
 		  i++;
-		  
-		  //Log.d(TAG,comm.getName());
-		  /*Log.d(TAG,Integer.toString(comm.getId()));
-		  Log.d(TAG,Integer.toString(comm.getType().ordinal()));*/
 		  }
-		
-		
 
 		ChooseFirstActivity.activities.add(this);
 
@@ -92,15 +87,15 @@ public class ListOfViewsActivity extends Activity {
 				
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
-				MidasResource[] resources = new MidasResource[ListChildren.length];
+				/*MidasResource[] resources = new MidasResource[ListChildren.length];*/
 		    for(int i=0;i<ListChildren.length;i++)
 		      {
-		      resources[i] = new MidasResource(i, ListChildren[i].toString(), MidasResource.FOLDER);
-		      //Log.d(TAG, communityList[i].toString());
+		      //resources[i] = new MidasResource(i, ListChildren[i].toString(), MidasResource.FOLDER);
+		      Log.d(TAG, ListChildren[i].getName());
 		      }
 		    
 		    Intent intent = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
-		    intent.putExtra("BundleResourceFolder", resources);
+		    intent.putExtra("BundleResourceFolder", ListChildren);
 		    Log.d(TAG, "intent sent to SingleListItemActivity");
 		    startActivity(intent);
 			}
