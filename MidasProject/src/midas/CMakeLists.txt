@@ -5,7 +5,7 @@ include(${VTK_USE_FILE})
 set(sources
   vesMidasApp.cpp
   midasFilesTools.cpp
-  midasResource.cpp
+  MidasResource.cpp
   )
 
 set(deps

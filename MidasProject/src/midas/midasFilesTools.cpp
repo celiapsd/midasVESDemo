@@ -14,7 +14,7 @@
 #include <vesKiwiCurlDownloader.h>
 
 #include <midasFilesTools.h>
-#include <midasResource.h>
+#include <MidasResource.h>
 
 
 
@@ -73,7 +73,7 @@ int midasFilesTools::init(const std::string& url,const std::string& email,const 
 }
 
 //----------------------------------------------------------------------------
-std::vector<midasResource> midasFilesTools::findCommunities()
+std::vector<MidasResource> midasFilesTools::findCommunities()
 {
     LOGI("findCommunities");
     this->midas->listCommunities();
@@ -87,7 +87,7 @@ std::vector<midasResource> midasFilesTools::findCommunities()
     {*/
     for (size_t i = 0; i<folderNames.size(); ++i)
     {
-        midasResource res(atoi(folderIds[i].c_str()), folderNames[i], midasResource::COMMUNITY);
+        MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::COMMUNITY);
         //LOGI(" res %d",res.getId());
         resources.push_back(res);
         //LOGI(" resources %d",resources[i].getId());

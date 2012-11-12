@@ -17,7 +17,7 @@
 
 #include <vesMidasClient.h>
 #include <vesKiwiCurlDownloader.h>
-#include <midasResource.h>
+#include <MidasResource.h>
 
 
 
@@ -122,7 +122,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 */
 
     /** get the array of communities **/
-   // std::vector<midasResource> communitiesResource = appTools->findCommunities();
+    std::vector<MidasResource> communitiesResource = appTools->findCommunities();
     std::vector<string> names [communitiesResource.size()];
     for (size_t i=0; i<communitiesResource.size(); ++i)
     {
