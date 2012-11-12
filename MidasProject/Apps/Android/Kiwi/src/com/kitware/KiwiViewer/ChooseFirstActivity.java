@@ -1,4 +1,3 @@
-
 /**----------------------Comments----------------------------------------------------------//
  * Name : Celia Pansard
  * Date of last modification : 11/06/2012
@@ -100,55 +99,15 @@ public class ChooseFirstActivity extends Activity
 			Log.d(TAG, "onCreate()");
 		  }
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.homepage);
-		new AutoCompleteTextViewListener(this);
-		
+		setContentView(R.layout.homepage);       /* Array of Urls defined statically in string.xml*/
+
+		String[] URLS = getResources().getStringArray(R.array.url_array);
+    AutoCompleteTextView myAutoComplete = (AutoCompleteTextView) this.findViewById(R.id.autocomplete_URL);
+    
+    ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, URLS);
+    myAutoComplete.setAdapter(adapter);
+
 	  }
-	
-	/**
-  * ---------- PRIVATE CLASS AutoCompleteTextViewListener--------------------------------------------<br/>
-  *
-  * @Listener on autoCompleteTextView to manage the Url editText
-  * (implements Text Watcher)
-  * 
-  * @param loader Activity ChooseFirstActivity
-  **/
-	private class AutoCompleteTextViewListener implements TextWatcher
-	{
-	
-	  /** AutoCompleteTextView for URL */
-    public AutoCompleteTextView myAutoComplete;
-  
-    /**---------Constructor of AutoCompleteTextViewListener---------------*/
-  	 AutoCompleteTextViewListener(ChooseFirstActivity loader)
-    	 {
-    	 
-    	 /* Array of Urls defined statically in string.xml*/
-    	 String[] URLS = getResources().getStringArray(R.array.url_array);
-       myAutoComplete = (AutoCompleteTextView) loader.findViewById(R.id.autocomplete_URL);
-       myAutoComplete.addTextChangedListener(this);
-       
-       ArrayAdapter<String> adapter = new ArrayAdapter<String>(loader, android.R.layout.simple_dropdown_item_1line, URLS);
-       myAutoComplete.setAdapter(adapter);
-       myAutoComplete.setOnItemClickListener(new OnItemClickListener() {
-         public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,long arg3) {
-           }
-         });
-    	 } 
-  	 
-  	 /*
-  	  * Methods to managed the AutoCompleteTextView (no need to be implemented)
-  	  */
-  	 public void beforeTextChanged(CharSequence s, int start, int count, int after)
-  	   {
-  	   }
-  	 public void onTextChanged(CharSequence s, int start, int before, int count)
-  	   {
-       }
-  	 public void afterTextChanged(Editable s)
-       {      
-       }
-	}
 	
 	
 	/* ---------- onCreateOptionsMenu--------------------------------------------------------*/
