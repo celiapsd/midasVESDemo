@@ -9,11 +9,12 @@ public class MidasResource implements Parcelable
     /*
      * The type of the resource
      */
-    public static final int COMMUNITY = 0;
-    public static final int FOLDER = 1;
-    public static final int ITEM = 2;
-    public static final int BITSTREAM = 3;
-    public static final int NOTSET = -1;
+    public static final int NOTSET = 0;
+    public static final int COMMUNITY = 1;
+    public static final int FOLDER = 2;
+    public static final int ITEM = 3;
+    public static final int BITSTREAM = 4;
+
     
     
     /*

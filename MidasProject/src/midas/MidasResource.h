@@ -17,11 +17,11 @@ class MidasResource
 public :
 
     typedef enum {
+          NOTSET,
           COMMUNITY,
           FOLDER,
           ITEM,
-          BITSTREAM,
-          NOTSET
+          BITSTREAM
        } Type ;
 
 
