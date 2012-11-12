@@ -1,7 +1,7 @@
-/// \class midasResource
+/// \class MidasResource
 /// \ingroup
-#ifndef __midasResource_h
-#define __midasResource_h
+#ifndef __MidasResource_h
+#define __MidasResource_h
 
 
 // VES includes
@@ -11,7 +11,7 @@
 #include <string>
 
 //-------------------------------------------------
-class midasResource
+class MidasResource
 {
 
 public :
@@ -25,9 +25,9 @@ public :
        } Type ;
 
 
-   midasResource();
-   midasResource(const int& id,const std::string& name,const Type& type);
-   virtual ~midasResource();
+   MidasResource();
+   MidasResource(const int& id,const std::string& name,const Type& type);
+   virtual ~MidasResource();
 
 
 

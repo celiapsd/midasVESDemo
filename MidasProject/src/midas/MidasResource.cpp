@@ -11,24 +11,24 @@
 #include <cassert>
 
 
-#include <midasResource.h>
+#include <MidasResource.h>
 
 
 
-#define  LOG_TAG    "midasResource"
+#define  LOG_TAG    "MidasResource"
 #define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
 #define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 //----------------------------------------------------------------------------
 
-midasResource::midasResource()
+MidasResource::MidasResource()
 {
-    LOGI("constructor midasResource");
+    LOGI("constructor MidasResource");
     init(-1, "", NOTSET);
 
 }
-midasResource::midasResource(const int& id,const std::string& name,const Type& type)
+MidasResource::MidasResource(const int& id,const std::string& name,const Type& type)
 {
     //LOGI("init");
     setId(id);
@@ -39,12 +39,12 @@ midasResource::midasResource(const int& id,const std::string& name,const Type& t
     //LOGI("setType");
 
 }
-midasResource::~midasResource()
+MidasResource::~MidasResource()
 {
 }
 
 //----------------------------------------------------------------------------
-void midasResource::init(const int& id,const std::string& name,const Type& type)
+void MidasResource::init(const int& id,const std::string& name,const Type& type)
 {
    //LOGI("init");
    setId(id);
@@ -55,33 +55,33 @@ void midasResource::init(const int& id,const std::string& name,const Type& type)
    //LOGI("setType");
 }
 //----------------------------------------------------------------------------
-void midasResource::setId(const int& mId)
+void MidasResource::setId(const int& mId)
 {
      //LOGI("setID");
      this->id = mId;
 }
 //----------------------------------------------------------------------------
-void midasResource::setName(const std::string& mName)
+void MidasResource::setName(const std::string& mName)
 {
     this->name = mName;
 }
 //----------------------------------------------------------------------------
-void midasResource::setType(const Type& mType)
+void MidasResource::setType(const Type& mType)
 {
     this->type = mType;
 }
 //----------------------------------------------------------------------------
-int midasResource::getId() const
+int MidasResource::getId() const
 {
     return this->id;
 }
 //----------------------------------------------------------------------------
-std::string midasResource::getName() const
+std::string MidasResource::getName() const
 {
     return this->name;
 }
 //----------------------------------------------------------------------------
-midasResource::Type midasResource::getType() const
+MidasResource::Type MidasResource::getType() const
 {
     return this->type;
 }
