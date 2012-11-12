@@ -9,7 +9,12 @@ public class MidasResource implements Parcelable
     /*
      * The type of the resource
      */
-    public enum Type { COMMUNITY, FOLDER, ITEM, BITSTREAM, NOTSET };
+    public static final int COMMUNITY = 0;
+    public static final int FOLDER = 1;
+    public static final int ITEM = 2;
+    public static final int BITSTREAM = 3;
+    public static final int NOTSET = -1;
+    
     
     /*
      * The id of the resource. This is unique within the given type
@@ -21,14 +26,14 @@ public class MidasResource implements Parcelable
      */
     protected String name;
     
-    protected Type type;
+    protected int type;
 
-    public Type getType()
+    public int getType()
       {
       return type;
       }
 
-    public void setType(Type type)
+    public void setType(int type)
       {
       this.type = type;
       }
@@ -55,15 +60,15 @@ public class MidasResource implements Parcelable
 
     public MidasResource()
       {
-      this.init(-1, name, Type.NOTSET);
+      this.init(-1, name, NOTSET);
       }
 
-    public MidasResource(int id, String name, Type type)
+    public MidasResource(int id, String name, int type)
       {
       this.init(id, name, type);
       }
     
-    protected void init( int id, String name, Type type)
+    protected void init( int id, String name, int type)
       {
       this.setId(id);
       this.setName(name);
@@ -79,7 +84,7 @@ public class MidasResource implements Parcelable
       {
       dest.writeInt(id);
       dest.writeString(name);
-      dest.writeInt(type.ordinal());
+      dest.writeInt(type);
       }
     
     public static final Parcelable.Creator<MidasResource> CREATOR
@@ -94,7 +99,7 @@ public class MidasResource implements Parcelable
     };
 
     private MidasResource(Parcel in) {
-      this.init(in.readInt(), in.readString(), Type.values()[in.readInt()]);
+      this.init(in.readInt(), in.readString(), in.readInt());
     }
 
   }
