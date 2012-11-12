@@ -184,6 +184,9 @@ public class DownloadFileActivity extends Activity {
 		setFilename(null);
 		//ChooseFirstActivity.finishAll();
 		//start ch again
+		Intent i = new Intent(DownloadFileActivity.this,
+        ChooseFirstActivity.class);
+    startActivity(i);
 		
 	}
 
