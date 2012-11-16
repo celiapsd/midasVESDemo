@@ -230,42 +230,46 @@ public class DownloadFileActivity extends Activity {
 	    
 	    Log.d(TAG + "AsyncTask :WaitWhileSave ", "doInBackground("+filename[0]+")");
 	    final String file = filename[0];
-
-         new Thread(new Runnable() {
+	    
+	    new Thread(new Runnable() {
       
-          public void run() {
-        
-            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress ");
-            Integer [] progress = new Integer [2];
-            progress[0] = -1;
-            double myProg = progress[0];
+        public void run() {
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread download  ");
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "getPriority ()"+ Thread.currentThread().getPriority());
+            mResult = MidasToolsNative.downloadItem(file,mPath);
+        }}).run();
+	    
+	    new Thread(new Runnable() {
       
-            while (myProg < 100 && mResult == null) {
-    	  
-            try
-              {
-              Log.d(TAG , "Thread begin Sleep");
-              Thread.sleep(1000);
-              Log.d(TAG , "Thread finish sleep");
-              } catch (InterruptedException e)
-                {
-                e.printStackTrace();
-                }
-            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress "+ myProg);
-            myProg= MidasToolsNative.getProgressDownload();
-            progress[0] = (int) myProg;
-            
-            publishProgress(progress);
-            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
+      public void run() {
+    
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress ");
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "getPriority ()"+ Thread.currentThread().getPriority());
+        Integer [] progress = new Integer [2];
+        progress[0] = -1;
+        double myProg = progress[0];
+  
+        while (myProg < 100 && mResult == null) {
+    
+        try
+          {
+          Log.d(TAG , "Thread begin Sleep");
+          Thread.sleep(1000);
+          Log.d(TAG , "Thread finish sleep");
+          } catch (InterruptedException e)
+            {
+            e.printStackTrace();
             }
-          }
-		    }).run();
-
-      new Thread(new Runnable() {
-         
-         public void run() {
-             mResult = MidasToolsNative.downloadItem(file,mPath);
-         }}).run();
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress "+ myProg);
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "getPriority ()"+ Thread.currentThread().getPriority());
+        myProg= MidasToolsNative.getProgressDownload();
+        progress[0] = (int) myProg;
+        
+        publishProgress(progress);
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
+        }
+      }
+    }).run();
       
       Log.d(TAG, mResult);
       return 0;
