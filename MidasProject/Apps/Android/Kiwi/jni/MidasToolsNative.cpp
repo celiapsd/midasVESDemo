@@ -9,12 +9,6 @@
 #include <vector>
 #include <iterator>
 
-
-/*#include <vesKiwiViewerApp.h>
-#include <vesKiwiBaselineImageTester.h>
-#include <vesBuiltinShaders.h>
-#include <vesKiwiTestHelper.h>*/
-
 #include <vesMidasClient.h>
 #include <vesKiwiCurlDownloader.h>
 #include <MidasResource.h>
