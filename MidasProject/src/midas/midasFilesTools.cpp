@@ -204,6 +204,11 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
                 MidasResource res(atoi(itemIds[i].c_str()), itemNames[i], MidasResource::ITEM,(int)itemBytes[i] );
                 resources.push_back(res);
             }
+            if (folderNames.empty() && itemNames.empty())
+            {
+                MidasResource res(-1, "Folder empty", MidasResource::NOTSET, (int)0 );
+                resources.push_back(res);
+            }
             LOGI("ressource ok");
             break;
             }
