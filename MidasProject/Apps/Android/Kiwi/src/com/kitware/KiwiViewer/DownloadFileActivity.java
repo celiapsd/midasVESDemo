@@ -255,9 +255,14 @@ public class DownloadFileActivity extends Activity {
             Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
             }
           }
-		    }).start();
+		    }).run();
 
-	    mResult = MidasToolsNative.downloadItem(filename[0],mPath);
+      new Thread(new Runnable() {
+         
+         public void run() {
+             mResult = MidasToolsNative.downloadItem(file,mPath);
+         }}).run();
+      
       Log.d(TAG, mResult);
       return 0;
 
