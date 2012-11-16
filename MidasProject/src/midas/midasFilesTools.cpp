@@ -305,7 +305,7 @@ double midasFilesTools::getProgressDownload ()
 void midasFilesTools::setProgressDownload(double progress)
 {
     this->mutex->Lock();
-    LOGI("setProgressDownload = %d",progress);
+    //LOGI("setProgressDownload = %d",progress);
     this->ProgressDownload = progress;
     this->mutex->Unlock();
 }

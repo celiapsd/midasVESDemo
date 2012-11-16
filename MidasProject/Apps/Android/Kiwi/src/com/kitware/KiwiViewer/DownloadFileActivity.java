@@ -231,21 +231,25 @@ public class DownloadFileActivity extends Activity {
 	    Log.d(TAG + "AsyncTask :WaitWhileSave ", "doInBackground("+filename[0]+")");
 	    final String file = filename[0];
 	    
-	    new Thread(new Runnable() {
+	    /**thread for download*/
+	  new Thread(new Runnable() {
       
         public void run() {
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread download  ");
-        Log.d(TAG + "AsyncTask :WaitWhileSave ", "getPriority ()"+ Thread.currentThread().getPriority());
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "download getPriority ()"+ Thread.currentThread().getPriority());
             mResult = MidasToolsNative.downloadItem(file,mPath);
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "download finished");
+                
         }}).run();
 	    
-	    new Thread(new Runnable() {
+	     /**thread for progress*/
+	  new Thread(new Runnable() {
       
       public void run() {
     
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress ");
-        Log.d(TAG + "AsyncTask :WaitWhileSave ", "getPriority ()"+ Thread.currentThread().getPriority());
-        Integer [] progress = new Integer [2];
+        Log.d(TAG + "AsyncTask :WaitWhileSave ", "progress getPriority ()"+ Thread.currentThread().getPriority());
+       Integer [] progress = new Integer [2];
         progress[0] = -1;
         double myProg = progress[0];
   
@@ -269,7 +273,7 @@ public class DownloadFileActivity extends Activity {
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
         }
       }
-    }).run();
+    }).start();
       
       Log.d(TAG, mResult);
       return 0;

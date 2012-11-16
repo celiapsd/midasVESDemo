@@ -35,19 +35,19 @@ void MyProgressDelegate::setTotalBytes(int totalBytes)
 
 int MyProgressDelegate::downloadProgress(double totalToDownload, double nowDownloaded)
 {
-  LOGI("downloadProgress");
+  //LOGI("downloadProgress");
 
-  LOGI("   nowDownloaded = %d",nowDownloaded);
-  LOGI("   totalToDownload = %d",totalToDownload);
-  LOGI("   totalbytes = %d", this->totalBytes);
+ // LOGI("   nowDownloaded = %d",nowDownloaded);
+  //LOGI("   totalToDownload = %d",totalToDownload);
+  //LOGI("   totalbytes = %d", this->totalBytes);
 
 
-    double progress = (nowDownloaded /  this->totalBytes);
-    LOGI("downloadProgress progress = %d",progress);
+    double progress = (nowDownloaded /  this->totalBytes);//*100;
+    //LOGI("downloadProgress progress = %d",progress);
 
     if (this->mFilesTool)
     {
-       LOGI("mFilesTools not null");
+       //LOGI("mFilesTools not null");
       this->mFilesTool->setProgressDownload(progress);
     }
 
