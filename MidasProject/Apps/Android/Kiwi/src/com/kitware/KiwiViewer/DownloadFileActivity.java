@@ -175,20 +175,19 @@ public class DownloadFileActivity extends Activity {
 	public void ButtonOnClickReturnHomepage(View v)  
 	  {
 	  Log.d(TAG, "ButtonOnClickReturnHomepage()");
-	  returnHomepage(v);
+	  setFilename(null);
+    //ChooseFirstActivity.finishAll();
+    //start ch again
+    Intent i = new Intent(DownloadFileActivity.this,
+        ChooseFirstActivity.class);
+    startActivity(i);
 		}
 
 	/*-------------RETURN HOMEPAGE--------------------------------------------------------------*/
-	public void returnHomepage(View v) {
+	/*public void returnHomepage(View v) {
 		Log.d(TAG, "returnHomepage()");
-		setFilename(null);
-		//ChooseFirstActivity.finishAll();
-		//start ch again
-		Intent i = new Intent(DownloadFileActivity.this,
-        ChooseFirstActivity.class);
-    startActivity(i);
 		
-	}
+	}*/
 
 	/* -------------CHOOSE FOLDER---------------------------------------------------------------*/
 	public void choosefolder(View v) {
