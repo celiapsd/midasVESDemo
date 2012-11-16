@@ -367,5 +367,6 @@ JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadI
 JNIEXPORT jint JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
 (JNIEnv * env, jobject obj)
 {
+    LOGI("getProgressDownload");
     return appTools->getProgressDownload();
 }

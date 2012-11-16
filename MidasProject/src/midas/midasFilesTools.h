@@ -8,6 +8,7 @@
 #include <vesSharedPtr.h>
 #include <vesMidasClient.h>
 #include <MidasResource.h>
+#include <vesKiwiCurlDownloader.h>
 
 
 // C++ includes
@@ -19,6 +20,7 @@ class midasFilesTools
 
 public :
 
+   typedef midasFilesTools Self;
    midasFilesTools();
    virtual ~midasFilesTools();
 
@@ -31,13 +33,16 @@ public :
    std::vector<MidasResource> findFolderChildren(const std::string& mName);
    std::string downloadItem(const std::string& nameItem,const std::string& pathItem);
 
-   static std::string ToString(const size_t& sz);
-   int getProgressDownload();
+   //static std::string ToString(const size_t& sz);
+   double getProgressDownload();
+   void setProgressDownload(double progress);
 
 
 private :
 
    vesMidasClient* midas;
+
+   double ProgressDownload;
 
    /*std::vector<std::string> folderNames;
    std::vector<std::string> folderIds;

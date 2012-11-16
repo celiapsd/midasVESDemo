@@ -15,6 +15,8 @@
 
 #include <midasFilesTools.h>
 #include <MidasResource.h>
+#include <MyProgressDelegate.h>
+#include <vesSharedPtr.h>
 
 
 
@@ -25,28 +27,6 @@
 
 typedef std::vector<std::string> vectorOfStrings;
 
-
-
-/*namespace{
-class MyProgressDelegate : public vesKiwiCurlDownloader::ProgressDelegate
-{
-  public:
-
-    MyProgressDelegate():itemKilobytes(0)
-    {
-    }
-
-    virtual int downloadProgress(double totalToDownload, double nowDownloaded)
-    {
-
-
-      int progress = nowDownloaded/itemKilobytes;
-      return progress;
-    }
-
-    int itemKilobytes;
-};
-}*/
 //----------------------------------------------------------------------------
 
 midasFilesTools::midasFilesTools()
@@ -270,7 +250,17 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     strMyId<<myId;
     std::string downloadUrl = this->midas->itemDownloadUrl(strMyId.str());
     LOGI("downloadUrl = %s",downloadUrl);
+
+    vesSharedPtr<MyProgressDelegate> PtprogressDelegate = vesSharedPtr<MyProgressDelegate>(new MyProgressDelegate);
+    LOGI("MyProgressDelegate ");
+    PtprogressDelegate->setFilesTool(this);
+    PtprogressDelegate->setTotalBytes(mySize);
+    LOGI("setFilesTool ");
+
     vesKiwiCurlDownloader downloader;
+    LOGI("downloader");
+    downloader.setProgressDelegate(PtprogressDelegate);
+    LOGI("setProgressDelegate");
 
     if(!mItemPath.size())
     {
@@ -288,11 +278,15 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
 
 }
 //----------------------------------------------------------------------------
-int midasFilesTools::getProgressDownload ()
+double midasFilesTools::getProgressDownload ()
 {
-    /*int mItemKilobytes = myItemSize/1024.0;
-    this->mProgressDelegate->itemKilobytes = mItemKilobytes;
-    downloader.setProgressDelegate(this->mProgressDelegate);
-    return progress_function;*/
-    return 0;
+    LOGI("getProgressDownload = %d",this->ProgressDownload);
+    return this->ProgressDownload;
+}
+
+//----------------------------------------------------------------------------
+void midasFilesTools::setProgressDownload(double progress)
+{
+    LOGI("setProgressDownload = %d",progress);
+    this->ProgressDownload = progress;
 }
