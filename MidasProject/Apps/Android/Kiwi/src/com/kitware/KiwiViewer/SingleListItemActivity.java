@@ -172,4 +172,14 @@ public class SingleListItemActivity extends Activity {
 		}
 		super.onStop();
 	}
+//	@Override
+//  public boolean onKeyDown(int keyCode, KeyEvent event)  {
+//      if (keyCode == KeyEvent.KEYCODE_BACK ) {
+//          ListChildrenStr = ListChildrenMidas; 
+//          super.onKeyDown(keyCode, event);
+//          return true;
+//      }
+//
+//      return super.onKeyDown(keyCode, event);
+//  }
 }
