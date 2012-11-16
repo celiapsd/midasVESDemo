@@ -17,6 +17,7 @@
 #include <MidasResource.h>
 #include <MyProgressDelegate.h>
 #include <vesSharedPtr.h>
+#include <vtkMutexLock.h>
 
 
 
@@ -33,6 +34,8 @@ midasFilesTools::midasFilesTools()
 {
     LOGI("constructor MidasFilesTools");
     this->midas = new vesMidasClient();
+    this->ProgressDownload = -1;
+    this->mutex = new vtkSimpleMutexLock() ;
 
 }
 midasFilesTools::~midasFilesTools()
@@ -288,13 +291,19 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
 //----------------------------------------------------------------------------
 double midasFilesTools::getProgressDownload ()
 {
-    LOGI("getProgressDownload = %d",this->ProgressDownload);
-    return this->ProgressDownload;
+    double value = 0;
+    this->mutex->Lock();
+    value = this->ProgressDownload;
+    LOGI("getProgressDownload = %d", value);
+    this->mutex->Unlock();
+    return value;
 }
 
 //----------------------------------------------------------------------------
 void midasFilesTools::setProgressDownload(double progress)
 {
+    this->mutex->Lock();
     LOGI("setProgressDownload = %d",progress);
     this->ProgressDownload = progress;
+    this->mutex->Unlock();
 }

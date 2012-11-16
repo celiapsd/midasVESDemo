@@ -9,6 +9,7 @@
 #include <vesMidasClient.h>
 #include <MidasResource.h>
 #include <vesKiwiCurlDownloader.h>
+#include <vtkMutexLock.h>
 
 
 // C++ includes
@@ -43,6 +44,8 @@ private :
    vesMidasClient* midas;
 
    double ProgressDownload;
+
+   vtkSimpleMutexLock* mutex;
 
    /*std::vector<std::string> folderNames;
    std::vector<std::string> folderIds;
