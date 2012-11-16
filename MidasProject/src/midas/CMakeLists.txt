@@ -6,6 +6,7 @@ set(sources
   vesMidasApp.cpp
   midasFilesTools.cpp
   MidasResource.cpp
+  CProgressDialog.cpp
   MyProgressDelegate.cpp
   )
 
