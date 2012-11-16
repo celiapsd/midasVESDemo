@@ -39,7 +39,9 @@ public class DownloadFileActivity extends Activity {
 	protected void showProgressDialog(String message) {
 		Log.d(TAG, "showProgressDialog("+message+")");
 	      mProgressDialog = new ProgressDialog(this);
+              mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 	      mProgressDialog.setIndeterminate(true);
+              mProgressDialog.setMax(100);
 	      mProgressDialog.setCancelable(false);
 	      mProgressDialog.setMessage(message);
 	      mProgressDialog.show();
@@ -227,6 +229,34 @@ public class DownloadFileActivity extends Activity {
         
 	    
 	    Log.d(TAG + "AsyncTask :WaitWhileSave ", "doInBackground("+filename[0]+")");
+
+         new Thread(new Runnable() {
+      
+          public void run() {
+        
+            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress ");
+            Integer [] progress = new Integer [2];
+            progress[0] = 0;
+            int myProg = progress[0];
+      
+            while (myProg < 100 && mResult == null) {
+    	  
+            try
+              {
+              Thread.sleep(1000);
+              } catch (InterruptedException e)
+                {
+                e.printStackTrace();
+                }
+            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress "+ myProg);
+            myProg= MidasToolsNative.getProgressDownload();
+            progress[0] = myProg;
+            publishProgress(progress);
+            Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
+            }
+          }
+		    }).start();
+
 	    mResult = MidasToolsNative.downloadItem(filename[0],mPath);
       Log.d(TAG, mResult);
       return 0;
@@ -246,7 +276,6 @@ public class DownloadFileActivity extends Activity {
 			Log.d(TAG + "AsyncTask :WaitWhileSave ", "onProgressUpdate()");
 
 	        super.onProgressUpdate(progress);
-	        //progress[0] = MidasToolsNative.getProgressDownload();
 	        mProgressDialog.setProgress(progress[0]);
 	    }
 	     /*------------------onPostExecute----------------------------------------------------------*/
