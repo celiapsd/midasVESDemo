@@ -56,7 +56,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadItem
 (JNIEnv * env, jobject obj, jstring nameItem, jstring pathItem);
 
-JNIEXPORT jint JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
+JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
 (JNIEnv * env, jobject obj);
 
 };
@@ -361,7 +361,7 @@ JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadI
 
 }
 //-------------------------------------------------------------------------------------------
-JNIEXPORT jint JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
+JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
 (JNIEnv * env, jobject obj)
 {
     LOGI("getProgressDownload");

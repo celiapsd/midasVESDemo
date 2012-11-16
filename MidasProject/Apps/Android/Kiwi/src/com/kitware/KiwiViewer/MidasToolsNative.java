@@ -32,6 +32,6 @@ public class MidasToolsNative {
      public static native synchronized MidasResource[] findCommunityChildren(String nameCommunity);
      public static native synchronized MidasResource[] findFolderChildren(String nameChildren);
      public static native synchronized String downloadItem(String nameItem,String pathItem);
-     public static native synchronized Integer getProgressDownload();
+     public static native synchronized double getProgressDownload();
       
 }
