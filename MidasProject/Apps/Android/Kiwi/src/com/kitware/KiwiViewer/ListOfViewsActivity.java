@@ -49,7 +49,7 @@ public class ListOfViewsActivity extends Activity {
 		  {
 		  MidasResource comm = (MidasResource) parcel;
 		  ListNames.add(comm.getName());
-		  Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType());
+		  Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType(), comm.getSize());
 		  Log.d(TAG, "name "+Communities[i].getName()+" Id "+Communities[i].getId()+" type "+Communities[i].getType());
 		  i++;
 		  }

@@ -61,7 +61,7 @@ public class SingleListItemActivity extends Activity {
       {
       MidasResource comm = (MidasResource) parcel;
       ListNames.add(comm.getName());
-      ListChildrenMidas[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType());
+      ListChildrenMidas[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType(), comm.getSize());
       i++;
       
       //Log.d(TAG,comm.getName());
@@ -104,7 +104,7 @@ public class SingleListItemActivity extends Activity {
 				  {
 				  //MidasResource item = new MidasResource();
 	        
-				  MidasResource item = new MidasResource(ListChildrenStr[0].getId(), ListChildrenStr[0].getName(), MidasResource.ITEM);
+				  MidasResource item = new MidasResource(ListChildrenStr[0].getId(), ListChildrenStr[0].getName(), MidasResource.ITEM,ListChildrenStr[0].getSize() );
 	          //Log.d(TAG, communityList[i].toString());
 	          
 				  Log.d(TAG, "to DOwnload file");

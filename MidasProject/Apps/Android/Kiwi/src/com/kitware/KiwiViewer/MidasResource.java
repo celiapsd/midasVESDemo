@@ -26,8 +26,16 @@ public class MidasResource implements Parcelable
      * The name of the resource 
      */
     protected String name;
-    
+ 
+    /*
+     * The type of the resource 
+     */   
     protected int type;
+   
+    /*
+     * The size of the resource 
+     */
+    protected int size;
 
     public int getType()
       {
@@ -58,22 +66,32 @@ public class MidasResource implements Parcelable
       {
       this.name = name;
       }
+    public int getSize()
+      {
+      return size;
+      }
+
+    public void setSize(int size)
+      {
+      this.size = size;
+      }
 
     public MidasResource()
       {
-      this.init(-1, name, NOTSET);
+      this.init(-1, name, NOTSET, 0);
       }
 
-    public MidasResource(int id, String name, int type)
+    public MidasResource(int id, String name, int type, int size)
       {
-      this.init(id, name, type);
+      this.init(id, name, type, size);
       }
     
-    protected void init( int id, String name, int type)
+    protected void init( int id, String name, int type, int size)
       {
       this.setId(id);
       this.setName(name);
       this.setType(type);
+      this.setSize(size);
       }
     
     public int describeContents()
@@ -86,6 +104,7 @@ public class MidasResource implements Parcelable
       dest.writeInt(id);
       dest.writeString(name);
       dest.writeInt(type);
+      dest.writeInt(size);
       }
     
     public static final Parcelable.Creator<MidasResource> CREATOR
@@ -100,7 +119,7 @@ public class MidasResource implements Parcelable
     };
 
     private MidasResource(Parcel in) {
-      this.init(in.readInt(), in.readString(), in.readInt());
+      this.init(in.readInt(), in.readString(), in.readInt(), in.readInt());
     }
 
   }

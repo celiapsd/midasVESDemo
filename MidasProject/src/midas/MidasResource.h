@@ -26,20 +26,22 @@ public :
 
 
    MidasResource();
-   MidasResource(const int& id,const std::string& name,const Type& type);
+   MidasResource(const int& id,const std::string& name,const Type& type, const int& size);
    virtual ~MidasResource();
 
 
 
-   void init(const int& id,const std::string& name, const Type& type);
+   void init(const int& id,const std::string& name, const Type& type, const int& size);
 
    void setId(const int& id);
    void setName(const std::string& name);
    void setType(const Type& type);
+   void setSize(const int& size);
 
    int getId() const;
    std::string getName() const;
    Type getType() const;
+   int getSize () const;
 
 
 private :
@@ -47,6 +49,7 @@ private :
    int id;
    std::string name;
    Type type;
+   int size;
 
 };
 

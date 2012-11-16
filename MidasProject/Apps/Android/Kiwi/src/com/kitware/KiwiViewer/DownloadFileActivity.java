@@ -71,7 +71,7 @@ public class DownloadFileActivity extends Activity {
 		  
 		  
 		  Parcelable itemParcelable = BundleResourceCommunity.getParcelable("file");  
-		  myItem = new MidasResource (((MidasResource) itemParcelable).getId(), ((MidasResource) itemParcelable).getName(), ((MidasResource) itemParcelable).getType());
+		  myItem = new MidasResource (((MidasResource) itemParcelable).getId(), ((MidasResource) itemParcelable).getName(), ((MidasResource) itemParcelable).getSize(),((MidasResource) itemParcelable).getType());
 		  setTitle(" Item " + myItem.getName());
 		  setFilename(myItem.getName());
 		  }

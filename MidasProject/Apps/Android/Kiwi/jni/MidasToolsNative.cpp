@@ -110,7 +110,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
     /** create un empty object linked with the MidasResource class**/
     jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
-    jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
+    jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;II)V");
     if (!jObjFirst)
       LOGI("JNICALL jObjFirst nok");
 
@@ -150,7 +150,8 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
         jobject myObject = env->NewObject(classe, constructor,
                                          (jint)communitiesResource[i].getId(),
                                           env->NewStringUTF(communitiesResource[i].getName().c_str()),
-                                          (jint)communitiesResource[i].getType());
+                                          (jint)communitiesResource[i].getType(),
+                                          (jint)communitiesResource[i].getSize());
         if (!myObject)
           LOGI("JNICALL myObject nok");
 
@@ -212,7 +213,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
         /** create un empty object linked with the MidasResource class**/
         jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
-        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
+        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;II)V");
         if (!jObjFirst)
           LOGI("JNICALL jObjFirst nok");
 
@@ -242,7 +243,8 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
             jobject myObject = env->NewObject(classe, constructor,
                                              (jint)childrenResource[i].getId(),
                                               env->NewStringUTF(childrenResource[i].getName().c_str()),
-                                              (jint)childrenResource[i].getType());
+                                              (jint)childrenResource[i].getType(),
+                                              (jint)childrenResource[i].getSize());
             if (!myObject)
               LOGI("JNICALL myObject nok");
 
@@ -289,7 +291,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 
         /** create un empty object linked with the MidasResource class**/
         jobject jObjFirst = env->NewObject(classe, (*env).GetMethodID(classe, "<init>", "()V"));
-        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;I)V");
+        jmethodID constructor = env->GetMethodID(classe, "<init>", "(ILjava/lang/String;II)V");
         if (!jObjFirst)
           LOGI("JNICALL jObjFirst nok");
 
@@ -319,7 +321,8 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
             jobject myObject = env->NewObject(classe, constructor,
                                              (jint)childrenResource[i].getId(),
                                               env->NewStringUTF(childrenResource[i].getName().c_str()),
-                                              (jint)childrenResource[i].getType());
+                                              (jint)childrenResource[i].getType(),
+                                              (jint)childrenResource[i].getSize());
             if (!myObject)
               LOGI("JNICALL myObject nok");
 

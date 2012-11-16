@@ -25,10 +25,10 @@
 MidasResource::MidasResource()
 {
     LOGI("constructor MidasResource");
-    init(-1, "", NOTSET);
+    init(-1, "", NOTSET, 0);
 
 }
-MidasResource::MidasResource(const int& id,const std::string& name,const Type& type)
+MidasResource::MidasResource(const int& id,const std::string& name,const Type& type, const int& size)
 {
     //LOGI("init");
     setId(id);
@@ -37,6 +37,7 @@ MidasResource::MidasResource(const int& id,const std::string& name,const Type& t
     LOGI("setName %s",name.c_str());
     setType(type);
     //LOGI("setType");
+    setSize(size);
 
 }
 MidasResource::~MidasResource()
@@ -44,7 +45,7 @@ MidasResource::~MidasResource()
 }
 
 //----------------------------------------------------------------------------
-void MidasResource::init(const int& id,const std::string& name,const Type& type)
+void MidasResource::init(const int& id,const std::string& name,const Type& type,const int& size)
 {
    //LOGI("init");
    setId(id);
@@ -53,6 +54,7 @@ void MidasResource::init(const int& id,const std::string& name,const Type& type)
    //LOGI("setName %s",name.c_str());
    setType(type);
    //LOGI("setType");
+   setSize(size);
 }
 //----------------------------------------------------------------------------
 void MidasResource::setId(const int& mId)
@@ -71,6 +73,11 @@ void MidasResource::setType(const Type& mType)
     this->type = mType;
 }
 //----------------------------------------------------------------------------
+void MidasResource::setSize(const int& mSize)
+{
+    this->size = mSize;
+}
+//----------------------------------------------------------------------------
 int MidasResource::getId() const
 {
     return this->id;
@@ -84,4 +91,9 @@ std::string MidasResource::getName() const
 MidasResource::Type MidasResource::getType() const
 {
     return this->type;
+}
+//----------------------------------------------------------------------------
+int MidasResource::getSize() const
+{
+    return this->size;
 }

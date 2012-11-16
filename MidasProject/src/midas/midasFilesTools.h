@@ -54,6 +54,7 @@ private :
    std::string myName;
    int myId;
    int myType;
+   int mySize;
 
 };
 
