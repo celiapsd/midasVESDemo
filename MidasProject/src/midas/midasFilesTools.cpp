@@ -260,7 +260,9 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     std::stringstream strMyId;
     strMyId<<myId;
     std::string downloadUrl = this->midas->itemDownloadUrl(strMyId.str());
-    LOGI("downloadUrl = %s",downloadUrl);
+    LOGI("downloadUrl = %s",downloadUrl.c_str());
+
+
 
     vesSharedPtr<MyProgressDelegate> PtprogressDelegate = vesSharedPtr<MyProgressDelegate>(new MyProgressDelegate);
     LOGI("MyProgressDelegate ");
@@ -280,7 +282,7 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, mItemPath);
     if (!downloadedFile.size()) {
         std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
-           LOGI("downloadedError = %s",downloadedError);
+           LOGI("downloadedError = %s",downloadedError.c_str());
       return downloadedError;
     }
     LOGI("downloadedFile = ok");

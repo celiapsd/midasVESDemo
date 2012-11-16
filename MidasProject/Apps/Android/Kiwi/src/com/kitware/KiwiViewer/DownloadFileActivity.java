@@ -229,6 +229,7 @@ public class DownloadFileActivity extends Activity {
         
 	    
 	    Log.d(TAG + "AsyncTask :WaitWhileSave ", "doInBackground("+filename[0]+")");
+	    final String file = filename[0];
 
          new Thread(new Runnable() {
       
@@ -236,21 +237,24 @@ public class DownloadFileActivity extends Activity {
         
             Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress ");
             Integer [] progress = new Integer [2];
-            progress[0] = 0;
-            int myProg = progress[0];
+            progress[0] = -1;
+            double myProg = progress[0];
       
             while (myProg < 100 && mResult == null) {
     	  
             try
               {
+              Log.d(TAG , "Thread begin Sleep");
               Thread.sleep(1000);
+              Log.d(TAG , "Thread finish sleep");
               } catch (InterruptedException e)
                 {
                 e.printStackTrace();
                 }
             Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread progress "+ myProg);
             myProg= MidasToolsNative.getProgressDownload();
-            progress[0] = myProg;
+            progress[0] = (int) myProg;
+            
             publishProgress(progress);
             Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
             }
