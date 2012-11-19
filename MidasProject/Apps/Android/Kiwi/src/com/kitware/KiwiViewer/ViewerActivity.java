@@ -548,7 +548,7 @@ public class ViewerActivity extends Activity {
 		  Log.d(TAG, "postLoadDataset(filename = "+filename+",errorTitle = "+errorTitle+",result = "+result+",errorMessage = "+errorMessage+")");
 
             dismissProgressDialog();
-            if (!result || !(errorTitle.isEmpty()) || !(errorMessage.isEmpty())) {
+            if (!result || (errorTitle.length() != 0) || (errorMessage.length() != 0)) {
                 showErrorDialog(errorTitle, errorMessage);
 
 	    }
