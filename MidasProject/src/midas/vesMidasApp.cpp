@@ -75,7 +75,8 @@ void vesMidasApp::initBeginning(int width,int height,const std::string& filename
     this->addBuiltinDataset(filename,path);
     //LOGI("file added");
     this->initCamera(width,height);
-    this->loadDataset(filename);
+    std::string file = path + "/" + filename;
+    this->loadDataset(file);
        //LOGI("file loaded");
     this->storeCameraState();
     this->initTime();
