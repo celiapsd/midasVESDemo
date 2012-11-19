@@ -47,10 +47,10 @@ public class ChooseFirstActivity extends Activity
   public static MidasResource [] communityList;
 	
 	/**Name of the current folder or item*/
-  public static String currentName;
+  //public static String currentName;
   
   /**Path of the current folder or item*/
-  public static String currentPath;
+  //public static String currentPath;
 
 	/** List of all the activities */
 	public static ArrayList<Activity> activities = new ArrayList<Activity>();
@@ -308,14 +308,14 @@ public class ChooseFirstActivity extends Activity
 //Maybe functions to delete 	
 	
  /*----------------------getters and setters----------------------------------------------------- */
-	  public static void setCurrentName(String myName)
+	 /* public static void setCurrentName(String myName)
       {
       currentName = myName;
       }
     public static String getCurrentName()
       {
       return currentName;
-      }
+      }*/
 
 	
   
@@ -327,7 +327,7 @@ public class ChooseFirstActivity extends Activity
    *  @param none
    * 
    * */
-   public static void finishAll() 
+ /*  public static void finishAll() 
     {
     if (ChooseFirstActivity.DEBUG) 
       {
@@ -340,7 +340,7 @@ public class ChooseFirstActivity extends Activity
       communityList = null;
       DownloadFileActivity.setFilename(null);
       DownloadFileActivity.setPath(null);
-    }
+    }*/
     /**
      * ----------finishAllExceptParam ---------------------<br/>
      * 
@@ -349,7 +349,7 @@ public class ChooseFirstActivity extends Activity
      *  @param String ActName
      * 
      * */
-    public static void finishAllExceptParam(String ActName) 
+    /*public static void finishAllExceptParam(String ActName) 
       {
       if (ChooseFirstActivity.DEBUG) 
         {
@@ -364,28 +364,9 @@ public class ChooseFirstActivity extends Activity
         }
       //communityList.clear();
   
-      }
+      }*/
 
-    /**
-     * ---------- testLauching---------------------<br/>
-     * 
-     * test if the activity in parameter has been launched 
-     * 
-     *  @param myActivityName string : name of the activity
-     * 
-     * */
-    public static boolean testLauching(String myActivityName)
-    {
-    for (Activity activity : ChooseFirstActivity.activities) 
-      {
-      if (activity.getTitle().toString().equals(myActivityName))
-        {
-          return true;
-        }
-      }
-    return false;
-    }
-}
+ }
 
 
 

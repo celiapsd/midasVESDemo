@@ -83,7 +83,7 @@ public class ListOfViewsActivity extends Activity {
 				/*retrieve the name of the community selected and send to SingleListItemActivity*/
 				String name = ((TextView) view).getText().toString();
 				
-				ChooseFirstActivity.setCurrentName(name);
+				//ChooseFirstActivity.setCurrentName(name);
 				
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
 				
