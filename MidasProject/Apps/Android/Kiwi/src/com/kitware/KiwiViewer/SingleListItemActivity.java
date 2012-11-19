@@ -22,11 +22,6 @@ import android.widget.TextView;
 public class SingleListItemActivity extends Activity {
 
 	/*------------------Attributes ----------------------------------------------------------*/
-	//public final static String EXTRA_MESSAGE3 = "com.kitware.KiwiViewer.MESSAGE";
-	//public int id;
-	//public String name;
-	// public Folder Child;
-
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
 
@@ -34,7 +29,7 @@ public class SingleListItemActivity extends Activity {
 	public  MidasResource [] ListChildrenMidas;
 	
 	public final static String TAG = "SingleListItemActivity";
-	/* Global Debug constant */
+	/** Global Debug constant **/
 	public static final boolean DEBUG = true;
 
 	/*---------- ON CREATE---------------------------------------------------------------------*/
@@ -68,11 +63,6 @@ public class SingleListItemActivity extends Activity {
       Log.d(TAG,Integer.toString(comm.getType().ordinal()));*/
       }
 		mainListView = (ListView) findViewById(R.id.mainListView);
-
-	  //ListChildren=ListOfViewsActivity.ListChildren;
-
-		//List<String> ListNames = new ArrayList<String>();
-		//ListNames.addAll(Arrays.asList(ListChildren));
 		listAdapter = new ArrayAdapter<String>(SingleListItemActivity.this,android.R.layout.simple_dropdown_item_1line, ListNames);
 
 		/*Set the ArrayAdapter as the ListView's adapter.*/
@@ -86,11 +76,6 @@ public class SingleListItemActivity extends Activity {
 				
 				/* retrieve the name of the community selected and send toSingleListItemActivity*/ 
 				String name = ((TextView) view).getText().toString();
-				
-     
-        
-        
-				//ListOfViewsActivity.ListChildren=ListChildren;
 				if (ListChildrenStr.length == 0 )
 				  {
 	        Log.d(TAG, "LIstChildren empty");
@@ -98,10 +83,8 @@ public class SingleListItemActivity extends Activity {
 				  }
 				else if(ListChildrenStr.length == 1 && ListChildrenStr[0].getType() == MidasResource.ITEM && ListChildrenStr[0].getName().equals(name))
 				  {
-				  //MidasResource item = new MidasResource();
 	        
 				  MidasResource item = new MidasResource(ListChildrenStr[0].getId(), ListChildrenStr[0].getName(), MidasResource.ITEM,ListChildrenStr[0].getSize() );
-	          //Log.d(TAG, communityList[i].toString());
 	          
 				  Log.d(TAG, "to DOwnload file");
 				  Intent i = new Intent(SingleListItemActivity.this, DownloadFileActivity.class);
@@ -111,14 +94,6 @@ public class SingleListItemActivity extends Activity {
 
           }
 				else 
-				  {
-				  /*MidasResource[] resources = new MidasResource[ListChildrenStr.length];
-	        for(int i=0;i<ListChildrenStr.length;i++)
-	          {
-	          resources[i] = new MidasResource(i, ListChildrenStr[i].toString(), MidasResource.FOLDER);
-	          //Log.d(TAG, communityList[i].toString());
-	          }*/
-	        
 				  Log.d(TAG, "to singleItem activity");
 				  Intent in = new Intent(SingleListItemActivity.this,SingleListItemActivity.class);
          

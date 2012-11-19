@@ -56,16 +56,6 @@ public class ListOfViewsActivity extends Activity {
 
 		ChooseFirstActivity.activities.add(this);
 
-		/*boolean isLaunched = ChooseFirstActivity.testLauching("DownloadFile");
-		boolean isLaunched2 = ChooseFirstActivity.testLauching("FileExplorer");
-		if(isLaunched||isLaunched2)
-		  {
-		  DownloadFileActivity.setFilename(null);
-      DownloadFileActivity.setPath(null);
-		  }*/
-		
-		
-		
 		mainListView = (ListView) findViewById(R.id.mainListView);
     listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, ListNames);
 
