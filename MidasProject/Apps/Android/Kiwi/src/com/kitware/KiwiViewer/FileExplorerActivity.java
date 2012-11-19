@@ -141,6 +141,9 @@ public class FileExplorerActivity extends ListActivity
 			 } 
 		 }else {
 		    root = path.get(position);
+		    
+        int Position = myPathTV.getText().toString().indexOf("/");
+        final String directory = new String (myPathTV.getText().toString().substring(Position,myPathTV.getText().toString().length()));
 			 filenameTV.setText("filename : " + file.getName());
 			 //DownloadFileActivity.setFilename(file.getName());
 			 //DownloadFileActivity.setPath(file.getAbsolutePath());
@@ -151,7 +154,7 @@ public class FileExplorerActivity extends ListActivity
 			        	
 			          Intent i = new Intent(FileExplorerActivity.this,ViewerActivity.class);
 			          i.putExtra("myItemName", file.getName());
-			          i.putExtra("myItemPath", root);
+			          i.putExtra("myItemPath", directory);
 			          startActivity(i);
 			          
 			          }
