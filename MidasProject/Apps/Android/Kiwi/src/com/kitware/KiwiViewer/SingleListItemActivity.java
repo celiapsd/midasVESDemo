@@ -41,9 +41,9 @@ public class SingleListItemActivity extends Activity {
 		ChooseFirstActivity.activities.add(this);
 		setContentView(R.layout.activity_list_of_views);
 
-		
-		
     Bundle BundleResourceCommunity = this.getIntent().getExtras();
+    String name = BundleResourceCommunity.getString("Name");
+    setTitle(name);
     Parcelable[] communitiesParcelable = BundleResourceCommunity.getParcelableArray("BundleResourceFolder");
     
     List<String> ListNames = new ArrayList<String>();
@@ -92,11 +92,11 @@ public class SingleListItemActivity extends Activity {
 
           }
 				else 
+				  {       
 				  Log.d(TAG, "to singleItem activity");
-				  Intent in = new Intent(SingleListItemActivity.this,SingleListItemActivity.class);
-         
-          
-          in.putExtra("BundleResourceFolder", ListChildrenStr);
+				  Intent in = new Intent(SingleListItemActivity.this,SingleListItemActivity.class);        
+          in.putExtra("BundleResourceFolder", ListChildren);
+          in.putExtra("Name", name);
           Log.d(TAG, "intent sent to SingleListItemActivity");
           startActivity(in);
           

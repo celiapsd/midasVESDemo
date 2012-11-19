@@ -343,21 +343,20 @@ public class DownloadFileActivity extends Activity {
 	/*---------------Open File ---------------------------------------------- */
 	public void openFile(View v) {
 		AlertDialog.Builder alt_open = new AlertDialog.Builder(this);
-		alt_open.setTitle("[" + ChooseFirstActivity.getCurrentName() + "]");
+		alt_open.setTitle("[" + filename + "]");
 		alt_open.setPositiveButton("open", new DialogInterface.OnClickListener(){
-		
-		
+
         public void onClick(DialogInterface dialog, int which)
           {
-        	
-        	
+            	
+            	
         	Intent i = new Intent(DownloadFileActivity.this,ViewerActivity.class);
-        	i.putExtra("myItemName", filename);
-        	i.putExtra("myItemPath", path);
-        	startActivity(i);
-      		//ChooseFirstActivity.finishAllExceptParam("ViewerActivity");
+          i.putExtra("myItemName", filename);
+         	i.putExtra("myItemPath", path);
+         	startActivity(i);
+       		//ChooseFirstActivity.finishAllExceptParam("ViewerActivity");
        		//ChooseFirstActivity.finishAll();
-          
+              
           }
       });
 		AlertDialog alertDialog = alt_open.create();

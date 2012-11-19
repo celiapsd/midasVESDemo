@@ -72,7 +72,7 @@ public class ListOfViewsActivity extends Activity {
 				
 				/*retrieve the name of the community selected and send to SingleListItemActivity*/
 				String name = ((TextView) view).getText().toString();
-				
+				setTitle("Communities");
 				//ChooseFirstActivity.setCurrentName(name);
 				
 				ListChildren = MidasToolsNative.findCommunityChildren(name);
@@ -86,6 +86,7 @@ public class ListOfViewsActivity extends Activity {
 		    
 		    Intent intent = new Intent(ListOfViewsActivity.this,SingleListItemActivity.class);
 		    intent.putExtra("BundleResourceFolder", ListChildren);
+		    intent.putExtra("Name", name);
 		    Log.d(TAG, "intent sent to SingleListItemActivity");
 		    startActivity(intent);
 			}
