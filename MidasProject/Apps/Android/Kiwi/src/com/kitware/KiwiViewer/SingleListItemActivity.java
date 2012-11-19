@@ -24,10 +24,9 @@ public class SingleListItemActivity extends Activity {
 	/*------------------Attributes ----------------------------------------------------------*/
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
-
-	public  MidasResource [] ListChildrenStr;
-	public  MidasResource [] ListChildrenMidas;
 	
+	public  MidasResource [] ListChildren;
+
 	public final static String TAG = "SingleListItemActivity";
 	/** Global Debug constant **/
 	public static final boolean DEBUG = true;
@@ -48,16 +47,15 @@ public class SingleListItemActivity extends Activity {
     Parcelable[] communitiesParcelable = BundleResourceCommunity.getParcelableArray("BundleResourceFolder");
     
     List<String> ListNames = new ArrayList<String>();
-    ListChildrenMidas = new MidasResource [communitiesParcelable.length];
+    ListChildren = new MidasResource [communitiesParcelable.length];
     
     int i = 0;
     for( Parcelable parcel : communitiesParcelable) 
       {
       MidasResource comm = (MidasResource) parcel;
       ListNames.add(comm.getName());
-      ListChildrenMidas[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType(), comm.getSize());
-      i++;
-      
+      ListChildren[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType(), comm.getSize());
+      i++;      
       //Log.d(TAG,comm.getName());
       /*Log.d(TAG,Integer.toString(comm.getId()));
       Log.d(TAG,Integer.toString(comm.getType().ordinal()));*/
@@ -76,16 +74,16 @@ public class SingleListItemActivity extends Activity {
 				
 				/* retrieve the name of the community selected and send toSingleListItemActivity*/ 
 				String name = ((TextView) view).getText().toString();
-				if (ListChildrenStr.length == 0 )
+				ListChildren = MidasToolsNative.findFolderChildren(name);
+
+				if (ListChildren.length == 0 )
 				  {
 	        Log.d(TAG, "LIstChildren empty");
 
 				  }
-				else if(ListChildrenStr.length == 1 && ListChildrenStr[0].getType() == MidasResource.ITEM && ListChildrenStr[0].getName().equals(name))
-				  {
-	        
-				  MidasResource item = new MidasResource(ListChildrenStr[0].getId(), ListChildrenStr[0].getName(), MidasResource.ITEM,ListChildrenStr[0].getSize() );
-	          
+				else if(ListChildren.length == 1 && ListChildren[0].getType() == MidasResource.ITEM && ListChildren[0].getName().equals(name))
+				  {      
+				  MidasResource item = new MidasResource(ListChildren[0].getId(), ListChildren[0].getName(), MidasResource.ITEM,ListChildren[0].getSize() );
 				  Log.d(TAG, "to DOwnload file");
 				  Intent i = new Intent(SingleListItemActivity.this, DownloadFileActivity.class);
 				  i.putExtra("file", item);
