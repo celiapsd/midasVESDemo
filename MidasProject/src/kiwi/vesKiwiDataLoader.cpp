@@ -44,9 +44,15 @@
 #include <vtkMetaImageReader.h>
 
 #include <vtksys/SystemTools.hxx>
+#include <android/log.h>
 
 #include <cassert>
 #include <limits>
+
+#define  LOG_TAG    "vesKiwiDataloader"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 //----------------------------------------------------------------------------
 class vesKiwiDataLoader::vesInternal
@@ -169,6 +175,7 @@ vtkSmartPointer<vtkDataSet> vesKiwiDataLoader::loadDataset(const std::string& fi
 {
   this->Internal->ErrorTitle = std::string();
   this->Internal->ErrorMessage = std::string();
+  LOGI("FILENAME %s",filename.c_str());
 
   if (!vtksys::SystemTools::FileExists(filename.c_str(), true))
     {

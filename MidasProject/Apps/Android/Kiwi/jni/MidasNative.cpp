@@ -53,8 +53,13 @@ void loadDataset(const std::string& filename, int builtinDatasetIndex/*, const s
 
     bool result = app->loadDataset(filename);
     if (result) {
-    app->resetView();
+        LOGI1("result loadDataset not null" );
+        app->resetView();
     }
+    else{
+        LOGI1("result loadDataset  null" );
+    }
+
 }
 //----------------------------------------------------------------------------
 void resetView()

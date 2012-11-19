@@ -25,6 +25,12 @@
 #include <iostream>
 
 #include <vtksys/SystemTools.hxx>
+#include <android/log.h>
+
+#define  LOG_TAG    "vesKiwiCurlDownloader"
+#define  LOGI(...)  __android_log_print(ANDROID_LOG_INFO,LOG_TAG,__VA_ARGS__)
+#define  LOGW(...)  __android_log_print(ANDROID_LOG_WARN,LOG_TAG,__VA_ARGS__)
+#define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 namespace {
 
@@ -63,6 +69,10 @@ size_t write_file(char *buffer, size_t size, size_t nmemb, void *userData)
 
 int progress_function(void* userData, double totalToDownload, double nowDownloaded, double totalToUpload, double nowUploaded)
 {
+    //LOGI("progress function nowDownloaded=%d",nowDownloaded);
+     //LOGI("progress function totalToDownload=%d",totalToDownload);
+      //LOGI("progress function totalToUpload=%d",totalToUpload);
+       //LOGI("progress function nowUploaded=%d",nowUploaded);
   return static_cast<vesKiwiCurlDownloader::ProgressDelegate*>(userData)->downloadProgress(totalToDownload, nowDownloaded);
 }
 

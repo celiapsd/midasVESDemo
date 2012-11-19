@@ -37,7 +37,7 @@ int MyProgressDelegate::downloadProgress(double totalToDownload, double nowDownl
 {
   //LOGI("downloadProgress");
 
- // LOGI("   nowDownloaded = %d",nowDownloaded);
+  //LOGI("   nowDownloaded = %d",nowDownloaded);
   //LOGI("   totalToDownload = %d",totalToDownload);
   //LOGI("   totalbytes = %d", this->totalBytes);
 

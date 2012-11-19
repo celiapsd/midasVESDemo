@@ -284,8 +284,9 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     }
     std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, mItemPath);
     if (!downloadedFile.size()) {
-        std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
-           LOGI("downloadedError = %s",downloadedError.c_str());
+      std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
+      LOGI("downloadedError = %s",downloadedError.c_str());
+
       return downloadedError;
     }
     LOGI("downloadedFile = ok");
