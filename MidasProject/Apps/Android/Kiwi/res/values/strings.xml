@@ -19,8 +19,8 @@
     <string name="Instruction2">Enter URL</string>
     <string name="http">http://</string>
     <string-array name="url_array">
-        <item>http://midas3.kitware.com/midas</item>
-        <item>http://slicer.kitware.com/midas3</item>
+        <item>midas3.kitware.com/midas</item>
+        <item>slicer.kitware.com/midas3</item>
     </string-array>
 
     <string name="Login">Login</string>

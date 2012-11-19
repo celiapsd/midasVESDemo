@@ -62,7 +62,7 @@
 	        android:id="@+id/autocomplete_URL"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
-	        android:completionThreshold="2"
+	        android:completionThreshold="1"
 	        android:layout_alignParentLeft="true"
 	        android:layout_below="@+id/urltext"
 	        android:layout_toLeftOf="@+id/ButtonGo"

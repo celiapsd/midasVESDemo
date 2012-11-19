@@ -242,7 +242,12 @@ public class ChooseFirstActivity extends Activity
 		String mEmail = email.getText().toString();
 		String mPassword = password.getText().toString();
 		String url = (String) URL.getText().toString();
-       
+		
+		if (url.length() != 0)
+		  {
+		  url = "http://"+ (String) URL.getText().toString();
+		  }
+		       
 		result = MidasToolsNative.init(url, mEmail, mPassword);
 		checkLogin(result);
 		Log.d(TAG, "checkLogin ok ");  
