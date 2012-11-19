@@ -36,16 +36,16 @@ public class DownloadFileActivity extends Activity {
 	public String TAG = "DownloadFileActivity";
 
 	/*------------------showProgressDialog--------------------------------------------------*/
-	protected void showProgressDialog(String message) {
-		Log.d(TAG, "showProgressDialog("+message+")");
-	      mProgressDialog = new ProgressDialog(this);
-              mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
-	      mProgressDialog.setIndeterminate(true);
-              mProgressDialog.setMax(100);
-	      mProgressDialog.setCancelable(false);
-	      mProgressDialog.setMessage(message);
-	      mProgressDialog.show();
-	    }
+  protected void showProgressDialog(String message) {
+    Log.d(TAG, "showProgressDialog("+message+")");
+    mProgressDialog = new ProgressDialog(this);
+    mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+    mProgressDialog.setIndeterminate(true);
+    mProgressDialog.setMax(100);
+    mProgressDialog.setCancelable(false);
+    mProgressDialog.setMessage(message);
+    mProgressDialog.show();
+	  }
 	/*------------------dismissProgressDialog--------------------------------------------------*/
 	public void dismissProgressDialog() {
 		Log.d(TAG, "dismissProgressDialog()");
@@ -225,7 +225,7 @@ public class DownloadFileActivity extends Activity {
 		
 		/*------------------------------------------------------------*/
 		@Override
-	    protected Integer doInBackground(String... filename) {
+	  protected Integer doInBackground(String... filename) {
         
 	    
 	    Log.d(TAG + "AsyncTask :WaitWhileSave ", "doInBackground("+filename[0]+")");
@@ -282,10 +282,10 @@ public class DownloadFileActivity extends Activity {
 		/*------------------------onPreExecute-------------------------------------------------------*/
 	    @Override
 	    protected void onPreExecute() {
-			  Log.d(TAG + "AsyncTask :WaitWhileSave ", "onPreExecute()");
+			Log.d(TAG + "AsyncTask :WaitWhileSave ", "onPreExecute()");
 
-	        super.onPreExecute();
-	        showProgressDialog("Saving File...");
+	      super.onPreExecute();
+	      showProgressDialog("Saving File...");
 	    }
 	    /*---------------------onProgressUpdate-----------------------------------------------------*/
 	    @Override
