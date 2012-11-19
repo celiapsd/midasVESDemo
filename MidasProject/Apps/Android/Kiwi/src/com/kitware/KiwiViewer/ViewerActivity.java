@@ -61,6 +61,9 @@ public class ViewerActivity extends Activity {
   	protected ArrayList<String> mBuiltinDatasetNames;
   
   	protected static String filePath;
+  	public static String filename;
+  	public static String path;
+  	
   	protected int datasetToOpen = -1;
   
   	protected ProgressDialog mProgressDialog = null;
@@ -324,16 +327,18 @@ public class ViewerActivity extends Activity {
         handleUriFromIntent(getIntent().getData());
 		  /*finish();*/
         Bundle FileBundle = this.getIntent().getExtras();
-        String myItemName = FileBundle.getString("myItemName");
+        filename = FileBundle.getString("myItemName");
         
-        if(!myItemName.equals("default"))
+        if(!filename.equals("default"))
           {
-          String myItemPath = FileBundle.getString("myItemPath");
-          setFilePath(myItemPath+"/"+myItemName);
+          path = FileBundle.getString("myItemPath");
+          setFilePath(path+"/"+filename);
           }
         else
           {
           setFilePath(null);
+          //setFilename(null);
+          //setPath(null);
           }
 		  
       //setFilePath(null);
@@ -646,6 +651,27 @@ public class ViewerActivity extends Activity {
   		  Log.d(TAG, "copyEarthAssets");
   	  copyAssetFileToStorage("earth.jpg");
   	}
+
+    public static String getFilename()
+      {
+      return filename;
+      }
+
+    public static void setFilename(String mFilename)
+      {
+      ViewerActivity.filename = mFilename;
+      }
+
+    public static String getPath()
+      {
+      return path;
+      }
+
+    public static void setPath(String mPath)
+      {
+      ViewerActivity.path = mPath;
+      }
+  	
 }
 
 

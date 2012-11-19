@@ -923,17 +923,19 @@ public void downloadAndOpenFile(final String url, final String downloadDir, fina
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
   		Log.d(TAG+"class MyRenderer","onSurfaceCreated");
 
+  	    if(ViewerActivity.getFilename() != null && !ViewerActivity.getFilename().equals("default") && ViewerActivity.getPath() != null)
   		boolean launchActivity = ChooseFirstActivity.testLauching("DownloadFile");
   		boolean launchActivity2 = ChooseFirstActivity.testLauching("FileExplorer");
   	  
   	  if (launchActivity || launchActivity2)
   	    {
-  	    if(!DownloadFileActivity.getFilename().isEmpty() && !DownloadFileActivity.getPath().isEmpty())
   	      {
-  	      MidasNative.initFile(100,100,DownloadFileActivity.getFilename(),DownloadFileActivity.getPath());
+  	      Log.d(TAG+"class MyRenderer","file not null");
+  	      MidasNative.initFile(100,100,ViewerActivity.getFilename(),ViewerActivity.getPath());
   	      
   	      }
   	      else{
+  	      Log.d(TAG+"class MyRenderer","file null");
             MidasNative.init(100,100);
   	      }
   	    }
