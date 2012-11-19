@@ -23,8 +23,8 @@ public class ListOfViewsActivity extends Activity {
 	/*----------Attributes-----------------------------------------------------------------*/
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
-	public static MidasResource [] ListChildren;
-	public static MidasResource [] Communities;
+	public  MidasResource [] ListChildren;
+	public  MidasResource [] Communities;
 	public final static String TAG = "ListOfViewsActivity";
 	/** Global Debug constant */
 	public static final boolean DEBUG = true;

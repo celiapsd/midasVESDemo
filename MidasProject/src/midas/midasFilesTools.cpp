@@ -59,6 +59,7 @@ int midasFilesTools::init(const std::string& url,const std::string& email,const 
 std::vector<MidasResource> midasFilesTools::findCommunities()
 {
     LOGI("findCommunities");
+    std::vector<MidasResource> currentResources;
     this->midas->listCommunities();
 
     vectorOfStrings folderNames = this->midas->folderNames();
@@ -69,11 +70,12 @@ std::vector<MidasResource> midasFilesTools::findCommunities()
     for (size_t i = 0; i<folderNames.size(); ++i)
     {
         MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::COMMUNITY, 0);
-        resources.push_back(res);
+        currentResources.push_back(res);
+        database.push_back(res);
     }
     LOGI("ressource ok");
 
-    return resources;
+    return currentResources;
 }
 //----------------------------------------------------------------------------
 void midasFilesTools::setHost(const std::string& url)
@@ -114,21 +116,21 @@ int midasFilesTools::login (const std::string& email,const std::string& password
 std::vector<MidasResource> midasFilesTools::findCommunityChildren(const std::string& communityName)
 {
     LOGI("findCommunityChildren");
-    std::vector<MidasResource> fail;
+    std::vector<MidasResource> currentResources;
 
     int communityId;
 
-    for (size_t i = 0; i < resources.size(); ++i)
+    for (size_t i = 0; i < database.size(); ++i)
     {
-        if (resources[i].getName() == communityName) {
-          communityId = resources[i].getId();
+        if (database[i].getName() == communityName) {
+          communityId = database[i].getId();
           LOGI("communityId(resources) %d",communityId);
       }
     }
 
     if (!communityId) {
         LOGI("failed to find community: %s", communityName.c_str());
-        return fail;
+        return currentResources;
     }
     std::stringstream strCommunityId;
     strCommunityId<<communityId;
@@ -138,22 +140,21 @@ std::vector<MidasResource> midasFilesTools::findCommunityChildren(const std::str
     if (!result)
     {
         LOGI("failed to find children");
-        return fail;
+        return currentResources;
     }
 
     vectorOfStrings folderNames = midas->folderNames();
     vectorOfStrings folderIds = this->midas->folderIds();
 
-    resources.clear();
-
     for (size_t i = 0; i<folderNames.size(); ++i)
     {
         MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::FOLDER, 0);
-        resources.push_back(res);
+        currentResources.push_back(res);
+        database.push_back(res);
     }
     LOGI("ressource ok");
 
-    return resources;
+    return currentResources;
 }
 //----------------------------------------------------------------------------
 std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string& mName)
@@ -163,17 +164,18 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
     int mId;
     int mType = 0;
     int mSize;
+    std::vector<MidasResource> currentResources;
 
-    for (size_t i = 0; i < resources.size(); ++i)
+
+    for (size_t i = 0; i < database.size(); ++i)
     {
-        if (resources[i].getName() == mName) {
-          mId = resources[i].getId();
+        if (database[i].getName() == mName) {
+          mId = database[i].getId();
           LOGI("myId(resources) %d",mId);
-          mType = resources[i].getType();
-          mSize = resources[i].getSize();
+          mType = database[i].getType();
+          mSize = database[i].getSize();
       }
     }
-    resources.clear();
 
     switch(mType)
     {
@@ -200,17 +202,19 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
             for (size_t i = 0; i<folderNames.size(); ++i)
             {
                 MidasResource res(atoi(folderIds[i].c_str()), folderNames[i], MidasResource::FOLDER, 0);
-                resources.push_back(res);
+                currentResources.push_back(res);
+                database.push_back(res);
             }
             for (size_t i = 0; i<itemNames.size(); ++i)
             {
                 MidasResource res(atoi(itemIds[i].c_str()), itemNames[i], MidasResource::ITEM,(int)itemBytes[i] );
-                resources.push_back(res);
+                currentResources.push_back(res);
+                database.push_back(res);
             }
             if (folderNames.empty() && itemNames.empty())
             {
                 MidasResource res(-1, "Folder empty", MidasResource::NOTSET, (int)0 );
-                resources.push_back(res);
+                currentResources.push_back(res);
             }
             LOGI("ressource ok");
             break;
@@ -218,8 +222,7 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
         case MidasResource::ITEM:
             {
             MidasResource res(mId, mName, MidasResource::ITEM, mSize);
-            resources.push_back(res);
-
+            currentResources.push_back(res);
             LOGI("ressource ok");
             break;
             }
@@ -228,7 +231,7 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
             LOGI("type = 0 --> finalList null");
             break;
     }
-    return resources;
+    return currentResources;
 }
 //----------------------------------------------------------------------------
 /*std::string midasFilesTools::ToString(const size_t& sz)
@@ -247,12 +250,12 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
 
     myName = itemName;
 
-    for (size_t i = 0; i < resources.size(); ++i)
+    for (size_t i = 0; i < database.size(); ++i)
     {
-        if (resources[i].getName() == itemName && resources[i].getType() == MidasResource::ITEM) {
-          myId = resources[i].getId();
-          myType = resources[i].getType();
-          mySize = resources[i].getSize();
+        if (database[i].getName() == itemName && database[i].getType() == MidasResource::ITEM) {
+          myId = database[i].getId();
+          myType = database[i].getType();
+          mySize = database[i].getSize();
       }
     }
     LOGI("itemId = %d",myId);
@@ -294,18 +297,18 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
 double midasFilesTools::getProgressDownload ()
 {
     double value = 0;
-    this->mutex->Lock();
+    //this->mutex->Lock();
     value = this->ProgressDownload;
-    LOGI("getProgressDownload = %d", value);
-    this->mutex->Unlock();
+    //LOGI("getProgressDownload = %d", value);
+    //this->mutex->Unlock();
     return value;
 }
 
 //----------------------------------------------------------------------------
 void midasFilesTools::setProgressDownload(double progress)
 {
-    this->mutex->Lock();
+   // this->mutex->Lock();
     //LOGI("setProgressDownload = %d",progress);
     this->ProgressDownload = progress;
-    this->mutex->Unlock();
+    //this->mutex->Unlock();
 }

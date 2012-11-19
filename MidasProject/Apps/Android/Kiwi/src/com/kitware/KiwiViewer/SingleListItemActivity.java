@@ -30,8 +30,8 @@ public class SingleListItemActivity extends Activity {
 	private ListView mainListView;
 	private ArrayAdapter<String> listAdapter;
 
-	public static MidasResource [] ListChildrenStr;
-	public static MidasResource [] ListChildrenMidas;
+	public  MidasResource [] ListChildrenStr;
+	public  MidasResource [] ListChildrenMidas;
 	
 	public final static String TAG = "SingleListItemActivity";
 	/* Global Debug constant */
@@ -100,7 +100,7 @@ public class SingleListItemActivity extends Activity {
 	        Log.d(TAG, "LIstChildren empty");
 
 				  }
-				else if(ListChildrenStr.length == 1)
+				else if(ListChildrenStr.length == 1 && ListChildrenStr[0].getType() == MidasResource.ITEM && ListChildrenStr[0].getName().equals(name))
 				  {
 				  //MidasResource item = new MidasResource();
 	        

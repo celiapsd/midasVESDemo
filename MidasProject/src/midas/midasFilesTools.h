@@ -47,12 +47,7 @@ private :
 
    vtkSimpleMutexLock* mutex;
 
-   /*std::vector<std::string> folderNames;
-   std::vector<std::string> folderIds;
-   std::vector<std::string> itemNames;
-   std::vector<std::string> itemIds;
-*/
-   std::vector<MidasResource> resources;
+   std::vector<MidasResource> database;
 
    std::string myName;
    int myId;
