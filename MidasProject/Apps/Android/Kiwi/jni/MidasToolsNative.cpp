@@ -54,10 +54,10 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 (JNIEnv * env, jobject obj, jstring nameChildren);
 
 JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadItem
-(JNIEnv * env, jobject obj, jstring nameItem, jstring pathItem);
+(JNIEnv * env, jobject obj, jstring nameItem, jstring pathItem, jobject loader);
 
-JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
-(JNIEnv * env, jobject obj);
+/*JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
+(JNIEnv * env, jobject obj);*/
 
 };
 //-------------------------------------------------------------------------------------------
@@ -340,7 +340,7 @@ JNIEXPORT jobjectArray JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_find
 }
 //-------------------------------------------------------------------------------------------
 JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadItem
-(JNIEnv * env, jobject obj, jstring nameItem, jstring pathItem)
+(JNIEnv * env, jobject obj, jstring nameItem, jstring pathItem, jobject loader)
 {
     const char *javaStrName = env->GetStringUTFChars(nameItem, NULL);
     const char *javaStrPath = env->GetStringUTFChars(pathItem, NULL);
@@ -354,16 +354,29 @@ JNIEXPORT jstring JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_downloadI
       env->ReleaseStringUTFChars(nameItem, javaStrName);
       env->ReleaseStringUTFChars(pathItem, javaStrPath);
 
-      std::string result = appTools->downloadItem(nameStr,pathStr);
+      //jclass cls = env->FindClass("com/kitware/KiwiViewer/DownloadFileActivity");
+     /* jclass cls = env->GetObjectClass( loader);
+      if(cls)
+        LOGI("JNICALL cls ok");
+     // jfieldID fid = env->GetFieldID(cls,"mProgressDialog","com/kitware/KiwiViewer/DownloadFileActivity");
+       jfieldID fid = env->GetFieldID(cls, "mProgressDialog", "Landroid/app/ProgressDialog;");
+      if(fid)
+        LOGI("JNICALL fid ok");
+      jobject jProgressDialog = env->GetObjectField(loader, fid);
+     if(jProgressDialog)
+        LOGI("JNICALL jProgressDialog ok");
+      //std::string result = appTools->downloadItem(nameStr,pathStr, env, jProgressDialog);*/
+      std::string result = appTools->downloadItem(nameStr,pathStr, env, loader);
+
       return(env->NewStringUTF(result.c_str()));
     }
 
 
 }
 //-------------------------------------------------------------------------------------------
-JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
+/*JNIEXPORT jdouble JNICALL Java_com_kitware_KiwiViewer_MidasToolsNative_getProgressDownload
 (JNIEnv * env, jobject obj)
 {
     LOGI("getProgressDownload");
     return appTools->getProgressDownload();
-}
+}*/

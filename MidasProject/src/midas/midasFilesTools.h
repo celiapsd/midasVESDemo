@@ -11,6 +11,8 @@
 #include <vesKiwiCurlDownloader.h>
 #include <vtkMutexLock.h>
 
+#include <jni.h>
+
 
 // C++ includes
 #include <string>
@@ -32,18 +34,19 @@ public :
    std::vector<MidasResource> findCommunities();
    std::vector<MidasResource> findCommunityChildren(const std::string& communityName);
    std::vector<MidasResource> findFolderChildren(const std::string& mName);
-   std::string downloadItem(const std::string& nameItem,const std::string& pathItem);
+   std::string downloadItem(const std::string& nameItem,const std::string& pathItem, JNIEnv* env, jobject loader);
 
    //static std::string ToString(const size_t& sz);
-   double getProgressDownload();
+   JNIEnv* getJNIEnv();
+   void setJNIEnv (JNIEnv* env);
    void setProgressDownload(double progress);
 
 
 private :
 
    vesMidasClient* midas;
+   JNIEnv* mEnv;
 
-   double ProgressDownload;
 
    vtkSimpleMutexLock* mutex;
 

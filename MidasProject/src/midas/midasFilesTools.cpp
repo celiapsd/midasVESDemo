@@ -18,6 +18,7 @@
 #include <MyProgressDelegate.h>
 #include <vesSharedPtr.h>
 #include <vtkMutexLock.h>
+#include <jni.h>
 
 
 
@@ -34,8 +35,9 @@ midasFilesTools::midasFilesTools()
 {
     LOGI("constructor MidasFilesTools");
     this->midas = new vesMidasClient();
-    this->ProgressDownload = -1;
+   // this->ProgressDownload = -1;
     this->mutex = new vtkSimpleMutexLock() ;
+    this->mEnv = new JNIEnv();
 
 }
 midasFilesTools::~midasFilesTools()
@@ -244,7 +246,7 @@ std::vector<MidasResource> midasFilesTools::findFolderChildren(const std::string
   return ss.str();
 }*/
 //----------------------------------------------------------------------------
-std::string midasFilesTools::downloadItem(const std::string& itemName,const std::string& itemPath)
+std::string midasFilesTools::downloadItem(const std::string& itemName,const std::string& itemPath, JNIEnv* env, jobject loader)
 {
     std::string mItemPath = itemPath;
 
@@ -270,21 +272,47 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
     vesSharedPtr<MyProgressDelegate> PtprogressDelegate = vesSharedPtr<MyProgressDelegate>(new MyProgressDelegate);
     LOGI("MyProgressDelegate ");
     PtprogressDelegate->setFilesTool(this);
+    LOGI("MyProgressDelegate setFilesTool ok");
+
+    jclass cls = env->GetObjectClass( loader);
+    if(cls)
+      LOGI("JNICALL cls ok");
+    jfieldID fid = env->GetFieldID(cls, "mProgressDialog", "Landroid/app/ProgressDialog;");
+    if(fid)
+     LOGI("JNICALL fid ok");
+    jobject jProgressDialog = env->GetObjectField(loader, fid);
+   if(jProgressDialog)
+   {
+     LOGI("JNICALL jProgressDialog ok");
+     PtprogressDelegate->setProgressDialog(&jProgressDialog);
+     LOGI("MyProgressDelegate setProgressDialog ok");
+   }
+    else
+    {
+        LOGI("MyProgressDelegate setProgressDialog nok");
+        return NULL;
+    }
+
+    setJNIEnv(env);
+     LOGI("MyProgressDelegate setJNIEnv ok");
     PtprogressDelegate->setTotalBytes(mySize);
+
     LOGI("setFilesTool ");
 
-    vesKiwiCurlDownloader downloader;
+    //vesKiwiCurlDownloader downloader;
+    vesSharedPtr<vesKiwiCurlDownloader> downloader = vesSharedPtr<vesKiwiCurlDownloader>(new vesKiwiCurlDownloader);
+
     LOGI("downloader");
-    downloader.setProgressDelegate(PtprogressDelegate);
+    downloader->setProgressDelegate(PtprogressDelegate);
     LOGI("setProgressDelegate");
 
     if(!mItemPath.size())
     {
         mItemPath = "/tmp";
     }
-    std::string downloadedFile = downloader.downloadUrlToDirectory(downloadUrl, mItemPath);
+    std::string downloadedFile = downloader->downloadUrlToDirectory(downloadUrl, mItemPath);
     if (!downloadedFile.size()) {
-      std::string downloadedError = downloader.errorTitle() + downloader.errorMessage();
+      std::string downloadedError = downloader->errorTitle() + downloader->errorMessage();
       LOGI("downloadedError = %s",downloadedError.c_str());
 
       return downloadedError;
@@ -295,21 +323,31 @@ std::string midasFilesTools::downloadItem(const std::string& itemName,const std:
 
 }
 //----------------------------------------------------------------------------
-double midasFilesTools::getProgressDownload ()
+JNIEnv* midasFilesTools::getJNIEnv ()
 {
-    double value = 0;
+    /*double value = 0;
     //this->mutex->Lock();
     value = this->ProgressDownload;
     //LOGI("getProgressDownload = %d", value);
-    //this->mutex->Unlock();
-    return value;
+    //this->mutex->Unlock();*/
+    return mEnv;
+}
+//----------------------------------------------------------------------------
+void midasFilesTools::setJNIEnv (JNIEnv* env)
+{
+    /*double value = 0;
+    //this->mutex->Lock();
+    value = this->ProgressDownload;
+    //LOGI("getProgressDownload = %d", value);
+    //this->mutex->Unlock();*/
+    this->mEnv = env;
 }
 
 //----------------------------------------------------------------------------
-void midasFilesTools::setProgressDownload(double progress)
+/*void midasFilesTools::setProgressDownload(double progress)
 {
    // this->mutex->Lock();
     //LOGI("setProgressDownload = %d",progress);
     this->ProgressDownload = progress;
     //this->mutex->Unlock();
-}
+}*/

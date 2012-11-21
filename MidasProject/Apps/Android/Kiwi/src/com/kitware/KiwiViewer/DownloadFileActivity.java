@@ -27,11 +27,9 @@ public class DownloadFileActivity extends Activity {
 	private static String filename;
 	private static String path;
 	
-	//public static Item myItem;
 	public static MidasResource myItem;
 	public static TextView location;
-	//private static String url;
-	protected ProgressDialog mProgressDialog;
+	public ProgressDialog mProgressDialog;
 	private static final boolean DEBUG = true;
 	public String TAG = "DownloadFileActivity";
 
@@ -62,16 +60,10 @@ public class DownloadFileActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		ChooseFirstActivity.activities.add(this);
 		setContentView(R.layout.activity_open_file);
-		
-		/*myItem = retrieveItemAtributes(SingleListItemActivity.ListChildren);
-		setTitle(" Item " + myItem.getItem_name());
-		setFilename(myItem.getItem_name());*/
-		
+
 		Bundle BundleResourceCommunity = this.getIntent().getExtras();
 		if(BundleResourceCommunity.keySet().contains("file"))
 		  {
-		  
-		  
 		  Parcelable itemParcelable = BundleResourceCommunity.getParcelable("file");  
 		  myItem = new MidasResource (((MidasResource) itemParcelable).getId(), ((MidasResource) itemParcelable).getName(), ((MidasResource) itemParcelable).getSize(),((MidasResource) itemParcelable).getType());
 		  setTitle(" Item " + myItem.getName());
@@ -232,18 +224,19 @@ public class DownloadFileActivity extends Activity {
 	    final String file = filename[0];
 	    
 	    /**thread for download*/
-	  new Thread(new Runnable() {
+	  /*new Thread(new Runnable() {
       
-        public void run() {
+        public void run() {*/
+	   // pbo.setProgressDialog(mProgressDialog);
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread download  ");
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "download getPriority ()"+ Thread.currentThread().getPriority());
-            mResult = MidasToolsNative.downloadItem(file,mPath);
+            mResult = MidasToolsNative.downloadItem( file, mPath, DownloadFileActivity.this);
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "download finished");
                 
-        }}).run();
+       // }}).run();
 	    
 	     /**thread for progress*/
-	  new Thread(new Runnable() {
+	  /*new Thread(new Runnable() {
       
       public void run() {
     
@@ -253,7 +246,7 @@ public class DownloadFileActivity extends Activity {
         progress[0] = -1;
         double myProg = progress[0];
   
-        while (myProg < 100 && mResult == null) {
+        while (myProg < 1 && mResult == null) {
     
         try
           {
@@ -273,7 +266,7 @@ public class DownloadFileActivity extends Activity {
         Log.d(TAG + "AsyncTask :WaitWhileSave ", "new thread ("+progress[0]+")");
         }
       }
-    }).start();
+    }).run();*/
       
       Log.d(TAG, mResult);
       return 0;
@@ -293,6 +286,7 @@ public class DownloadFileActivity extends Activity {
 			Log.d(TAG + "AsyncTask :WaitWhileSave ", "onProgressUpdate()");
 
 	        super.onProgressUpdate(progress);
+	        Log.d(TAG, "progress = "+mProgressDialog.getProgress());
 	        mProgressDialog.setProgress(progress[0]);
 	    }
 	     /*------------------onPostExecute----------------------------------------------------------*/

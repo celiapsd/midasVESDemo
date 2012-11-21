@@ -20,6 +20,8 @@
 
 package com.kitware.KiwiViewer;
 
+import android.app.ProgressDialog;
+
 
 public class MidasToolsNative {
 
@@ -31,7 +33,7 @@ public class MidasToolsNative {
      public static native synchronized MidasResource[] findCommunities();
      public static native synchronized MidasResource[] findCommunityChildren(String nameCommunity);
      public static native synchronized MidasResource[] findFolderChildren(String nameChildren);
-     public static native synchronized String downloadItem(String nameItem,String pathItem);
+     public static native synchronized String downloadItem( String nameItem,String pathItem, DownloadFileActivity loader);
      public static native synchronized double getProgressDownload();
       
 }
