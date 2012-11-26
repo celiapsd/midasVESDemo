@@ -21,151 +21,141 @@ import android.widget.TextView;
 /*------------------------------------------------------------------------------------------*/
 public class FileExplorerActivity extends ListActivity 
 {
- 
-  /*------------------Attributes -----------------------------------------------------------*/
-	 private List<String> item = null;
-	 private List<String> path = null;
-	 private static  String root;
-	 public static TextView myPathTV=null;
-	 public static TextView filenameTV=null;
-	 private Button saveButton;
 
-	 /*-------------onCreate ------------------------------------------------------------------*/
-    @Override
-    public void onCreate(Bundle savedInstanceState) 
+/*------------------Attributes -----------------------------------------------------------*/
+private List<String> item = null;
+private List<String> path = null;
+private static  String root;
+public static TextView myPathTV=null;
+public static TextView filenameTV=null;
+private Button saveButton;
+
+/*-------------onCreate ------------------------------------------------------------------*/
+@Override
+public void onCreate(Bundle savedInstanceState) 
+  {
+
+  super.onCreate(savedInstanceState);
+  setContentView(R.layout.single_list_item_view);
+
+  myPathTV = (TextView)findViewById(R.id.path);
+  filenameTV=(TextView)findViewById(R.id.filename);
+
+  Bundle typeSearchBundle = this.getIntent().getExtras();
+  String typeSearch = typeSearchBundle.getString("mySearch");
+
+  if (typeSearch.equals("itemSearch"))
     {
-        
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.single_list_item_view);
-        ChooseFirstActivity.activities.add(this);
-        
-        myPathTV = (TextView)findViewById(R.id.path);
-        filenameTV=(TextView)findViewById(R.id.filename);
-        
-        Bundle typeSearchBundle = this.getIntent().getExtras();
-        String typeSearch = typeSearchBundle.getString("mySearch");
-        
-        if (typeSearch.equals("itemSearch"))
-          {
-         
-          filenameTV.setText("filename : " + "null");
-          setRoot(Environment.getExternalStorageDirectory().getPath());         
-          getDir(getRoot());
-          }
-        else if (typeSearch.equals("directorySearch"))
-          {
-          final String filename = typeSearchBundle.getString("myfile");
-          filenameTV.setText("filename : " + filename);
-          setRoot(Environment.getExternalStorageDirectory().getPath());
-          getDir(getRoot());
-          saveButton = (Button) findViewById(R.id.saveDirectory);
-          saveButton.setOnClickListener(new View.OnClickListener(){ 
-            public void onClick(View view) 
-              { 
-              String directory= new String(myPathTV.getText().toString());
-              int Position = directory.indexOf("/");
-              directory = directory.substring(Position,directory.length());
-              Intent in=new Intent(FileExplorerActivity.this,DownloadFileActivity.class);
-              //in.putExtra("myItemName", file.getName());
-              in.putExtra("myItemPath", directory);
-              in.putExtra("myItemName", filename);
-               startActivity(in); 
-              }
-          });
-          }
-        
-        //filenameTV.setText("filename : " + DownloadFileActivity.getFilename());
-
-        
+    filenameTV.setText("filename : " + "null");
+    setRoot(Environment.getExternalStorageDirectory().getPath());         
+    getDir(getRoot());
     }
-    /*----------------- Assessors-------------------------------------------------------------*/
-    public static String getRoot()
-      {
-      return root;
-      }
-
-    public static void setRoot(String myRoot)
-      {
-      root = myRoot;
-      }
-
-    /*----------------- getDir -------------------------------------------------------------*/
-    private void getDir(String dirPath)
+  else if (typeSearch.equals("directorySearch"))
     {
-	     myPathTV.setText("Location: " + dirPath);
-	     item = new ArrayList<String>();
-	     path = new ArrayList<String>();
-	     File f = new File(dirPath);
-	     File[] files = f.listFiles();
-	     
-	     if(!dirPath.equals(getRoot()))
-	     {
-	      item.add(getRoot());
-	      path.add(getRoot());
-	      item.add("../");
-	      path.add(f.getParent()); 
-	     }
-     
-	     for(int i=0; i < files.length; i++)
-	     {
-	    	 File file = files[i];
-	      
-	    	 if(!file.isHidden() && file.canRead())
-	    	 {
-	    		 path.add(file.getPath());
-	    		 if(file.isDirectory())
-	    		 {
-	    			 item.add(file.getName() + "/");
-	    		 }else{
-	    			 item.add(file.getName());
-	    		 }
-	    	 } 
-	     }
-	     ArrayAdapter<String> fileList =new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
-	     setListAdapter(fileList); 
+    final String filename = typeSearchBundle.getString("myfile");
+    filenameTV.setText("filename : " + filename);
+    setRoot(Environment.getExternalStorageDirectory().getPath());
+    getDir(getRoot());
+    saveButton = (Button) findViewById(R.id.saveDirectory);
+    saveButton.setOnClickListener(new View.OnClickListener()
+      { 
+      public void onClick(View view) 
+        { 
+        String directory= new String(myPathTV.getText().toString());
+        int Position = directory.indexOf("/");
+        directory = directory.substring(Position,directory.length());
+        Intent in=new Intent(FileExplorerActivity.this,DownloadFileActivity.class);
+        in.putExtra("myItemPath", directory);
+        in.putExtra("myItemName", filename);
+        startActivity(in); 
+        }
+      });
     }
-   
-    /*------------------onListItemClick-------------------------------------------------------------------*/
-	 @Override
-	 protected void onListItemClick(ListView l, View v, int position, long id) 
-	 {
-	  
-		 final File file = new File(path.get(position));
-	  
-		 if (file.isDirectory())
-		 {
-			 if(file.canRead()){
-				 getDir(path.get(position));
-			 }else{
-				 new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "] folder can't be read!").setPositiveButton("OK", null).show(); 
-			 } 
-		 }else {
-		    root = path.get(position);
-		    
-        int Position = myPathTV.getText().toString().indexOf("/");
-        final String directory = new String (myPathTV.getText().toString().substring(Position,myPathTV.getText().toString().length()));
-			 filenameTV.setText("filename : " + file.getName());
-			 //DownloadFileActivity.setFilename(file.getName());
-			 //DownloadFileActivity.setPath(file.getAbsolutePath());
-			 AlertDialog.Builder alt_open = new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "]").setPositiveButton("open", new DialogInterface.OnClickListener(){
-						
-			        public void onClick(DialogInterface dialog, int which)
-			          {
-			        	
-			          Intent i = new Intent(FileExplorerActivity.this,ViewerActivity.class);
-			          i.putExtra("myItemName", file.getName());
-			          i.putExtra("myItemPath", directory);
-			          startActivity(i);
-			          
-			          }
-			      });
-			AlertDialog alertDialog = alt_open.create();
-					 
-			alertDialog.show();
-			 
-			 
 
-		 }
-	 }
-	
+  }
+/*----------------- Assessors-------------------------------------------------------------*/
+public static String getRoot()
+  {
+  return root;
+  }
+
+public static void setRoot(String myRoot)
+  {
+  root = myRoot;
+  }
+
+/*----------------- getDir -------------------------------------------------------------*/
+private void getDir(String dirPath)
+  {
+  myPathTV.setText("Location: " + dirPath);
+  item = new ArrayList<String>();
+  path = new ArrayList<String>();
+  File f = new File(dirPath);
+  File[] files = f.listFiles();
+
+  if(!dirPath.equals(getRoot()))
+    {
+    item.add(getRoot());
+    path.add(getRoot());
+    item.add("../");
+    path.add(f.getParent()); 
+    }
+
+  for(int i=0; i < files.length; i++)
+    {
+    File file = files[i];
+
+    if(!file.isHidden() && file.canRead())
+      {
+      path.add(file.getPath());
+      if(file.isDirectory())
+        {
+        item.add(file.getName() + "/");
+        }else{
+        item.add(file.getName());
+        }
+      } 
+    }
+  ArrayAdapter<String> fileList =new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+  setListAdapter(fileList); 
+  }
+
+/*------------------onListItemClick-------------------------------------------------------------------*/
+@Override
+protected void onListItemClick(ListView l, View v, int position, long id) 
+  {
+
+  final File file = new File(path.get(position));
+
+  if (file.isDirectory())
+    {
+    if(file.canRead())
+      {
+      getDir(path.get(position));
+      }else
+        {
+        new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "] folder can't be read!").setPositiveButton("OK", null).show(); 
+        } 
+    }else 
+      {
+      root = path.get(position);
+
+      int Position = myPathTV.getText().toString().indexOf("/");
+      final String directory = new String (myPathTV.getText().toString().substring(Position,myPathTV.getText().toString().length()));
+      filenameTV.setText("filename : " + file.getName());
+      AlertDialog.Builder alt_open = new AlertDialog.Builder(this).setIcon(R.drawable.ic_launcher).setTitle("[" + file.getName() + "]").setPositiveButton("open", new DialogInterface.OnClickListener()
+        {
+        public void onClick(DialogInterface dialog, int which)
+          {
+          Intent i = new Intent(FileExplorerActivity.this,ViewerActivity.class);
+          i.putExtra("myItemName", file.getName());
+          i.putExtra("myItemPath", directory);
+          startActivity(i);
+          }
+        });
+      AlertDialog alertDialog = alt_open.create();
+      alertDialog.show();
+      }
+  }
+
 }	

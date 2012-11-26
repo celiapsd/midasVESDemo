@@ -37,66 +37,71 @@ import java.util.ArrayList;
 
 public class DatasetListActivity extends Activity {
 
-  public ListView mListView;
-  
-  /** Global Debug constant */
-  public static final boolean DEBUG = true;
+public ListView mListView;
 
-  /** logging tag */
-  public static String TAG = "DatasetListActivity";
+/** Global Debug constant */
+public static final boolean DEBUG = true;
 
-  @Override
-  protected void onCreate(Bundle savedInstanceState) {
+/** logging tag */
+public static String TAG = "DatasetListActivity";
 
-    super.onCreate(savedInstanceState);
-    if (DatasetListActivity.DEBUG) 
+@Override
+protected void onCreate(Bundle savedInstanceState) 
+  {
+
+  super.onCreate(savedInstanceState);
+  if (DatasetListActivity.DEBUG) 
+    {
+    Log.d(TAG, "onCreate()");
+    }
+
+  // Make us non-modal, so that others can receive touch events.
+  getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
+
+  // ...but notify us that it happened.
+  getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
+
+  setTitle("Open Data");
+
+  this.setContentView(R.layout.datasetlistactivity);
+  ArrayList<String> datasets = getIntent().getExtras().getStringArrayList("com.kitware.KiwiViewer.bundle.DatasetList");
+  ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,datasets);
+  mListView = (ListView) findViewById(R.id.listView);
+  mListView.setAdapter(adapter);
+  mListView.setOnItemClickListener(new OnItemClickListener() 
+    {
+
+    public void onItemClick(AdapterView<?> adapterView, View view, int pos,
+        long arg3) 
       {
-      Log.d(TAG, "onCreate()");
-      }
-
-    // Make us non-modal, so that others can receive touch events.
-    getWindow().setFlags(LayoutParams.FLAG_NOT_TOUCH_MODAL, LayoutParams.FLAG_NOT_TOUCH_MODAL);
-
-    // ...but notify us that it happened.
-    getWindow().setFlags(LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH, LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH);
-
-    setTitle("Open Data");
-
-    this.setContentView(R.layout.datasetlistactivity);
-    ArrayList<String> datasets = getIntent().getExtras().getStringArrayList("com.kitware.KiwiViewer.bundle.DatasetList");
-    ArrayAdapter<String> adapter = new ArrayAdapter<String>(getBaseContext(),android.R.layout.simple_list_item_1,datasets);
-    mListView = (ListView) findViewById(R.id.listView);
-    mListView.setAdapter(adapter);
-    mListView.setOnItemClickListener(new OnItemClickListener() {
-    	
-      public void onItemClick(AdapterView<?> adapterView, View view, int pos,
-          long arg3) {
-        String value = (String) adapterView.getItemAtPosition(pos);
-        Intent curIntent = new Intent();
-        curIntent.putExtra("com.kitware.KiwiViewer.bundle.DatasetName",value);
-        curIntent.putExtra("com.kitware.KiwiViewer.bundle.DatasetOffset",pos);
-        setResult(Activity.RESULT_OK, curIntent);
-        finish();
+      String value = (String) adapterView.getItemAtPosition(pos);
+      Intent curIntent = new Intent();
+      curIntent.putExtra("com.kitware.KiwiViewer.bundle.DatasetName",value);
+      curIntent.putExtra("com.kitware.KiwiViewer.bundle.DatasetOffset",pos);
+      setResult(Activity.RESULT_OK, curIntent);
+      finish();
       }
     });
 
   }
 
-  @Override
-  public boolean onTouchEvent(MotionEvent event) {
-    // If we've received a touch notification that the user has touched
-    // outside the app, finish the activity.
+@Override
+public boolean onTouchEvent(MotionEvent event) 
+  {
+  // If we've received a touch notification that the user has touched
+  // outside the app, finish the activity.
   if (DatasetListActivity.DEBUG) 
     {
     Log.d(TAG, "onTouchEvent()");
     }
-    if (MotionEvent.ACTION_OUTSIDE == event.getAction()) {
-      finish();
-      return true;
+  if (MotionEvent.ACTION_OUTSIDE == event.getAction()) 
+    {
+    finish();
+    return true;
     }
 
-    // Delegate everything else to Activity.
-    return super.onTouchEvent(event);
+  // Delegate everything else to Activity.
+  return super.onTouchEvent(event);
   }
 
 }
