@@ -21,41 +21,41 @@
 class midasFilesTools
 {
 
-public :
+  public :
 
-   typedef midasFilesTools Self;
-   midasFilesTools();
-   virtual ~midasFilesTools();
+    typedef midasFilesTools Self;
+    midasFilesTools();
+    virtual ~midasFilesTools();
 
-   int init(const std::string& url,const std::string& email,const std::string& password);
-   void setHost(const std::string& url);
-   int login(const std::string& email,const std::string& password);
+    int init(const std::string& url,const std::string& email,const std::string& password);
+    void setHost(const std::string& url);
+    int login(const std::string& email,const std::string& password);
 
-   std::vector<MidasResource> findCommunities();
-   std::vector<MidasResource> findCommunityChildren(const std::string& communityName);
-   std::vector<MidasResource> findFolderChildren(const std::string& mName);
-   std::string downloadItem(const std::string& nameItem,const std::string& pathItem, JNIEnv* env, jobject loader);
+    std::vector<MidasResource> findCommunities();
+    std::vector<MidasResource> findCommunityChildren(const std::string& communityName);
+    std::vector<MidasResource> findFolderChildren(const std::string& mName);
+    std::string downloadItem(const std::string& nameItem,const std::string& pathItem, JNIEnv* env, jobject loader);
 
-   //static std::string ToString(const size_t& sz);
-   JNIEnv* getJNIEnv();
-   void setJNIEnv (JNIEnv* env);
-   void setProgressDownload(double progress);
-
-
-private :
-
-   vesMidasClient* midas;
-   JNIEnv* mEnv;
+    //static std::string ToString(const size_t& sz);
+    JNIEnv* getJNIEnv();
+    void setJNIEnv (JNIEnv* env);
+    void setProgressDownload(double progress);
 
 
-   vtkSimpleMutexLock* mutex;
+  private :
 
-   std::vector<MidasResource> database;
+    vesMidasClient* midas;
+    JNIEnv* mEnv;
 
-   std::string myName;
-   int myId;
-   int myType;
-   int mySize;
+
+    vtkSimpleMutexLock* mutex;
+
+    std::vector<MidasResource> database;
+
+    std::string myName;
+    int myId;
+    int myType;
+    int mySize;
 
 };
 

@@ -16,31 +16,31 @@
 class vesMidasApp : public vesKiwiViewerApp
 {
 
-public :
+  public :
 
-  typedef vesKiwiViewerApp Superclass;
-  vesMidasApp();
-  ~vesMidasApp();
+    typedef vesKiwiViewerApp Superclass;
+    vesMidasApp();
+    ~vesMidasApp();
 
-  void initBeginning(int width,int height,const std::string& filename, const std::string& path);
-  void storeCameraState();
-  void restoreCameraState();
-  void initCamera(int w,int h);
-  void addBuiltinDataset(std::string filename, std::string path);
-  void initTime();
-  void setParametersDataset(std::string filename, int builtinDatasetIndex);
-  int getBuiltinDatasetIndex();
-  int defaultBuiltinDatasetIndex() const;
-  int nextBuiltinDatasetIndex() const;
-  void clearExistingDataset();
-  bool render();
-  bool getDatasetIsLoaded();
+    void initBeginning(int width,int height,const std::string& filename, const std::string& path);
+    void storeCameraState();
+    void restoreCameraState();
+    void initCamera(int w,int h);
+    void addBuiltinDataset(std::string filename, std::string path);
+    void initTime();
+    void setParametersDataset(std::string filename, int builtinDatasetIndex);
+    int getBuiltinDatasetIndex();
+    int defaultBuiltinDatasetIndex() const;
+    int nextBuiltinDatasetIndex() const;
+    void clearExistingDataset();
+    bool render();
+    bool getDatasetIsLoaded();
 
 
-private :
+  private :
 
-  class midasInternal;
-  midasInternal* Internal;
+    class midasInternal;
+    midasInternal* Internal;
 
 };
 

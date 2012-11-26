@@ -23,17 +23,16 @@
 #define  LOGE(...)  __android_log_print(ANDROID_LOG_ERROR,LOG_TAG,__VA_ARGS__)
 
 //----------------------------------------------------------------------------
-
-
 MyProgressDelegate::MyProgressDelegate()
-{
-    mFilesTool = 0;
-    totalBytes = 0;
-    shouldAbort = false;
-    mProgressDialog = NULL;
-    LOGI("MyProgressDelegate");
+  {
+  mFilesTool = 0;
+  totalBytes = 0;
+  shouldAbort = false;
+  mProgressDialog = NULL;
+  LOGI("MyProgressDelegate");
 
-}
+  }
+//----------------------------------------------------------------------------
 /*void MyProgressDelegate::initProgressDialog(JNIEnv *env)
 {
    // this->mFilesTool->getJNIEnv();
@@ -63,22 +62,24 @@ MyProgressDelegate::MyProgressDelegate()
     if (!mProgressDialog)
       LOGI(" mProgressDialog nok");
 }*/
-
+//----------------------------------------------------------------------------
 void MyProgressDelegate::setFilesTool(midasFilesTools * filesTool)
-{
+  {
   this->mFilesTool = filesTool;
-}
+  }
+//----------------------------------------------------------------------------
 void MyProgressDelegate::setTotalBytes(int totalBytes)
-{
+  {
   this->totalBytes = totalBytes;
-}
- void MyProgressDelegate::setProgressDialog(jobject* progressDialog)
- {
-     this->mProgressDialog = progressDialog;
- }
-
+  }
+//----------------------------------------------------------------------------
+void MyProgressDelegate::setProgressDialog(jobject* progressDialog)
+  {
+  this->mProgressDialog = progressDialog;
+  }
+//----------------------------------------------------------------------------
 int MyProgressDelegate::downloadProgress(double totalToDownload, double nowDownloaded)
-{
+  {
   LOGI("downloadProgress");
 
   LOGI("   nowDownloaded = %d",nowDownloaded);
@@ -86,52 +87,54 @@ int MyProgressDelegate::downloadProgress(double totalToDownload, double nowDownl
   //LOGI("   totalbytes = %d", this->totalBytes);
 
 
-    int progress = (nowDownloaded /  this->totalBytes)*100;
-    LOGI("downloadProgress progress = %d", progress);
+  int progress = (nowDownloaded /  this->totalBytes)*100;
+  LOGI("downloadProgress progress = %d", progress);
 
-    jclass cls = this->mFilesTool->getJNIEnv()->FindClass("android/app/ProgressDialog");
-    if(cls)
-        LOGI("class cls ok");
-    else
-        LOGI("class cls nok");
+  jclass cls = this->mFilesTool->getJNIEnv()->FindClass("android/app/ProgressDialog");
+  if(cls)
+    LOGI("class cls ok");
+  else
+    LOGI("class cls nok");
 
-    jmethodID method = this->mFilesTool->getJNIEnv()->GetMethodID(cls, "setProgress", "(I)V");
-    if(method)
-        LOGI("method  ok");
-    else
-        LOGI("method  nok");
+  jmethodID method = this->mFilesTool->getJNIEnv()->GetMethodID(cls, "setProgress", "(I)V");
+  if(method)
+    LOGI("method  ok");
+  else
+    LOGI("method  nok");
 
-    if (progress < 0)
+  if (progress < 0)
     {
-        LOGI(" progress = 0;");
-        progress = 0;
+    LOGI(" progress = 0;");
+    progress = 0;
     }
-    else if(progress > 100)
+  else if(progress > 100)
     {
-        LOGI(" progress =100;");
-        progress = 100;
+    LOGI(" progress =100;");
+    progress = 100;
     }
 
-    if (mProgressDialog)
+  if (mProgressDialog)
     {
-        LOGI(" mProgressDialog not null");
-      this->mFilesTool->getJNIEnv()->CallVoidMethod(*mProgressDialog, method, progress);
-      LOGI("CallVoidMethod  ok");
+    LOGI(" mProgressDialog not null");
+    this->mFilesTool->getJNIEnv()->CallVoidMethod(*mProgressDialog, method, progress);
+    LOGI("CallVoidMethod  ok");
     }
-    else
-       LOGI("CallVoidMethod  nok");
+  else
+    LOGI("CallVoidMethod  nok");
 
-    /*fid = this->mFilesTool->env->GetFieldID(env,cls,"mProgressDialog","Lcom/kitware/KiwiViewer/DownloadFileActivity;");
+  /*fid = this->mFilesTool->env->GetFieldID(env,cls,"mProgressDialog","Lcom/kitware/KiwiViewer/DownloadFileActivity;");
     jobject jProgressDialog = this->mFilesTool->env->GetObjectField(env, obj, fid);*/
 
-    //(*env)->SetObjectField(env,info,fid,name);
+  //(*env)->SetObjectField(env,info,fid,name);
 
 
-    if (shouldAbort) {
-      return 1;
+  if (shouldAbort)
+    {
+    return 1;
     }
-    else {
-      return 0;
+  else
+    {
+    return 0;
     }
-}
+  }
 

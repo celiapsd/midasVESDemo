@@ -25,12 +25,12 @@ class MyProgressDelegate : public vesKiwiCurlDownloader::ProgressDelegate
 
     virtual int downloadProgress(double totalToDownload, double nowDownloaded);
 
-private :
+  private :
 
-   midasFilesTools * mFilesTool;
-   jobject* mProgressDialog;
-   int totalBytes;
-   bool shouldAbort;
+    midasFilesTools * mFilesTool;
+    jobject* mProgressDialog;
+    int totalBytes;
+    bool shouldAbort;
 
 };
 
