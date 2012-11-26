@@ -1,19 +1,15 @@
 package com.kitware.KiwiViewer;
 
 /*----------------------------------------libraries----------------------------------------*/
-import java.util.ArrayList;
-import java.util.List;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView;
 
 /*------------------------------------------------------------------------------------------*/
 public class ListOfViewsActivity extends Activity 
@@ -21,16 +17,13 @@ public class ListOfViewsActivity extends Activity
 
 /*----------Attributes-----------------------------------------------------------------*/
 
-/**ListView to display */
+/*ListView to display */
 private ListView mainListView;
 
-/** Array Adapter contains the list of data (array of community Name) */
-private ArrayAdapter<String> listAdapter;
-
-/** Array of MidasResources, can contain Folders, Items*/
+/* Array of MidasResources, can contain Folders, Items*/
 public  MidasResource [] ListChildren;
 
-/** Array of Communities */
+/* Array of Communities */
 public  MidasResource [] Communities;
 
 /** logging tag */
@@ -53,24 +46,22 @@ public void onCreate(Bundle savedInstanceState)
   Bundle BundleResourceCommunity = this.getIntent().getExtras();
   Parcelable[] communitiesParcelable = BundleResourceCommunity.getParcelableArray("BundleResourceCommunity");
 
-  List<String> ListNames = new ArrayList<String>();
+  String[] ListNames = new String[communitiesParcelable.length];
   Communities = new MidasResource [communitiesParcelable.length];
 
   int i = 0;
   for( Parcelable parcel : communitiesParcelable) 
     {
     MidasResource comm = (MidasResource) parcel;
-    ListNames.add(comm.getName());
+    ListNames[i] = comm.getName();
     Communities[i] = new MidasResource(comm.getId(), comm.getName(), comm.getType(), comm.getSize());
     i++;
     }
 
-
+  ResourceAdapter adapter = new ResourceAdapter(this,R.layout.custom_row_item_view, ListNames, Communities);
   mainListView = (ListView) findViewById(R.id.mainListView);
-  listAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_dropdown_item_1line, ListNames);
-
   /*Set the ArrayAdapter as the ListView's adapter.*/
-  mainListView.setAdapter(listAdapter); 
+  mainListView.setAdapter(adapter);
 
   Log.d(TAG, "waiting for a click");
 
@@ -85,7 +76,7 @@ public void onCreate(Bundle savedInstanceState)
         }
 
       /*retrieve the name of the community selected */
-      String name = ((TextView) view).getText().toString();
+      String name = (String) Communities[position].getName();
       setTitle("Communities");
 
       /*Get the array of MidasResources, children of the community selected*/
